@@ -16,4 +16,14 @@ public static class DatabaseStartupExtensions
 			_ = c.UseNpgsql(dataSource, o => o.UseNodaTime());
 		});
 	}
+
+	public static IApplicationBuilder InitializeDatabase(this IApplicationBuilder app)
+	{
+		using var scope = app.ApplicationServices.CreateScope();
+		var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+		_ = db.Database.EnsureCreated();
+
+		db.Database.Migrate();
+		return app;
+	}
 }
