@@ -1,24 +1,25 @@
 using System.Globalization;
 using Destructurama;
+using NodaTime;
 using Serilog;
 using Serilog.Events;
 using Serilog.Exceptions;
 using Serilog.Exceptions.Core;
 using Serilog.Exceptions.EntityFrameworkCore.Destructurers;
-using Timespace.Api.Features.Shared.Exceptions;
 
 namespace Timespace.Api.Infrastructure.Logging;
 
 public static class LoggingStartupExtensions
 {
-	public static void ConfigureSerilog(this IHostBuilder host)
+	public static void ConfigureSerilog(this IHostBuilder host, Uri seqUrl)
 	{
 		_ = host.UseSerilog((_, lc) => lc
 			.Destructure.UsingAttributes()
-			.MinimumLevel.Verbose()
+			.ConfigureForNodaTime(DateTimeZoneProviders.Tzdb)
+			.MinimumLevel.Information()
 			.MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
 			.MinimumLevel.Override("Microsoft.Hosting.Lifetime", LogEventLevel.Information)
-			.Filter.ByExcluding(x => x.Exception is TimespaceException && x.Properties["SourceContext"].ToString().Contains("Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware", StringComparison.InvariantCultureIgnoreCase))
+			.MinimumLevel.Override("Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware", LogEventLevel.Fatal)
 			.Enrich.FromLogContext()
 			.Enrich.WithEnvironmentName()
 			.Enrich.WithThreadId()
@@ -30,7 +31,7 @@ public static class LoggingStartupExtensions
 					.WithDestructurers(new[] { new DbUpdateExceptionDestructurer() })
 			)
 			.WriteTo.Console(formatProvider: CultureInfo.InvariantCulture)
-			.WriteTo.Seq(serverUrl: "http://localhost:5341/")
+			.WriteTo.Seq(serverUrl: seqUrl.ToString())
 		);
 	}
 

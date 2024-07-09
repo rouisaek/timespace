@@ -1,5 +1,7 @@
 using System.Text.Json;
 using Immediate.Validations.Shared;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Metadata;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +15,11 @@ namespace Timespace.Api.Infrastructure.Startup;
 
 public static class StartupExtensions
 {
+	public static void AddConfiguration(this IServiceCollection services, ConfigurationManager configurationManager)
+	{
+
+	}
+
 	public static void ConfigureImmediatePlatform(this IServiceCollection services)
 	{
 		_ = services.AddHandlers();
@@ -21,19 +28,49 @@ public static class StartupExtensions
 
 	public static void AddIdentity(this IServiceCollection services)
 	{
-		_ = services.AddIdentityCore<ApplicationUser>()
-			.AddEntityFrameworkStores<AppDbContext>();
+		_ = services.AddIdentityCore<ApplicationUser>(config =>
+			{
+				config.SignIn.RequireConfirmedEmail = true;
+				config.User.RequireUniqueEmail = true;
+				config.Password.RequiredLength = 6;
+				config.Password.RequiredUniqueChars = 0;
+				config.Password.RequireLowercase = false;
+				config.Password.RequireUppercase = false;
+				config.Password.RequireDigit = false;
+				config.Password.RequireNonAlphanumeric = false;
+			})
+			.AddEntityFrameworkStores<AppDbContext>()
+			.AddDefaultTokenProviders();
+
+		_ = services.Configure<CookieAuthenticationOptions>(o =>
+		{
+			o.LoginPath = PathString.Empty;
+		});
 
 		_ = services.AddAuthentication(options =>
 		{
 			options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
 			options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
-			options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+			options.DefaultSignInScheme = IdentityConstants.ApplicationScheme;
 		}).AddCookie(IdentityConstants.ApplicationScheme, o =>
 		{
 			o.Cookie.Name = "timespace";
 			o.Cookie.HttpOnly = true;
 			o.ExpireTimeSpan = TimeSpan.FromDays(7);
+			o.Events.OnRedirectToLogin = _ => throw new UnauthorizedException();
+		});
+
+		_ = services.AddAuthorization(options =>
+		{
+			options.DefaultPolicy = new AuthorizationPolicyBuilder()
+				.AddAuthenticationSchemes(IdentityConstants.ApplicationScheme)
+				.RequireAuthenticatedUser()
+				.Build();
+
+			options.FallbackPolicy = new AuthorizationPolicyBuilder()
+				.AddAuthenticationSchemes(IdentityConstants.ApplicationScheme)
+				.RequireAuthenticatedUser()
+				.Build();
 		});
 
 		services.TryAddScoped<IUserValidator<ApplicationUser>, UserValidator<ApplicationUser>>();
@@ -108,12 +145,6 @@ public static class StartupExtensions
 					Status = StatusCodes.Status400BadRequest,
 				},
 
-				UnauthorizedAccessException => new ProblemDetails
-				{
-					Detail = "Access denied.",
-					Status = StatusCodes.Status403Forbidden,
-				},
-
 				BadHttpRequestException { InnerException: JsonException ex }
 					when ex.Message.StartsWith("JSON deserialization for type", StringComparison.InvariantCultureIgnoreCase) => new ProblemDetails
 					{
@@ -135,7 +166,7 @@ public static class StartupExtensions
 
 				_ => new ProblemDetails
 				{
-					Detail = "An error has occurred.",
+					Detail = "An error has occurred. Please contact us with the value of the 'RequestId' header",
 					Status = StatusCodes.Status500InternalServerError,
 				},
 			};

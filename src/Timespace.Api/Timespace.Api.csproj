@@ -6,6 +6,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="AutoRegisterInject" />
 		<PackageReference Include="Destructurama.Attributed" />
 		<PackageReference Include="Immediate.Apis"/>
 		<PackageReference Include="Immediate.Handlers"/>
@@ -26,6 +27,7 @@
 		<PackageReference Include="Serilog.Enrichers.Environment"/>
 		<PackageReference Include="Serilog.Enrichers.Thread"/>
 		<PackageReference Include="Serilog.Exceptions.EntityFrameworkCore"/>
+		<PackageReference Include="Serilog.NodaTime" />
 		<PackageReference Include="Serilog.Sinks.Console"/>
 		<PackageReference Include="Serilog.Sinks.Seq" />
 		<PackageReference Include="Swashbuckle.AspNetCore"/>

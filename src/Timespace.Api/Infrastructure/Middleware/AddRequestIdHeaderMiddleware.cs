@@ -1,5 +1,6 @@
 namespace Timespace.Api.Infrastructure.Middleware;
 
+[RegisterSingleton(typeof(AddRequestIdHeaderMiddleware))]
 public class AddRequestIdHeaderMiddleware : IMiddleware
 {
 	public Task InvokeAsync(HttpContext context, RequestDelegate next)

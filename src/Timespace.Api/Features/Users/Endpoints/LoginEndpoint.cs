@@ -2,6 +2,7 @@ using Destructurama.Attributed;
 using Immediate.Apis.Shared;
 using Immediate.Handlers.Shared;
 using Immediate.Validations.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using NodaTime;
 using Timespace.Api.Database;
@@ -12,6 +13,7 @@ namespace Timespace.Api.Features.Users.Endpoints;
 
 [Handler]
 [MapPost("/api/login")]
+[AllowAnonymous]
 public static partial class LoginEndpoint
 {
 	[Validate]
@@ -20,18 +22,21 @@ public static partial class LoginEndpoint
 		public required string Email { get; set; }
 		[LogMasked]
 		public required string Password { get; set; }
-		public required Instant Date { get; set; }
+		public required LocalTime Date { get; set; }
 	}
 
-	private static async ValueTask<int> HandleAsync(Command command, AppDbContext db, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, CancellationToken token)
+	private static async ValueTask<bool> HandleAsync(Command command, AppDbContext db, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, CancellationToken token)
 	{
 		var user = await userManager.FindByEmailAsync(command.Email);
 
 		if (user == null)
 			throw new NotFoundException("User");
 
+		var passResetToken = await userManager.GeneratePasswordResetTokenAsync(user);
+		var tokens = await userManager.GenerateNewTwoFactorRecoveryCodesAsync(user, 5);
+
 		var signInResult = await signInManager.PasswordSignInAsync(user, command.Password, false, false);
 
-		return default;
+		return signInResult.Succeeded;
 	}
 }

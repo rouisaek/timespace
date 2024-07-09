@@ -20,7 +20,7 @@ try
 
 	// Add services to the container.
 
-	builder.Host.ConfigureSerilog();
+	builder.Host.ConfigureSerilog(new Uri(builder.Configuration["SeqUrl"] ?? ""));
 
 	_ = builder.Services.Configure<ApiBehaviorOptions>(
 		o =>
@@ -42,15 +42,14 @@ try
 	builder.Services.AddDatabase(builder.Configuration["DbContextOptions:ConnectionString"] ?? throw new ArgumentException("Cannot find connection string"));
 	builder.Services.ConfigureImmediatePlatform();
 	builder.Services.AddIdentity();
-	// builder.Services.AddHellangProblemDetails();
 
 	_ = builder.Services.AddDistributedMemoryCache();
 	_ = builder.Services.AddHttpContextAccessor();
-	_ = builder.Services.AddAuthorization();
+	// _ = builder.Services.AddAuthorization();
 	_ = builder.Services.AddEndpointsApiExplorer();
 	_ = builder.Services.AddSwagger();
 	_ = builder.Services.AddProblemDetails(StartupExtensions.ConfigureProblemDetails);
-	_ = builder.Services.AddSingleton<AddRequestIdHeaderMiddleware>();
+	_ = builder.Services.AutoRegisterFromTimespaceApi();
 
 	_ = builder.Services.AddResponseCompression(
 		options => options.EnableForHttps = true
