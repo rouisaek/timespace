@@ -16,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F2A8B2CF-5F0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{733C01DF-A533-4E72-A5A8-8B5562E63353}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timespace.SourceGenerators", "src\Timespace.SourceGenerators\Timespace.SourceGenerators\Timespace.SourceGenerators.csproj", "{C29FE429-F755-41B7-951C-7F43E2444FBC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timespace.SourceGenerators", "src\Timespace.SourceGenerators\Timespace.SourceGenerators.csproj", "{C29FE429-F755-41B7-951C-7F43E2444FBC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timespace.SourceGenerators.Tests", "tests\Timespace.SourceGenerators.Tests\Timespace.SourceGenerators.Tests.csproj", "{8017F3D4-E60B-41C5-8163-12C459F8BA01}"
 EndProject

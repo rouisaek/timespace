@@ -27,7 +27,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Timespace.SourceGenerators\Timespace.SourceGenerators\Timespace.SourceGenerators.csproj" />
+      <ProjectReference Include="..\..\src\Timespace.SourceGenerators\Timespace.SourceGenerators.csproj" />
     </ItemGroup>
 
 </Project>
