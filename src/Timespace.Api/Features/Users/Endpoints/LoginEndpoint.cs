@@ -10,9 +10,12 @@ using Timespace.Api.Features.Users.Models;
 
 namespace Timespace.Api.Features.Users.Endpoints;
 
+[GeneratePermission("timespace:login")]
+public static partial class LoginEndpointPolicy;
+
 [Handler]
 [MapPost("/api/login")]
-[AllowAnonymous]
+[Authorize(Policy = LoginEndpointPolicy.PolicyName)]
 public static partial class LoginEndpoint
 {
 	[Validate]

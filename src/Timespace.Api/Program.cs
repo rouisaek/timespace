@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Security.Claims;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using NodaTime;
@@ -44,6 +45,7 @@ try
 	builder.Services.AddDatabase(builder.Configuration["DbContextOptions:ConnectionString"] ?? throw new ArgumentException("Cannot find connection string"));
 	builder.Services.ConfigureImmediatePlatform();
 	builder.Services.AddIdentity();
+	_ = builder.Services.AddPermissionPolicies();
 
 	_ = builder.Services.AddDistributedMemoryCache();
 	_ = builder.Services.AddHttpContextAccessor();
@@ -55,6 +57,9 @@ try
 	_ = builder.Services.AddResponseCompression(
 		options => options.EnableForHttps = true
 	);
+
+	_ = builder.Services.AddAuthorizationBuilder()
+		.AddPolicy("ValidUser", p => p.RequireAssertion(x => x.User.HasClaim(ClaimTypes.NameIdentifier, "12345")));
 
 	var app = builder.Build();
 

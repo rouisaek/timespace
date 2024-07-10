@@ -1,0 +1,16 @@
+#nullable enable
+
+namespace Microsoft.Extensions.DependencyInjection;
+
+public static class GeneratePermissionPoliciesExtensions
+{
+	public static IServiceCollection AddPermissionPolicies(this IServiceCollection services)
+	{
+		services.AddAuthorizationBuilder(){{if classes.size == 0 ~}};{{ end }}
+		{{~ for c in classes ~}}
+        			.AddPolicy({{~ c.fqn ~}}.PolicyName, p => p.RequireAssertion(x => x.User.HasClaim("permission", {{ c.fqn ~}}.PolicyName)))
+		{{~ end ~}};
+
+		return services;
+	}
+}
