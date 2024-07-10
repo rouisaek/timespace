@@ -11,7 +11,7 @@ public class GeneratePermissionPolicyTests
 			  {
 			  
 			  [AttributeUsage(AttributeTargets.Class)]
-			  public sealed class GeneratePermissionAttribute(string permissionString) : System.Attribute
+			  public sealed class GeneratePermissionPolicyAttribute(string permissionString) : System.Attribute
 			  {
 			  	public string PermissionString { get; internal init; } = permissionString;
 			  }

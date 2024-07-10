@@ -6,7 +6,6 @@ using NodaTime;
 using NodaTime.Serialization.SystemTextJson;
 using Serilog;
 using Timespace.Api.Database;
-using Timespace.Api.Features.Users.Models;
 using Timespace.Api.Infrastructure.Exceptions;
 using Timespace.Api.Infrastructure.Logging;
 using Timespace.Api.Infrastructure.Middleware;
@@ -76,7 +75,6 @@ try
 		endpoints =>
 		{
 			_ = endpoints.MapTimespaceApiEndpoints();
-			_ = endpoints.MapIdentityApi<ApplicationUser>();
 		}
 	);
 

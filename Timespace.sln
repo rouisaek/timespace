@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timespace.SourceGenerators"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timespace.SourceGenerators.Tests", "tests\Timespace.SourceGenerators.Tests\Timespace.SourceGenerators.Tests.csproj", "{8017F3D4-E60B-41C5-8163-12C459F8BA01}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timespace.Analyzers", "src\Timespace.Analyzers\Timespace.Analyzers.csproj", "{8E4FEA41-B3B5-408A-BA1E-3420FF2B283F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,10 +40,15 @@ Global
 		{8017F3D4-E60B-41C5-8163-12C459F8BA01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8017F3D4-E60B-41C5-8163-12C459F8BA01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8017F3D4-E60B-41C5-8163-12C459F8BA01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E4FEA41-B3B5-408A-BA1E-3420FF2B283F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E4FEA41-B3B5-408A-BA1E-3420FF2B283F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E4FEA41-B3B5-408A-BA1E-3420FF2B283F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E4FEA41-B3B5-408A-BA1E-3420FF2B283F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9F9700ED-807C-478C-B571-BB1A156F7D5D} = {F2A8B2CF-5F06-4DE7-B8D4-74301F1289F9}
 		{C29FE429-F755-41B7-951C-7F43E2444FBC} = {F2A8B2CF-5F06-4DE7-B8D4-74301F1289F9}
 		{8017F3D4-E60B-41C5-8163-12C459F8BA01} = {733C01DF-A533-4E72-A5A8-8B5562E63353}
+		{8E4FEA41-B3B5-408A-BA1E-3420FF2B283F} = {F2A8B2CF-5F06-4DE7-B8D4-74301F1289F9}
 	EndGlobalSection
 EndGlobal

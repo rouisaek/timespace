@@ -10,8 +10,11 @@ using Timespace.Api.Features.Users.Models;
 
 namespace Timespace.Api.Features.Users.Endpoints;
 
-[GeneratePermission("timespace:login")]
-public static partial class LoginEndpointPolicy;
+[GeneratePermissionPolicy]
+public static class LoginEndpointPolicy
+{
+	public const string PolicyName = "timespace:login";
+}
 
 [Handler]
 [MapPost("/api/login")]
@@ -44,6 +47,7 @@ public static partial class LoginEndpoint
 
 		if (!signInResult.Succeeded)
 			throw new BadRequestException("Email or password incorrect");
+
 
 		return new()
 		{

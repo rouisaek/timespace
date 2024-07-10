@@ -1,8 +1,0 @@
-#nullable enable
-
-namespace {{ namespace ~}};
-
-public static partial class {{ name }}
-{
-	public const string PolicyName = "{{~ permission_string ~}}";
-}

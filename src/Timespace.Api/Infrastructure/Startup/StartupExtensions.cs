@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Timespace.Api.Database;
 using Timespace.Api.Features.Shared.Exceptions;
 using Timespace.Api.Features.Users.Models;
+using Timespace.Api.Infrastructure.Authorization;
 
 namespace Timespace.Api.Infrastructure.Startup;
 
@@ -41,6 +42,7 @@ public static class StartupExtensions
 		_ = services.Configure<CookieAuthenticationOptions>(o =>
 		{
 			o.LoginPath = PathString.Empty;
+			o.AccessDeniedPath = PathString.Empty;
 		});
 
 		_ = services.AddAuthentication(options =>
@@ -54,20 +56,21 @@ public static class StartupExtensions
 			o.Cookie.HttpOnly = true;
 			o.ExpireTimeSpan = TimeSpan.FromDays(7);
 			o.Events.OnRedirectToLogin = _ => throw new UnauthorizedException();
+			o.Events.OnRedirectToAccessDenied = _ => throw new ForbiddenException();
 		});
 
-		_ = services.AddAuthorization(options =>
-		{
-			options.DefaultPolicy = new AuthorizationPolicyBuilder()
-				.AddAuthenticationSchemes(IdentityConstants.ApplicationScheme)
-				.RequireAuthenticatedUser()
-				.Build();
-
-			options.FallbackPolicy = new AuthorizationPolicyBuilder()
-				.AddAuthenticationSchemes(IdentityConstants.ApplicationScheme)
-				.RequireAuthenticatedUser()
-				.Build();
-		});
+		// _ = services.AddAuthorization(options =>
+		// {
+		// 	options.DefaultPolicy = new AuthorizationPolicyBuilder()
+		// 		.AddAuthenticationSchemes(IdentityConstants.ApplicationScheme)
+		// 		.RequireAuthenticatedUser()
+		// 		.Build();
+		//
+		// 	options.FallbackPolicy = new AuthorizationPolicyBuilder()
+		// 		.AddAuthenticationSchemes(IdentityConstants.ApplicationScheme)
+		// 		.RequireAuthenticatedUser()
+		// 		.Build();
+		// });
 
 		services.TryAddScoped<IUserValidator<ApplicationUser>, UserValidator<ApplicationUser>>();
 		services.TryAddScoped<IPasswordValidator<ApplicationUser>, PasswordValidator<ApplicationUser>>();
@@ -80,6 +83,8 @@ public static class StartupExtensions
 		services.TryAddScoped<IUserConfirmation<ApplicationUser>, DefaultUserConfirmation<ApplicationUser>>();
 		services.TryAddScoped<UserManager<ApplicationUser>>();
 		services.TryAddScoped<SignInManager<ApplicationUser>>();
+
+		_ = services.AddSingleton<IAuthorizationMiddlewareResultHandler, CustomAuthorizationMiddlewareResultHandler>();
 	}
 
 	public static IServiceCollection AddSwagger(this IServiceCollection services) =>
