@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Timespace.Api.Infrastructure.Exceptions;
 
 namespace Timespace.Api.Features.Shared.Exceptions;
 

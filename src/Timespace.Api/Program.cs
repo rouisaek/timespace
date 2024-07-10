@@ -6,6 +6,7 @@ using NodaTime.Serialization.SystemTextJson;
 using Serilog;
 using Timespace.Api.Database;
 using Timespace.Api.Features.Users.Models;
+using Timespace.Api.Infrastructure.Exceptions;
 using Timespace.Api.Infrastructure.Logging;
 using Timespace.Api.Infrastructure.Middleware;
 using Timespace.Api.Infrastructure.Startup;
@@ -46,10 +47,9 @@ try
 
 	_ = builder.Services.AddDistributedMemoryCache();
 	_ = builder.Services.AddHttpContextAccessor();
-	// _ = builder.Services.AddAuthorization();
 	_ = builder.Services.AddEndpointsApiExplorer();
 	_ = builder.Services.AddSwagger();
-	_ = builder.Services.AddProblemDetails(StartupExtensions.ConfigureProblemDetails);
+	_ = builder.Services.AddProblemDetails(ExceptionStartupExtensions.ConfigureProblemDetails);
 	_ = builder.Services.AutoRegisterFromTimespaceApi();
 
 	_ = builder.Services.AddResponseCompression(

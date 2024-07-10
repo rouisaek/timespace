@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using Immediate.Handlers.Shared;
-using Timespace.Api.Features.Shared.Exceptions;
+using Timespace.Api.Infrastructure.Exceptions;
 
 namespace Timespace.Api.Infrastructure.Logging;
 
