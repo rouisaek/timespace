@@ -5,6 +5,7 @@ using NodaTime;
 using NodaTime.Serialization.SystemTextJson;
 using Serilog;
 using Timespace.Api.Database;
+using Timespace.Api.Features.Users.Models;
 using Timespace.Api.Infrastructure.Logging;
 using Timespace.Api.Infrastructure.Middleware;
 using Timespace.Api.Infrastructure.Startup;
@@ -17,9 +18,9 @@ try
 	var builder = WebApplication.CreateBuilder(args);
 
 	_ = builder.Configuration.AddJsonFile("secrets.json", optional: true);
+	_ = builder.Services.ConfigureAllOptions();
 
 	// Add services to the container.
-
 	builder.Host.ConfigureSerilog(new Uri(builder.Configuration["SeqUrl"] ?? ""));
 
 	_ = builder.Services.Configure<ApiBehaviorOptions>(
@@ -70,6 +71,7 @@ try
 		endpoints =>
 		{
 			_ = endpoints.MapTimespaceApiEndpoints();
+			_ = endpoints.MapIdentityApi<ApplicationUser>();
 		}
 	);
 
