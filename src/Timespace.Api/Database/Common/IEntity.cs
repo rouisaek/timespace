@@ -1,4 +1,4 @@
-namespace Timespace.Api.Database.EntityAttributes;
+namespace Timespace.Api.Database.Common;
 
 public interface IEntity
 {

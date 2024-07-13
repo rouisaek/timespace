@@ -1,6 +1,6 @@
 using Timespace.Api.Features.Tenants.Models;
 
-namespace Timespace.Api.Database.EntityAttributes;
+namespace Timespace.Api.Database.Common;
 
 public interface ITenanted
 {
