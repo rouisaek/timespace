@@ -8,7 +8,7 @@ public static class GeneratePermissionPoliciesExtensions
 	{
 		services.AddAuthorizationBuilder(){{if classes.size == 0 ~}};{{ end }}
 		{{~ for c in classes ~}}
-        			.AddPolicy({{~ c.fqn ~}}.PolicyName, p => p.RequireAssertion(x => x.User.HasClaim("permission", {{ c.fqn ~}}.PolicyName)))
+        			.AddPolicy({{~ c.fqn ~}}.PolicyName, p => p.RequireAssertion(x => x.User.HasClaim("permission", {{ c.fqn ~}}.PolicyName) || x.User.HasClaim("permission", global::Timespace.Api.Infrastructure.Authorization.AdminPolicy.PolicyName)))
 		{{~ end ~}};
 
 		return services;
