@@ -13,6 +13,7 @@ public class ApplicationUser : IdentityUser<int>, ITenanted
 	public string FirstName { get; set; } = null!;
 	public string? MiddleName { get; set; }
 	public string LastName { get; set; } = null!;
+	public List<string> Permissions { get; set; } = [];
 
 	public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
 	{
@@ -21,6 +22,7 @@ public class ApplicationUser : IdentityUser<int>, ITenanted
 			_ = builder.Property(x => x.FirstName).HasMaxLength(256);
 			_ = builder.Property(x => x.MiddleName).HasMaxLength(256);
 			_ = builder.Property(x => x.LastName).HasMaxLength(256);
+			_ = builder.Property(x => x.Permissions).HasDefaultValue(new List<string>());
 		}
 	}
 }

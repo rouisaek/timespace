@@ -45,7 +45,7 @@ public static class LoggingStartupExtensions
 
 			o.EnrichDiagnosticContext = static (diagnosticContext, httpContext) =>
 			{
-				diagnosticContext.Set("User", httpContext.User?.Identity?.Name);
+				diagnosticContext.Set("User", httpContext.User.Identity?.Name);
 				diagnosticContext.Set("RemoteIP", httpContext.Connection.RemoteIpAddress);
 				diagnosticContext.Set("ConnectingIP", httpContext.Request.Headers["CF-Connecting-IP"]);
 			};

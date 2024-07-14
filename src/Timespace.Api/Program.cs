@@ -6,6 +6,7 @@ using NodaTime;
 using NodaTime.Serialization.SystemTextJson;
 using Serilog;
 using Timespace.Api.Database;
+using Timespace.Api.Infrastructure.Authorization;
 using Timespace.Api.Infrastructure.Exceptions;
 using Timespace.Api.Infrastructure.Logging;
 using Timespace.Api.Infrastructure.Middleware;
@@ -62,14 +63,15 @@ try
 
 	var app = builder.Build();
 
+	_ = app.UseLogging();
 	_ = app.UseExceptionHandler();
+	_ = app.UseMiddleware<AddPermissionsMiddleware>();
 	_ = app.UseMiddleware<AddRequestIdHeaderMiddleware>();
 	_ = app.UseHttpsRedirection();
 	_ = app.UseSwagger();
 	_ = app.UseSwaggerUI();
 	_ = app.UseRouting();
 	_ = app.UseAuthorization();
-	_ = app.UseLogging();
 
 	_ = app.UseEndpoints(
 		endpoints =>

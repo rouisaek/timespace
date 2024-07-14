@@ -4,21 +4,14 @@ using Immediate.Handlers.Shared;
 using Immediate.Validations.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Timespace.Api.Database;
 using Timespace.Api.Features.Shared.Exceptions;
 using Timespace.Api.Features.Users.Models;
 
 namespace Timespace.Api.Features.Users.Endpoints;
 
-[GeneratePermissionPolicy]
-public static class LoginEndpointPolicy
-{
-	public const string PolicyName = "timespace:login";
-}
-
 [Handler]
 [MapPost("/api/login")]
-[Authorize(Policy = LoginEndpointPolicy.PolicyName)]
+[AllowAnonymous]
 public static partial class LoginEndpoint
 {
 	[Validate]
@@ -36,7 +29,7 @@ public static partial class LoginEndpoint
 		public bool Success { get; set; }
 	}
 
-	private static async ValueTask<Response> HandleAsync(Command command, AppDbContext db, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, CancellationToken token)
+	private static async ValueTask<Response> HandleAsync(Command command, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, CancellationToken _)
 	{
 		var user = await userManager.FindByEmailAsync(command.Email);
 
@@ -47,7 +40,6 @@ public static partial class LoginEndpoint
 
 		if (!signInResult.Succeeded)
 			throw new BadRequestException("Email or password incorrect");
-
 
 		return new()
 		{
