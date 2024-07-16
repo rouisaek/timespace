@@ -24,3 +24,5 @@ riderModule.iml
 # Secure files
 secrets.json
 Secrets.Targets
+
+.DS_store
