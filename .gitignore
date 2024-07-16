@@ -26,3 +26,4 @@ secrets.json
 Secrets.Targets
 
 .DS_store
+.env
