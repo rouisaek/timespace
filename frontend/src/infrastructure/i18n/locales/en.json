@@ -30,5 +30,16 @@
   "validations.phoneNumber": "{label} must be a valid phone number",
   "validations.required": "{label} is required.",
   "validations.sameAs": "{label} must be the same as {otherName}.",
-  "signUpPage.loginText2": "Click here to sign in."
+  "signUpPage.loginText2": "Click here to sign in.",
+  "success": "Success",
+  "error": "Error",
+  "forgotPasswordModal.emailSent": "A password reset email has been sent to the given email address, please check your inbox.",
+  "forgotPasswordModal.emailNotSentError": "Something went wrong with sending your password reset email. Please try again later or contact our support team.",
+  "loginPage.loginSuccess": "Login successful, you will be redirected to the homepage.",
+  "loginPage.loginError": "Login failed, check the email and/or password.",
+  "errors.email-not-confirmed": "Email has not been confirmed yet, please check your inbox.",
+  "errors.login-failed": "Login failed, check your email address and/or password",
+  "errors.email-not-confirmed.resend-email": "Resend confirmation email",
+  "loginPage.emailConfirmationSent": "Email confirmation has been resent. Please check your inbox.",
+  "loginPage.emailConfirmationNotSent": "There was an issue with resending the confirmation email. Please try again later or contact our support team."
 }

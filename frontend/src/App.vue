@@ -6,6 +6,7 @@ import { RouterView } from 'vue-router'
 import * as enLocale from '@/infrastructure/i18n/locales/primevue/en.json';
 import * as nlLocale from '@/infrastructure/i18n/locales/primevue/en.json';
 import DynamicDialog from 'primevue/dynamicdialog';
+import Toast from 'primevue/toast';
 
 const primeVue = usePrimeVue();
 const i18n = useI18n();

@@ -25,7 +25,20 @@
   "signUpPage.continueButtonText": "Doorgaan",
   "commonFieldLabels.email": "E-mailadres",
   "forgotPasswordModal.submitButtonText": "Verstuur wachtwoord reset link",
-  "loginPage.signUpText": "Nog geen klant? \nKlik hier om u aan te melden.",
   "loginPage.signUpText2": "Klik hier om te registeren.",
-  "signUpPage.loginText2": "Klik hier om in te loggen."
+  "signUpPage.loginText2": "Klik hier om in te loggen.",
+  "error": "Error",
+  "success": "Succes",
+  "forgotPasswordModal.emailSent": "Er is een e-mail voor het opnieuw instellen van het wachtwoord naar het opgegeven e-mailadres verzonden. Controleer uw inbox.",
+  "forgotPasswordModal.emailNotSentError": "Er is iets misgegaan bij het verzenden van uw e-mail voor het opnieuw instellen van uw wachtwoord. \nProbeer het later opnieuw of neem contact op met ons ondersteuningsteam.",
+  "loginPage.loginSuccess": "Inloggen succesvol, u wordt doorgestuurd naar de homepage.",
+  "loginPage.loginError": "Inloggen mislukt, controleer het e-mailadres en/of wachtwoord.",
+  "errors.login-failed": "Inloggen mislukt, controleer uw e-mailadres en/of wachtwoord",
+  "errors.email-not-confirmed": "E-mail is nog niet bevestigd, controleer uw inbox.",
+  "forgotPasswordModal.emailFieldLabel": "E-mail",
+  "loginPage.forgotPasswordModalHeader": "Wachtwoord vergeten",
+  "loginPage.signUpText1": "Nog geen klant?",
+  "validations.phoneNumber": "{label} moet een geldig telefoonnummer zijn",
+  "loginPage.emailConfirmationNotSent": "Er is een probleem opgetreden bij het opnieuw verzenden van de bevestigingsmail. \nProbeer het later opnieuw of neem contact op met ons ondersteuningsteam.",
+  "loginPage.emailConfirmationSent": "Er is een e-mailbevestiging opnieuw verzonden. \nControleer uw inbox."
 }

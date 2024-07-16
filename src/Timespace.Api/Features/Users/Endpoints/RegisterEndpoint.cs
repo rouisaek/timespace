@@ -16,8 +16,8 @@ public static partial class RegisterEndpoint
 	[Validate]
 	public partial record Command : IValidationTarget<Command>
 	{
-		public required string TenantName { get; set; }
-
+		public required string TenantName { get; init; }
+		public required string FirstName { get; init; } = null!;
 		[EmailAddress]
 		public required string Email { get; init; }
 		[LogMasked]
@@ -31,17 +31,25 @@ public static partial class RegisterEndpoint
 
 	private static async ValueTask<Response> HandleAsync(Command command, UserManager<ApplicationUser> userManager, AppDbContext dbContext, CancellationToken token)
 	{
+		var transaction = await dbContext.Database.BeginTransactionAsync(token);
 		var tenant = dbContext.Tenants.Add(new() { DisplayName = command.TenantName, });
 		_ = await dbContext.SaveChangesAsync(token);
 
-		var result = await userManager.CreateAsync(new ApplicationUser() { Email = command.Email, UserName = command.Email, TenantId = tenant.Entity.Id }, command.Password);
+		var result = await userManager.CreateAsync(new ApplicationUser() { Email = command.Email, UserName = command.Email, TenantId = tenant.Entity.Id, FirstName = command.FirstName }, command.Password);
 
 		if (result.Succeeded)
+		{
+			await transaction.CommitAsync(token);
 			return new()
 			{
 				Success = true
 			};
+		}
+		else
+		{
+			await transaction.RollbackAsync(token);
+			return new() { Success = false, };
+		}
 
-		return new() { Success = false, };
 	}
 }

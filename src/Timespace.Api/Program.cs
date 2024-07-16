@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using System.Security.Claims;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using NodaTime;
@@ -20,6 +19,8 @@ try
 	var builder = WebApplication.CreateBuilder(args);
 
 	_ = builder.Configuration.AddJsonFile("secrets.json", optional: true);
+	_ = builder.Configuration.AddJsonFile("appsettings.json", optional: true);
+	_ = builder.Configuration.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true);
 	_ = builder.Services.ConfigureAllOptions();
 
 	// Add services to the container.
@@ -53,13 +54,14 @@ try
 	_ = builder.Services.AddSwagger();
 	_ = builder.Services.AddProblemDetails(ExceptionStartupExtensions.ConfigureProblemDetails);
 	_ = builder.Services.AutoRegisterFromTimespaceApi();
+	_ = builder.Services.AddCors(c => c.AddDefaultPolicy(p => p.AllowAnyHeader()
+		.AllowAnyMethod()
+		.AllowCredentials()
+		.WithOrigins(builder.Configuration.GetSection("CorsSettings").GetSection("CorsDomains").Get<string[]>() ?? [])));
 
 	_ = builder.Services.AddResponseCompression(
 		options => options.EnableForHttps = true
 	);
-
-	_ = builder.Services.AddAuthorizationBuilder()
-		.AddPolicy("ValidUser", p => p.RequireAssertion(x => x.User.HasClaim(ClaimTypes.NameIdentifier, "12345")));
 
 	var app = builder.Build();
 
@@ -71,6 +73,7 @@ try
 	_ = app.UseSwagger();
 	_ = app.UseSwaggerUI();
 	_ = app.UseRouting();
+	_ = app.UseCors();
 	_ = app.UseAuthorization();
 
 	_ = app.UseEndpoints(

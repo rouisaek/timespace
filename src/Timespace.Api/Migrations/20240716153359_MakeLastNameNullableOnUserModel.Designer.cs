@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using NodaTime;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Timespace.Api.Database;
 
@@ -13,9 +13,11 @@ using Timespace.Api.Database;
 namespace Timespace.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240716153359_MakeLastNameNullableOnUserModel")]
+    partial class MakeLastNameNullableOnUserModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -133,9 +135,6 @@ namespace Timespace.Api.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
 
-                    b.Property<Instant?>("LastEmailConfirmationSent")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("LastName")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
@@ -163,7 +162,9 @@ namespace Timespace.Api.Migrations
 
                     b.Property<List<string>>("Permissions")
                         .IsRequired()
-                        .HasColumnType("text[]");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text[]")
+                        .HasDefaultValue(new List<string>());
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("text");

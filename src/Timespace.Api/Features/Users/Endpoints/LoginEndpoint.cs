@@ -4,6 +4,7 @@ using Immediate.Handlers.Shared;
 using Immediate.Validations.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Timespace.Api.Features.Shared.Exceptions;
 using Timespace.Api.Features.Shared.Validations;
 using Timespace.Api.Features.Users.Exceptions;
 using Timespace.Api.Features.Users.Models;
@@ -41,7 +42,15 @@ public static partial class LoginEndpoint
 		var signInResult = await signInManager.PasswordSignInAsync(user, command.Password, command.RememberMe, false);
 
 		if (!signInResult.Succeeded)
+		{
+			if (signInResult.IsNotAllowed && !user.EmailConfirmed)
+			{
+				throw new BadRequestException("Email has not been confirmed yet.",
+					"email-not-confirmed");
+			}
+
 			throw new LoginFailedException();
+		}
 
 		return new()
 		{
