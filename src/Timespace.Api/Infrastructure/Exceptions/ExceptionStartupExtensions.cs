@@ -25,30 +25,35 @@ public static class ExceptionStartupExtensions
 						)
 				)
 				{
+					Type = "timespace:errors:validation",
 					Status = StatusCodes.Status400BadRequest,
 				},
 
 				BadHttpRequestException { InnerException: JsonException ex }
 					when ex.Message.StartsWith("JSON deserialization for type", StringComparison.InvariantCultureIgnoreCase) => new ProblemDetails
 					{
+						Type = "timespace:errors:json-validation",
 						Detail = $"Missing the following properties: " + ex.Message.Split("following: ")[1],
 						Status = StatusCodes.Status400BadRequest
 					},
 
 				BadHttpRequestException { InnerException: JsonException ex } => new ProblemDetails()
 				{
+					Type = "timespace:errors:json-validation",
 					Detail = ex.Message,
 					Status = StatusCodes.Status400BadRequest
 				},
 
 				TimespaceException ex => new ProblemDetails
 				{
+					Type = ex.ErrorType,
 					Detail = ex.Message,
 					Status = ex.StatusCode
 				},
 
 				_ => new ProblemDetails
 				{
+					Type = "timespace:errors:internal-server-error",
 					Detail = "An error has occurred. Please contact us with the value of the 'RequestId' header",
 					Status = StatusCodes.Status500InternalServerError,
 				},

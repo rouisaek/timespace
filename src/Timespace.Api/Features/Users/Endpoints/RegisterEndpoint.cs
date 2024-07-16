@@ -1,10 +1,10 @@
-using System.Text.RegularExpressions;
 using Destructurama.Attributed;
 using Immediate.Apis.Shared;
 using Immediate.Handlers.Shared;
 using Immediate.Validations.Shared;
 using Microsoft.AspNetCore.Identity;
 using Timespace.Api.Database;
+using Timespace.Api.Features.Shared.Validations;
 using Timespace.Api.Features.Users.Models;
 
 namespace Timespace.Api.Features.Users.Endpoints;
@@ -16,12 +16,9 @@ public static partial class RegisterEndpoint
 	[Validate]
 	public partial record Command : IValidationTarget<Command>
 	{
-		[GeneratedRegex(@"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$")]
-		private static partial Regex EmailRegex();
-
 		public required string TenantName { get; set; }
 
-		[Match(regex: nameof(EmailRegex))]
+		[EmailAddress]
 		public required string Email { get; init; }
 		[LogMasked]
 		public required string Password { get; init; }

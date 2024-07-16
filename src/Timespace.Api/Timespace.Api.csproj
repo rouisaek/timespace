@@ -8,30 +8,30 @@
 	<ItemGroup>
 		<PackageReference Include="AutoRegisterInject" />
 		<PackageReference Include="Destructurama.Attributed" />
-		<PackageReference Include="Immediate.Apis"/>
-		<PackageReference Include="Immediate.Handlers"/>
-		<PackageReference Include="Immediate.Validations"/>
+		<PackageReference Include="Immediate.Apis" />
+		<PackageReference Include="Immediate.Handlers" />
+		<PackageReference Include="Immediate.Validations" />
 		<PackageReference Include="MailKit" />
-		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore"/>
-		<PackageReference Include="Microsoft.EntityFrameworkCore"/>
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="NodaTime"/>
+		<PackageReference Include="NodaTime" />
 		<PackageReference Include="NodaTime.Serialization.SystemTextJson" />
-		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL"/>
-		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.NodaTime"/>
-		<PackageReference Include="Npgsql.NodaTime"/>
-		<PackageReference Include="Serilog"/>
-		<PackageReference Include="Serilog.AspNetCore"/>
-		<PackageReference Include="Serilog.Enrichers.Environment"/>
-		<PackageReference Include="Serilog.Enrichers.Thread"/>
-		<PackageReference Include="Serilog.Exceptions.EntityFrameworkCore"/>
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.NodaTime" />
+		<PackageReference Include="Npgsql.NodaTime" />
+		<PackageReference Include="Serilog" />
+		<PackageReference Include="Serilog.AspNetCore" />
+		<PackageReference Include="Serilog.Enrichers.Environment" />
+		<PackageReference Include="Serilog.Enrichers.Thread" />
+		<PackageReference Include="Serilog.Exceptions.EntityFrameworkCore" />
 		<PackageReference Include="Serilog.NodaTime" />
-		<PackageReference Include="Serilog.Sinks.Console"/>
+		<PackageReference Include="Serilog.Sinks.Console" />
 		<PackageReference Include="Serilog.Sinks.Seq" />
-		<PackageReference Include="Swashbuckle.AspNetCore"/>
+		<PackageReference Include="Swashbuckle.AspNetCore" />
 		<PackageReference Include="ThisAssembly.Git">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -45,7 +45,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<AdditionalFiles Include="../../BannedSymbols.txt"/>
+		<AdditionalFiles Include="../../BannedSymbols.txt" />
 	</ItemGroup>
 
 	<ItemGroup>
