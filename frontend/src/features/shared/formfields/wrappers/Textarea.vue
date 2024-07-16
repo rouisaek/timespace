@@ -1,13 +1,14 @@
 <template>
     <!-- Begin form field -->
-    <div class="field w-100 mt-6">
-        <div class="p-float-label w-100">
+    <div class="field w-full mt-6">
+        <div class="p-float-label w-full">
             <Textarea :id="id" v-bind="componentAttributes" v-model="v$.modelValue.$model" :class="componentClasses">
                                             <template v-for="(_, slot) of $slots" v-slot:[slot]="scope">
                                                 <slot :name="slot" v-bind="scope"/>
                                             </template>
-                                        </Textarea>
-            <label :for="id" :class="{ 'p-error': v$.modelValue.$invalid && showError }">{{ props.label }}{{ required ? '*'
+</Textarea>
+            <label :for="id" :class="{ 'p-error': v$.modelValue.$invalid && showError }">{{ props.label }}{{ required ?
+                '*'
                 : '' }}</label>
         </div>
         <small :id="id + '-help'" v-if="helpText">{{ helpText }}<br></small>
@@ -45,7 +46,7 @@ const v$ = useVuelidate({ modelValue: rules }, reactive({ modelValue }));
 
 const componentClasses = reactive<any>({
     "p-invalid": computed(() => v$.value.modelValue.$invalid && props.showError),
-    "w-100": true,
+    "w-full": true,
 });
 
 const inputProps = { ...props };

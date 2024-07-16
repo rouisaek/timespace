@@ -1,10 +1,10 @@
 <template>
     <!-- Begin form field -->
     <div :class="{
-        'field w-100': true,
+        'field w-full': true,
         'mt-6': props.label,
     }">
-        <div class="p-float-label w-100" v-if="props.label">
+        <div class="p-float-label w-full" v-if="props.label">
             <Dropdown :id="id" v-bind="componentAttributes" v-model="v$.modelValue.$model" :class="componentClasses">
                 <template v-for="(_, slot) of $slots" v-slot:[slot]="scope">
                     <slot :name="slot" v-bind="scope" />
@@ -53,7 +53,7 @@ const v$ = useVuelidate({ modelValue: rules ?? {} }, reactive({ modelValue }));
 
 const componentClasses = reactive<any>({
     "p-invalid": computed(() => v$.value.modelValue.$invalid && props.showError),
-    "w-100": true,
+    "w-full": true,
 });
 
 const inputProps: any = { ...props, ...attrs };

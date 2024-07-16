@@ -1,7 +1,7 @@
 <template>
     <!-- Begin form field -->
-    <div class="field w-100 mt-6">
-        <div class="p-float-label w-100">
+    <div class="field w-full mt-6">
+        <div class="p-float-label w-full">
             <AutoComplete :id="id" v-bind="componentAttributes" v-model="v$.modelValue.$model"
                 :class="componentClasses">
                 <template v-for="(_, slot) of $slots" v-slot:[slot]="scope">
@@ -47,7 +47,7 @@ const v$ = useVuelidate({ modelValue: rules }, reactive({ modelValue }));
 
 const componentClasses = reactive<any>({
     "p-invalid": computed(() => v$.value.modelValue.$invalid && props.showError),
-    "w-100": true,
+    "w-full": true,
 });
 
 const inputProps: any = { ...props, ...attrs };
@@ -56,7 +56,7 @@ if (props.disabled) inputProps.disabled = props.disabled;
 inputProps.pt = {
     ...props.pt, ...{
         input: {
-            class: 'w-100'
+            class: 'w-full'
         },
         panel: {
             class: 'px-2'

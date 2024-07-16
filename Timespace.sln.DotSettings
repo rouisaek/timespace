@@ -15,9 +15,9 @@
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=30268A7051168441BABF0D6FEE32A9AE/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=30268A7051168441BABF0D6FEE32A9AE/Entry/=0F17EA7CD0DED04E9D0E2148A2E61672/@KeyIndexDefined">False</s:Boolean>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=30268A7051168441BABF0D6FEE32A9AE/Entry/=0F17EA7CD0DED04E9D0E2148A2E61672/Position/@EntryValue">4</s:Int64>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=30268A7051168441BABF0D6FEE32A9AE/Entry/=2DB34A3C5FF23D44BBD1A2B140BE6586/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=30268A7051168441BABF0D6FEE32A9AE/Entry/=2DB34A3C5FF23D44BBD1A2B140BE6586/EntryName/@EntryValue">POST Endpoint with db</s:String>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=30268A7051168441BABF0D6FEE32A9AE/Entry/=2DB34A3C5FF23D44BBD1A2B140BE6586/Position/@EntryValue">3</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=30268A7051168441BABF0D6FEE32A9AE/Entry/=2DB34A3C5FF23D44BBD1A2B140BE6586/@KeyIndexDefined">False</s:Boolean>
+	
+	
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=30268A7051168441BABF0D6FEE32A9AE/Entry/=55C015F148BCBD4D86E4329163D9E616/EntryName/@EntryValue">Class Declaration Codefix Provider</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=30268A7051168441BABF0D6FEE32A9AE/Entry/=55C015F148BCBD4D86E4329163D9E616/Position/@EntryValue">1</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=30268A7051168441BABF0D6FEE32A9AE/Entry/=57C6EB36F895974799FA0913DFCCA486/@KeyIndexDefined">False</s:Boolean>
@@ -32,25 +32,25 @@
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=30268A7051168441BABF0D6FEE32A9AE/Entry/=8D079D4BB08E0E4386BC411600A69AD8/Position/@EntryValue">2</s:Int64>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=30268A7051168441BABF0D6FEE32A9AE/Entry/=E86BFE5D8639C04FABA34DAF0792254B/EntryName/@EntryValue">Method Declaration Codefix Provider</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/QuickList/=30268A7051168441BABF0D6FEE32A9AE/Entry/=E86BFE5D8639C04FABA34DAF0792254B/Position/@EntryValue">2</s:Int64>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2DB34A3C5FF23D44BBD1A2B140BE6586/@KeyIndexDefined">True</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2DB34A3C5FF23D44BBD1A2B140BE6586/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2DB34A3C5FF23D44BBD1A2B140BE6586/CustomProperties/=Extension/@EntryIndexedValue">cs</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2DB34A3C5FF23D44BBD1A2B140BE6586/CustomProperties/=FileName/@EntryIndexedValue">PostEndpointWithDb</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2DB34A3C5FF23D44BBD1A2B140BE6586/CustomProperties/=ValidateFileName/@EntryIndexedValue">True</s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2DB34A3C5FF23D44BBD1A2B140BE6586/Description/@EntryValue">POST Endpoint with db</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2DB34A3C5FF23D44BBD1A2B140BE6586/Field/=CLASSNAME/@KeyIndexDefined">False</s:Boolean>
-	
-	
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2DB34A3C5FF23D44BBD1A2B140BE6586/Field/=NAMESPACE/@KeyIndexDefined">False</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2DB34A3C5FF23D44BBD1A2B140BE6586/@KeyIndexDefined">False</s:Boolean>
 	
 	
 	
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2DB34A3C5FF23D44BBD1A2B140BE6586/Reformat/@EntryValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2DB34A3C5FF23D44BBD1A2B140BE6586/Scope/=C040821D1CED82449253405557DCEA32/@KeyIndexDefined">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2DB34A3C5FF23D44BBD1A2B140BE6586/Scope/=C040821D1CED82449253405557DCEA32/Type/@EntryValue">InAnyNetProject</s:String>
-	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2DB34A3C5FF23D44BBD1A2B140BE6586/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2DB34A3C5FF23D44BBD1A2B140BE6586/Text/@EntryValue"></s:String>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=2DB34A3C5FF23D44BBD1A2B140BE6586/UITag/@EntryValue">Immediate Apis</s:String>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3B13DB03FF3C7A43837C9DDC0D2CCBD1/@KeyIndexDefined">False</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3B13DB03FF3C7A43837C9DDC0D2CCBD1/Applicability/=File/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=3B13DB03FF3C7A43837C9DDC0D2CCBD1/Applicability/=File/@EntryIndexRemoved">True</s:Boolean>
@@ -177,8 +177,12 @@ public static class $SELSTART$Auth$SELEND$EndpointPolicy
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B12301B062174F4FAE4711909D33E29A/CustomProperties/=ValidateFileName/@EntryIndexedValue">True</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B12301B062174F4FAE4711909D33E29A/Description/@EntryValue">POST</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B12301B062174F4FAE4711909D33E29A/Field/=CLASSNAME/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B12301B062174F4FAE4711909D33E29A/Field/=CLASSNAME/Expression/@EntryValue">getAlphaNumericFileNameWithoutExtension()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B12301B062174F4FAE4711909D33E29A/Field/=CLASSNAME/InitialRange/@EntryValue">-1</s:Int64>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B12301B062174F4FAE4711909D33E29A/Field/=CLASSNAME/Order/@EntryValue">1</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B12301B062174F4FAE4711909D33E29A/Field/=NAMESPACE/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B12301B062174F4FAE4711909D33E29A/Field/=NAMESPACE/Expression/@EntryValue">fileDefaultNamespace()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B12301B062174F4FAE4711909D33E29A/Field/=NAMESPACE/InitialRange/@EntryValue">-1</s:Int64>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B12301B062174F4FAE4711909D33E29A/Field/=NAMESPACE/Order/@EntryValue">0</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B12301B062174F4FAE4711909D33E29A/Field/=permission/@KeyIndexDefined">True</s:Boolean>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B12301B062174F4FAE4711909D33E29A/Field/=permission/Order/@EntryValue">3</s:Int64>
@@ -210,7 +214,7 @@ public static partial class $CLASSNAME$
 	[Validate]
 	public partial record Command : IValidationTarget&lt;Command&gt;
 	{
-		
+		$END$
 	}
 
 	public record Response
@@ -256,7 +260,7 @@ namespace $NAMESPACE$;
 [GeneratePermissionPolicy]
 public static class $CLASSNAME$Policy
 {
-	public const string PolicyName = "timespace:";
+	public const string PolicyName = "timespace:$permission$";
 }
 
 [Handler]
@@ -267,7 +271,7 @@ public static partial class $CLASSNAME$
 	[Validate]
 	public partial record Command : IValidationTarget&lt;Command&gt;
 	{
-		
+		$END$
 	}
 
 	public record Response
