@@ -1,1 +1,13 @@
-This is a confirmation link for your timespace.nl
+Hallo {{ user_name }},
+
+Iemand heeft onlangs een e-mailbevestiging aangevraagd voor je
+Timespace-account. Als jij dat was, kun je je e-mail bevestigen door hier op de
+knop te klikken:
+
+E-mail bevestigen {{ confirm_email_link }}
+
+Als je dit niet hebt aangevraagd, kun je deze e-mail gewoon negeren en
+verwijderen.
+
+Om je account veilig te houden, stuur deze e-mail alstublieft niet door naar
+iemand anders.

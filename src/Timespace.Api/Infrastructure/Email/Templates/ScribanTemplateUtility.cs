@@ -1,7 +1,7 @@
 using System.Reflection;
 using Scriban;
 
-namespace Timespace.Api.Infrastructure.Email;
+namespace Timespace.Api.Infrastructure.Email.Templates;
 
 public static class ScribanTemplateUtility
 {

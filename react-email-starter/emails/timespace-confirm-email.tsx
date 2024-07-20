@@ -12,39 +12,36 @@ import {
   } from "@react-email/components";
   import * as React from "react";
   
-  export const DropboxResetPasswordEmail = () => {
+  export const TimespaceConfirmEmailEmail = () => {
 	return (
 	  <Html>
 		<Head />
-		<Preview>Dropbox reset your password</Preview>
+		<Preview>Bevestig Timespace e-mail</Preview>
 		<Body style={main}>
 		  <Container style={container}>
 			
 			<Section>
-			  <Text style={text}>Hi {`{{ userFirstName }}`},</Text>
+			  <Text style={text}>Hallo {`{{ user_name }}`},</Text>
 			  <Text style={text}>
-				Someone recently requested an email confirmation for your Timespace
-				account. If this was you, you can confirm your email by clicking the button here:
+				Iemand heeft onlangs een e-mailbevestiging aangevraagd voor je Timespace-account. Als jij dat was, kun je je e-mail bevestigen door hier op de knop te klikken:
 			  </Text>
-			  <Button style={button} href="{{ confirmEmailLink }}">
-				Reset password
+			  <Button style={button} href="{{ confirm_email_link }}">
+				E-mail bevestigen
 			  </Button>
 			  <Text style={text}>
-				If you don&apos;t didn&apos;t
-				request this, just ignore and delete this message.
+				Als je dit niet hebt aangevraagd, kun je deze e-mail gewoon negeren en verwijderen.
 			  </Text>
 			  <Text style={text}>
-				To keep your account secure, please don&apos;t forward this email
-				to anyone.
+				Om je account veilig te houden, stuur deze e-mail alstublieft niet door naar iemand anders.
 			  </Text>
 			</Section>
 		  </Container>
 		</Body>
 	  </Html>
 	);
-  };
+};
   
-  export default DropboxResetPasswordEmail;
+  export default TimespaceConfirmEmailEmail;
   
   const main = {
 	backgroundColor: "#f6f9fc",
@@ -59,8 +56,7 @@ import {
   
   const text = {
 	fontSize: "16px",
-	fontFamily:
-	  "'Open Sans', 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif",
+	fontFamily: `ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`,
 	fontWeight: "300",
 	color: "#404040",
 	lineHeight: "26px",
