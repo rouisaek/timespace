@@ -1,6 +1,5 @@
-@import 'primeicons/primeicons.css';
-
-@layer tailwind-base, primevue, tailwind-utilities;
+@import 'primeicons/primeicons.css' layer(primeicons);
+@layer tailwind-base, primevue, tailwind-utilities, primeicons;
 
 @layer tailwind-base {
 	@tailwind base;

@@ -7,6 +7,9 @@ import * as enLocale from '@/infrastructure/i18n/locales/primevue/en.json';
 import * as nlLocale from '@/infrastructure/i18n/locales/primevue/en.json';
 import DynamicDialog from 'primevue/dynamicdialog';
 import Toast from 'primevue/toast';
+import { useToastStore } from './infrastructure/stores/toastStore';
+
+useToastStore();
 
 const primeVue = usePrimeVue();
 const i18n = useI18n();

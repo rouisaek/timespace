@@ -40,5 +40,9 @@
   "loginPage.signUpText1": "Nog geen klant?",
   "validations.phoneNumber": "{label} moet een geldig telefoonnummer zijn",
   "loginPage.emailConfirmationNotSent": "Er is een probleem opgetreden bij het opnieuw verzenden van de bevestigingsmail. \nProbeer het later opnieuw of neem contact op met ons ondersteuningsteam.",
-  "loginPage.emailConfirmationSent": "Er is een e-mailbevestiging opnieuw verzonden. \nControleer uw inbox."
+  "loginPage.emailConfirmationSent": "Er is een e-mailbevestiging opnieuw verzonden. \nControleer uw inbox.",
+  "confirmEmailPage.title": "Bevestig Email",
+  "confirmEmailPage.successMessage": "Je e-mailadres is succesvol bevestigd, je kunt nu inloggen.",
+  "confirmEmailPage.errorMessage": "Er is iets misgegaan bij het bevestigen van uw e-mailadres. \nNeem contact op met ons ondersteuningsteam.",
+  "confirmEmailPage.loginText": "Ga naar de inlogpagina"
 }

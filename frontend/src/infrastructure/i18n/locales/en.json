@@ -41,5 +41,10 @@
   "errors.login-failed": "Login failed, check your email address and/or password",
   "errors.email-not-confirmed.resend-email": "Resend confirmation email",
   "loginPage.emailConfirmationSent": "Email confirmation has been resent. Please check your inbox.",
-  "loginPage.emailConfirmationNotSent": "There was an issue with resending the confirmation email. Please try again later or contact our support team."
+  "loginPage.emailConfirmationNotSent": "There was an issue with resending the confirmation email. Please try again later or contact our support team.",
+  "confirmEmailPage.title": "Confirm email",
+  "confirmEmailPage.successMessage": "Your email has been confirmed succesfully, you can now log in.",
+  "confirmEmailPage.errorMessage": "Something went wrong while confirming your email. Please contact our support team.",
+  "confirmEmailPage.loginText": "Go to login page",
+  "dashboardHeader.search": "Search..."
 }
