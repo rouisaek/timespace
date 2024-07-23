@@ -13,8 +13,9 @@ public class ApplicationUser : IdentityUser<int>, ITenanted
 	public int TenantId { get; set; }
 	public string FirstName { get; set; } = null!;
 	public string? MiddleName { get; set; }
-	public string? LastName { get; set; } = null!;
-	public List<string> Permissions { get; init; } = [];
+	public string? LastName { get; set; }
+	public new required string Email { get; set; }
+	public List<string> Permissions { get; init; } = null!;
 	public Instant? LastEmailConfirmationSent { get; set; }
 
 	public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>

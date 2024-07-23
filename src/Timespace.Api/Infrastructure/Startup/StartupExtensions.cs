@@ -21,6 +21,7 @@ public static class StartupExtensions
 	{
 		_ = services.AddIdentityCore<ApplicationUser>(config =>
 			{
+				config.SignIn.RequireConfirmedEmail = true;
 				config.User.RequireUniqueEmail = true;
 				config.Password.RequiredLength = 6;
 				config.Password.RequiredUniqueChars = 0;

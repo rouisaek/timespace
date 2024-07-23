@@ -4,8 +4,8 @@ using Immediate.Handlers.Shared;
 using Immediate.Validations.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Timespace.Api.Features.Users.EmailConfirmation.Handlers;
 using Timespace.Api.Features.Users.Models;
-using Timespace.Api.Infrastructure;
 
 namespace Timespace.Api.Features.Users.EmailConfirmation.Endpoints;
 
@@ -27,7 +27,7 @@ public static partial class RequestEmailConfirmationResendEndpoint
 
 	private static async ValueTask<Response> HandleAsync(Command command,
 		UserManager<ApplicationUser> userManager,
-		EmailService emailService,
+		SendConfirmationEmailCommand.Handler sendConfirmationEmailCommand,
 		CancellationToken token)
 	{
 		var user = await userManager.FindByEmailAsync(command.Email);
@@ -37,6 +37,12 @@ public static partial class RequestEmailConfirmationResendEndpoint
 			return new Response { Success = true };
 		}
 
+		_ = await sendConfirmationEmailCommand.HandleAsync(new()
+		{
+			Email = user.Email!,
+			FirstName = user.FirstName,
+			User = user
+		}, token);
 
 		return new Response { Success = true }; ;
 	}

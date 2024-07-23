@@ -9,15 +9,9 @@ using Timespace.Api.Features.Users.Models;
 
 namespace Timespace.Api.Features.Users.EmailConfirmation.Endpoints;
 
-[GeneratePermissionPolicy]
-public static class ConfirmEmailEndpointPolicy
-{
-	public const string PolicyName = "timespace:permission";
-}
-
 [Handler]
 [MapPost("/api/accounts/email-confirmation")]
-[Authorize(ConfirmEmailEndpointPolicy.PolicyName)]
+[AllowAnonymous]
 public static partial class ConfirmEmailEndpoint
 {
 	[Validate]
@@ -42,7 +36,7 @@ public static partial class ConfirmEmailEndpoint
 
 		var result = await userManager.ConfirmEmailAsync(user, command.Code);
 
-		if (result.Succeeded)
+		if (!result.Succeeded)
 			throw new EmailConfirmationFailedException();
 
 		return new Response { Success = true };
