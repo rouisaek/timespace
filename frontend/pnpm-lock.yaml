@@ -23,6 +23,9 @@ dependencies:
   dayjs:
     specifier: ^1.11.11
     version: 1.11.11
+  iconify-icon:
+    specifier: ^2.1.0
+    version: 2.1.0
   intl-tel-input:
     specifier: ^23.3.2
     version: 23.3.2
@@ -35,9 +38,6 @@ dependencies:
   pretty-bytes:
     specifier: ^6.1.1
     version: 6.1.1
-  primeicons:
-    specifier: ^7.0.0
-    version: 7.0.0
   primevue:
     specifier: ^4.0.0
     version: 4.0.0(@primeuix/utils@0.0.5)(vue@3.4.31)
@@ -52,6 +52,15 @@ dependencies:
     version: 4.4.0(vue@3.4.31)
 
 devDependencies:
+  '@iconify-json/heroicons':
+    specifier: ^1.1.22
+    version: 1.1.22
+  '@iconify/tailwind':
+    specifier: ^1.1.1
+    version: 1.1.1
+  '@iconify/vue':
+    specifier: ^4.1.2
+    version: 4.1.2(vue@3.4.31)
   '@rushstack/eslint-patch':
     specifier: ^1.8.0
     version: 1.10.3
@@ -746,6 +755,30 @@ packages:
   /@humanwhocodes/object-schema@2.0.3:
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
     deprecated: Use @eslint/object-schema instead
+    dev: true
+
+  /@iconify-json/heroicons@1.1.22:
+    resolution: {integrity: sha512-UNfSBdD/JBYBvFFhce6e3FsmeqshGz8u964R36npJvIzuORhIHUXrFerulBWFmbG0V1xvMqLZVZc4bPyjP5p7A==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify/tailwind@1.1.1:
+    resolution: {integrity: sha512-4mmA//qjZigv7D4KlqcVSYTqfRIJzyts2/lSCAJfCL0rVMIE76+ifJnaE5jxCo1+nYGBF8FsFo0qFOs+sX4EnA==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify/types@2.0.0:
+    resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
+
+  /@iconify/vue@4.1.2(vue@3.4.31):
+    resolution: {integrity: sha512-CQnYqLiQD5LOAaXhBrmj1mdL2/NCJvwcC4jtW2Z8ukhThiFkLDkutarTOV2trfc9EXqUqRs0KqXOL9pZ/IyysA==}
+    peerDependencies:
+      vue: '>=3'
+    dependencies:
+      '@iconify/types': 2.0.0
+      vue: 3.4.31(typescript@5.4.5)
     dev: true
 
   /@intlify/core-base@9.13.1:
@@ -2297,6 +2330,12 @@ packages:
     engines: {node: '>=16.17.0'}
     dev: true
 
+  /iconify-icon@2.1.0:
+    resolution: {integrity: sha512-lto4XU3bwTQnb+D/CsJ4dWAo0aDe+uPMxEtxyOodw9l7R9QnJUUab3GCehlw2M8mDHdeUu/ufx8PvRQiJphhXg==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: false
+
   /ignore@5.3.1:
     resolution: {integrity: sha512-5Fytz/IraMjqpwfd34ke28PTVMjZjJG2MPn5t7OE4eUCUNf8BAa7b5WUS9/Qvr6mwOQS7Mk6vdsMno5he+T8Xw==}
     engines: {node: '>= 4'}
@@ -2922,10 +2961,6 @@ packages:
   /pretty-bytes@6.1.1:
     resolution: {integrity: sha512-mQUvGU6aUFQ+rNvTIAcZuWGRT9a6f6Yrg9bHs4ImKF+HZCEK+plBvnAZYSIQztknZF2qnzNtr6F8s0+IuptdlQ==}
     engines: {node: ^14.13.1 || >=16.0.0}
-    dev: false
-
-  /primeicons@7.0.0:
-    resolution: {integrity: sha512-jK3Et9UzwzTsd6tzl2RmwrVY/b8raJ3QZLzoDACj+oTJ0oX7L9Hy+XnVwgo4QVKlKpnP/Ur13SXV/pVh4LzaDw==}
     dev: false
 
   /primevue@4.0.0(@primeuix/utils@0.0.5)(vue@3.4.31):

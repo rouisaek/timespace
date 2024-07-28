@@ -39,7 +39,7 @@ onMounted(() => {
 <template>
 	<div class="flex w-full h-full place-items-center justify-center gradient-bg">
 		<div
-			class="p-12 shadow-2xl border-gray-200 dark:border-gray-900 border rounded bg-white dark:bg-neutral-800 min-w-[50%] md:min-w-[30%]">
+			class="p-12 shadow-2xl border-gray-200 dark:border-gray-900 border rounded bg-white dark:bg-slate-800 min-w-[50%] md:min-w-[30%]">
 			<div class="flex justify-center mb-6">
 				<TimespaceLogoWithWordmark />
 			</div>

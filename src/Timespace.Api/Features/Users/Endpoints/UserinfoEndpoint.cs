@@ -1,6 +1,9 @@
 using Immediate.Apis.Shared;
 using Immediate.Handlers.Shared;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
+using Timespace.Api.Database;
+using Timespace.Api.Features.Shared.Exceptions;
 using Timespace.Api.Infrastructure.UsageContext;
 
 namespace Timespace.Api.Features.Users.Endpoints;
@@ -19,18 +22,26 @@ public static partial class UserinfoEndpoint
 		public required List<string> Permissions { get; init; }
 	}
 
-	private static ValueTask<Response> HandleAsync(object _, IUsageContext usageContext, CancellationToken __)
+	private static async ValueTask<Response> HandleAsync(object _, IUsageContext usageContext, AppDbContext db, CancellationToken token)
 	{
-		var user = usageContext.User;
+		var contexUser = usageContext.User;
 
-		return new ValueTask<Response>(new Response()
-		{
-			FirstName = user.FirstName,
-			MiddleName = user.MiddleName,
-			LastName = user.LastName,
-			Email = user.Email,
-			Permissions = user.Permissions
-		});
+		var response = await db.Users
+			.Where(x => x.Id == contexUser.Id)
+			.Select(x => new Response
+			{
+				FirstName = x.FirstName,
+				MiddleName = x.MiddleName,
+				LastName = x.LastName,
+				Email = x.Email,
+				Permissions = x.Permissions
+			})
+			.FirstOrDefaultAsync(token);
+
+		if (response is null)
+			throw new BadRequestException("Something went wrong with projecting into userinfo object");
+
+		return response;
 	}
 }
 

@@ -44,5 +44,10 @@
   "confirmEmailPage.title": "Bevestig Email",
   "confirmEmailPage.successMessage": "Je e-mailadres is succesvol bevestigd, je kunt nu inloggen.",
   "confirmEmailPage.errorMessage": "Er is iets misgegaan bij het bevestigen van uw e-mailadres. \nNeem contact op met ons ondersteuningsteam.",
-  "confirmEmailPage.loginText": "Ga naar de inlogpagina"
+  "confirmEmailPage.loginText": "Ga naar de inlogpagina",
+  "userAccountMenu.logoutTitle": "Uitloggen",
+  "userAccountMenu.settingsTitle": "Instellingen",
+  "userAccountMenu.profileTitle": "Profiel",
+  "dashboardAsideNavigation.employeesTitle": "Medewerkers",
+  "employeesNavigationItem.hours": "Uren"
 }

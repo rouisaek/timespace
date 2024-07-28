@@ -4,6 +4,7 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { plugin as primeVue } from '@/infrastructure/plugins/primevue'
 import { VueQueryPlugin } from '@tanstack/vue-query'
+import 'iconify-icon'
 
 import App from './App.vue'
 import router from './router'

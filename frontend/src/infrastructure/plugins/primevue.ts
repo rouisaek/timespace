@@ -33,10 +33,10 @@ const CustomAuraPreset = definePreset(Aura, {
 			},
 			dark: {
 				formField: {
-					background: '{neutral.900}'
+					background: '{slate.900}'
 				},
 				dialog: {
-					background: '{neutral.800}'
+					background: '{slate.800}'
 				}
 			}
 		}

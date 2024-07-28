@@ -46,5 +46,12 @@
   "confirmEmailPage.successMessage": "Your email has been confirmed succesfully, you can now log in.",
   "confirmEmailPage.errorMessage": "Something went wrong while confirming your email. Please contact our support team.",
   "confirmEmailPage.loginText": "Go to login page",
-  "dashboardHeader.search": "Search..."
+  "dashboardHeader.search": "Search...",
+  "userAccountMenu.settingsTitle": "Settings",
+  "userAccountMenu.logoutTitle": "Logout",
+  "userAccountMenu.profileTitle": "Profile",
+  "userAccountMenu.logoutSuccessMessage": "Logout successful, you will be rerouted to the login page.",
+  "userAccountMenu.logoutErrorMessage": "Something went wrong while trying to log you out. Please try again later or contact our support team.",
+  "dashboardAsideNavigation.employeesTitle": "Employees",
+  "employeesNavigationItem.hours": "Hours"
 }

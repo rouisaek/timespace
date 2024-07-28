@@ -23,19 +23,23 @@ function submit() {
 <template>
 	<div class="flex w-full h-full place-items-center justify-center gradient-bg">
 		<div
-			class="p-6 md:p-12 m-6 md:m-12 shadow-2xl border-gray-200 dark:border-gray-900 border rounded bg-white dark:bg-neutral-800 min-w-[50%] lg:min-w-[30%]">
+			class="p-6 md:p-12 m-6 md:m-12 shadow-2xl border-gray-200 dark:border-gray-900 border rounded bg-white dark:bg-slate-800 min-w-[50%] lg:min-w-[30%]">
 			<div class="flex justify-center mb-6">
 				<TimespaceLogoWithWordmark />
 			</div>
 			<h1 class="font-bold text-3xl">{{ $t('signUpPage.title') }}</h1>
-			<p class="mb-6 text-neutral-600 dark:text-neutral-400">{{ $t('signUpPage.stepOneSubtitle') }}</p>
+			<p class="mb-6 text-slate-600 dark:text-slate-400">{{ $t('signUpPage.stepOneSubtitle') }}</p>
 			<Form.Text id="email" :label="$t('commonFieldLabels.email')" v-model="state.email" email size="large"
 				:show-text-errors="submitted" :show-error="submitted" required />
 			<div class="flex flex-col gap-4 items-center">
-				<Button :label="$t('signUpPage.continueButtonText')" icon="pi pi-arrow-right" icon-pos="right"
-					class="mt-6 w-full" size="large" @click="submit" />
+				<Button class="mt-6 w-full" size="large" @click="submit">
+					<template #default>
+						<span>{{ $t('signUpPage.continueButtonText') }}</span>
+						<span class="icon-[heroicons--arrow-right] h-6 w-6"></span>
+					</template>
+				</Button>
 				<div class="flex flex-row gap-1">
-					<span class="text-neutral-700 dark:text-neutral-300">{{ $t('signUpPage.loginText') }}</span>
+					<span class="text-slate-700 dark:text-slate-300">{{ $t('signUpPage.loginText') }}</span>
 					<RouterLink class="text-indigo-700 dark:text-indigo-300 font-semibold" :to="{ name: 'login' }">{{
 						$t('signUpPage.loginText2') }}</RouterLink>
 				</div>

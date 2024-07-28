@@ -4,7 +4,7 @@ import { reactive, ref } from "vue";
 import Button from "primevue/button";
 import TimespaceLogoWithWordmark from "@/features/shared/logos/TimespaceLogoWithWordmark.vue";
 import useVuelidate from "@vuelidate/core";
-import { RouterLink } from "vue-router";
+import { RouterLink, useRouter } from "vue-router";
 import { useDialog } from "primevue/usedialog";
 import ForgotPasswordModal from "./forgot-password/ForgotPasswordModal.vue";
 import { useI18n } from "vue-i18n";
@@ -17,6 +17,7 @@ import Divider from "primevue/divider";
 const dialog = useDialog();
 const toast = useToast();
 const { t } = useI18n();
+const router = useRouter();
 
 const state = reactive({
 	email: null,
@@ -37,6 +38,7 @@ function submit() {
 
 	apiClient.post("/accounts/login", state).then(() => {
 		loading.value = false;
+		router.push({ name: 'dashboard' });
 	}).catch((err) => {
 		if (request.isAxiosError(err)) {
 			switch (err.response?.data.type) {
@@ -52,8 +54,6 @@ function submit() {
 		}
 		loading.value = false;
 	});
-
-	console.log("submitting", state);
 }
 
 function openResetPasswordModal() {
@@ -92,7 +92,7 @@ function resendConfirmationEmail() {
 <template>
 	<div class="flex w-full h-full place-items-center justify-center gradient-bg">
 		<div
-			class="p-12 flex flex-col shadow-2xl border-gray-200 dark:border-gray-900 border rounded bg-white dark:bg-neutral-800 min-w-[50%] md:min-w-[30%]">
+			class="p-12 flex flex-col shadow-2xl border-gray-200 dark:border-gray-900 border rounded bg-white dark:bg-slate-800 min-w-[50%] md:min-w-[30%]">
 			<div class="flex justify-center mb-6">
 				<TimespaceLogoWithWordmark />
 			</div>
@@ -112,21 +112,20 @@ function resendConfirmationEmail() {
 					</Button>
 				</div>
 			</Message>
-			<Divider class="my-6" />
-			<h1 class="font-bold text-3xl mb-6">{{ $t('loginPage.title') }}</h1>
+			<h1 class="font-bold text-3xl mb-4">{{ $t('loginPage.title') }}</h1>
 			<Form.Text id="email" :label="$t('commonFieldLabels.email')" v-model="state.email" email size="large"
 				:show-text-errors="submitted" :show-error="submitted" required />
 			<Form.Password id="password" :label="$t('loginPage.passwordFieldLabel')" v-model="state.password"
 				:toggleMask="true" size="large" :show-text-errors="submitted" :show-error="submitted" required />
 			<span role="button" @click="openResetPasswordModal"
-				class="text-neutral-700 dark:text-neutral-300 cursor-pointer">{{
+				class="text-slate-700 dark:text-slate-300 cursor-pointer">{{
 					$t('loginPage.forgotPasswordText')
 				}}</span>
 			<div class="flex flex-col gap-4 items-center">
 				<Button :label="$t('loginPage.loginButtonText')" class="mt-6 w-full" size="large" @click="submit"
 					:loading="loading" />
 				<div class="flex flex-row gap-1">
-					<span class="text-neutral-700 dark:text-neutral-300">{{ $t('loginPage.signUpText1') }}</span>
+					<span class="text-slate-700 dark:text-slate-300">{{ $t('loginPage.signUpText1') }}</span>
 					<RouterLink class="text-indigo-700 dark:text-indigo-300 font-semibold" :to="{ name: 'sign-up' }">{{
 						$t('loginPage.signUpText2') }}</RouterLink>
 				</div>

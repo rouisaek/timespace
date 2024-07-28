@@ -16,7 +16,7 @@ public class AddPermissionsMiddleware : IMiddleware
 		await using var db = context.RequestServices.GetRequiredService<AppDbContext>();
 		var usageContext = context.RequestServices.GetRequiredService<IUsageContext>();
 
-		if (context.User is { } claimsPrincipal)
+		if (context.User is { Identity.IsAuthenticated: true } claimsPrincipal)
 		{
 			var userId = userManager.GetUserId(claimsPrincipal) ?? throw new UnauthorizedException();
 			var user = await userManager.FindByIdAsync(userId) ?? throw new UnauthorizedException();

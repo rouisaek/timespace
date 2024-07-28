@@ -1,15 +1,11 @@
 <script setup lang="ts">
-import { useUserinfoQuery } from '@/features/users/accounts/queries/meQuery';
-
-const { data: userInfo } = useUserinfoQuery();
+import DashboardAsideNavigationItems from './DashboardAsideNavigationItems.vue';
 </script>
 
 <template>
-	<aside class="h-full w-fit">
-		<div>
-			<div class="h-12 w-12 bg-gray-500">
-			</div>
-			<span>Bedrijfsnaam</span>
+	<aside class="h-full min-w-[20%] border-r border-slate-300 dark:border-slate-700 p-8 dark:bg-slate-800">
+		<div class="">
+			<DashboardAsideNavigationItems />
 		</div>
 	</aside>
 </template>

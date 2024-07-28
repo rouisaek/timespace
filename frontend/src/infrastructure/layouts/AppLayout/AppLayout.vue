@@ -7,9 +7,11 @@ import DashboardHeader from '@/features/dashboard/header/DashboardHeader.vue';
 <template>
 	<div class="h-dvh w-dvw flex flex-col">
 		<DashboardHeader />
-		<div class="flex flex-row">
+		<div class="flex flex-row h-full">
 			<DashboardAsideNavigation />
-			<RouterView />
+			<div class="flex-grow bg-slate-50 dark:bg-slate-900">
+				<RouterView />
+			</div>
 		</div>
 	</div>
 </template>

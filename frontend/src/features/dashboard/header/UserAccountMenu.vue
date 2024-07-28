@@ -1,26 +1,85 @@
 <script setup lang="ts">
 import { useUserinfoQuery } from '@/features/users/accounts/queries/meQuery';
 import { join } from 'lodash-es';
+import { ref } from 'vue';
+import Menu from 'primevue/menu';
+import { useI18n } from 'vue-i18n';
+import type { MenuItem } from 'primevue/menuitem';
+import { apiClient } from '@/infrastructure/api';
+import { toastStore } from '@/infrastructure/stores/toastStore';
+import { useRouter } from 'vue-router';
+import queryClient from '@/infrastructure/query-client';
 
 const { data: userInfo } = useUserinfoQuery();
+const { t } = useI18n();
+const router = useRouter();
+const menu = ref();
+
+const toggle = (event: any) => {
+	menu.value.toggle(event);
+}
+
+const items = ref<MenuItem[]>([
+	{
+		label: t('userAccountMenu.profileTitle'),
+		items: [
+			{
+				label: t('userAccountMenu.settingsTitle'),
+				icon: 'pi pi-cog'
+			},
+			{
+				label: t('userAccountMenu.logoutTitle'),
+				icon: 'pi pi-sign-out',
+				command: () => {
+					apiClient.post('/accounts/logout')
+						.then(async () => {
+							toastStore.toasts.push({
+								severity: 'success',
+								summary: t('success'),
+								detail: t('userAccountMenu.logoutSuccessMessage')
+							});
+
+							await queryClient.invalidateQueries({ queryKey: ['/accounts/me'] });
+							router.push({ name: 'login' });
+						}).catch(() => {
+							toastStore.toasts.push({
+								severity: 'error',
+								summary: t('error'),
+								detail: t('userAccountMenu.logoutErrorMessage')
+							});
+						})
+				}
+			}
+		]
+	}
+]);
 </script>
 
 <template>
-	<div>
-		<div class="flex flex-row place-items-center justify-between gap-3">
-			<div
-				class="h-11 w-11 bg-indigo-100 dark:bg-indigo-900 border border-indigo-600 dark:border-indigo-400 rounded flex place-items-center justify-center">
-				<span class="font-bold text-indigo-900 dark:text-indigo-100 text-xl">{{ userInfo?.firstName.charAt(0)
-					}}</span>
-			</div>
-			<div class="flex-col items-start hidden lg:flex">
-				<span class="font-bold">{{ join([userInfo?.firstName, userInfo?.middleName, userInfo?.lastName], " ")
-					}}</span>
-				<span class="text-neutral-600 dark:text-neutral-400">{{ userInfo?.email }}</span>
-			</div>
-			<i class="pi pi-chevron-down hidden lg:block"></i>
+	<div class="flex flex-row place-items-center justify-between gap-3 cursor-pointer" @click="toggle">
+		<div
+			class="h-11 w-11 bg-indigo-100 dark:bg-indigo-900 border border-indigo-600 dark:border-indigo-400 rounded flex place-items-center justify-center">
+			<span class="font-bold text-indigo-900 dark:text-indigo-100 text-xl">{{ userInfo?.firstName.charAt(0)
+				}}</span>
 		</div>
+		<div class="flex-col items-start hidden lg:flex">
+			<span class="font-bold">{{ join([userInfo?.firstName, userInfo?.middleName, userInfo?.lastName], " ")
+				}}</span>
+			<span class="text-slate-600 dark:text-slate-400">{{ userInfo?.email }}</span>
+		</div>
+		<i class="pi pi-chevron-down hidden lg:block"></i>
 	</div>
+	<Menu :model="items" class="w-full md:w-60" ref="menu" popup>
+		<template #submenulabel="{ item }">
+			<span class="font-bold">{{ item.label }}</span>
+		</template>
+		<template #item="{ item, props }">
+			<a class="flex items-center" v-bind="props.action">
+				<iconify-icon :icon="item.icon" />
+				<span>{{ item.label }}</span>
+			</a>
+		</template>
+	</Menu>
 </template>
 
 <style scoped></style>

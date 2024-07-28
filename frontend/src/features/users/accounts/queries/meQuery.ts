@@ -19,5 +19,5 @@ export function userInfoFetcher(): Promise<UserInfoResponse> {
 }
 
 export function useUserinfoQuery() {
-	return useQuery({ queryKey: ['/accounts/me'], queryFn: userInfoFetcher, retry: false })
+	return useQuery({ queryKey: ['/accounts/me'], queryFn: userInfoFetcher })
 }
