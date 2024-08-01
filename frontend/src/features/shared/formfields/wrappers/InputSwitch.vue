@@ -9,11 +9,12 @@
                 @click="modelValue = !modelValue">{{ label
                 }}
             </div>
-            <InputSwitch :id="id" v-bind="componentAttributes" v-model="v$.modelValue.$model" :class="componentClasses" :pt="{
-                root: {
-                    class: 'w-fit'
-                }
-            }">
+            <InputSwitch :id="id" v-bind="componentAttributes" v-model="v$.modelValue.$model" :class="componentClasses"
+                :pt="{
+                    root: {
+                        class: 'w-fit'
+                    }
+                }">
                 <template v-for="(_, slot) of $slots" v-slot:[slot]="scope">
                     <slot :name="slot" v-bind="scope" />
                 </template>
@@ -53,7 +54,7 @@ const v$ = useVuelidate({ modelValue: rules }, reactive({ modelValue }));
 // eslint-disable-next-line vue/no-setup-props-destructure
 
 const componentClasses = reactive<any>({
-    "p-invalid": computed(() => v$.value.modelValue.$invalid && props.showError),
+    "border-red-700 dark:border-red-300": computed(() => v$.value.modelValue.$invalid && props.showError),
     "flex-shrink-1": true,
 });
 

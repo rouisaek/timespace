@@ -39,7 +39,7 @@ const rules: any = getRules(props, true, props.label);
 const v$ = useVuelidate({ modelValue: rules }, reactive({ modelValue }));
 
 const componentClasses = reactive<any>({
-	"p-invalid": computed(() => v$.value.modelValue.$invalid && props.showError),
+	"border-red-700 dark:border-red-300": computed(() => v$.value.modelValue.$invalid && props.showError),
 	"w-full": true,
 });
 

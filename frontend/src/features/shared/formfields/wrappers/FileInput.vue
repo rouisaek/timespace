@@ -50,7 +50,7 @@ const v$ = useVuelidate({ modelValue: rules }, reactive({ modelValue }));
 // eslint-disable-next-line vue/no-setup-props-destructure
 
 const componentClasses = reactive<any>({
-	"p-invalid": true,
+	"border-red-700 dark:border-red-300": true,
 	"w-full": true,
 });
 
