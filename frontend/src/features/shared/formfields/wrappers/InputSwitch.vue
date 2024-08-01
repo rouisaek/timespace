@@ -5,7 +5,7 @@
             'd-flex flex-row-reverse justify-start align-items-center gap-4': props.rightLabel,
             'd-flex flex-column gap-2': props.topLabel,
         }">
-            <div :class="{ 'p-error': v$.modelValue.$invalid && showError, 'text-nowrap flex-grow-1 cursor-pointer': true }"
+            <div :class="{ 'dark:text-red-300 text-red-700': v$.modelValue.$invalid && showError, 'text-nowrap flex-grow-1 cursor-pointer': true }"
                 @click="modelValue = !modelValue">{{ label
                 }}
             </div>
@@ -23,7 +23,7 @@
         <small :id="id + '-help'" v-if="helpText">{{ helpText }}<br></small>
         <span v-if="v$.modelValue.$error && showTextErrors">
             <span :id="id + '-error'" v-for="(error, index) of v$.modelValue.$errors" :key="index">
-                <small class="p-error">{{ error.$message }}</small>
+                <small class="dark:text-red-300 text-red-700">{{ error.$message }}</small>
             </span>
         </span>
     </div>

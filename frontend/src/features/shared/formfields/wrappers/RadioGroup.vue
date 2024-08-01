@@ -1,7 +1,7 @@
 <template>
     <!-- Begin form field -->
     <div class="d-flex flex-column gap-1 h-100 mt-6">
-        <label :for="name" :class="{ 'p-error': v$.modelValue.$invalid && showError, h6: true }">
+        <label :for="name" :class="{ 'dark:text-red-300 text-red-700': v$.modelValue.$invalid && showError, h6: true }">
             {{ label }}
         </label>
         <div class="d-flex flex-row gap-4 align-items-center" v-for="option in options" :key="option.value">
@@ -14,7 +14,7 @@
         <small :id="id + '-help'" v-if="helpText">{{ helpText }}<br></small>
         <span v-if="v$.modelValue.$invalid && showTextErrors">
             <span :id="id + '-error'" v-for="(error, index) of v$.modelValue.$errors" :key="index">
-                <small class="p-error">{{ error.$message }}</small>
+                <small class="dark:text-red-300 text-red-700">{{ error.$message }}</small>
             </span>
         </span>
     </div>

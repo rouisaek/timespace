@@ -7,14 +7,16 @@
                     <slot :name="slot" v-bind="scope" />
                 </template>
             </InputMask>
-            <label :for="id" :class="{ 'p-error': v$.modelValue.$invalid && showError }">{{ props.label }}{{ required ?
-                '*'
+            <label :for="id" :class="{ 'dark:text-red-300 text-red-700': v$.modelValue.$invalid && showError }">{{
+                props.label }}{{
+                    required ?
+                        '*'
                 : '' }}</label>
         </div>
         <small :id="id + '-help'" v-if="helpText">{{ helpText }}<br></small>
         <span v-if="v$.modelValue.$invalid && showTextErrors">
             <span :id="id + '-error'" v-for="(error, index) of v$.modelValue.$errors" :key="index">
-                <small class="p-error">{{ error.$message }}</small>
+                <small class="dark:text-red-300 text-red-700">{{ error.$message }}</small>
             </span>
         </span>
     </div>
