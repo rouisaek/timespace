@@ -4,53 +4,53 @@ import ToastService from 'primevue/toastservice'
 import DialogService from 'primevue/dialogservice'
 import Tooltip from 'primevue/tooltip'
 import ConfirmationService from 'primevue/confirmationservice'
-import { definePreset } from '@primevue/themes'
-import Aura from '@primevue/themes/aura'
+// import { definePreset } from '@primevue/themes'
+import CustomAura from './presets/CustomAura'
 
-const CustomAuraPreset = definePreset(Aura, {
-	semantic: {
-		primary: {
-			50: '{indigo.50}',
-			100: '{indigo.100}',
-			200: '{indigo.200}',
-			300: '{indigo.300}',
-			400: '{indigo.400}',
-			500: '{indigo.500}',
-			600: '{indigo.600}',
-			700: '{indigo.700}',
-			800: '{indigo.800}',
-			900: '{indigo.900}',
-			950: '{indigo.950}'
-		},
-		colorScheme: {
-			light: {
-				formField: {
-					background: '{white}'
-				},
-				dialog: {
-					background: '{white}'
-				}
-			},
-			dark: {
-				formField: {
-					background: '{slate.900}'
-				},
-				dialog: {
-					background: '{slate.800}'
-				}
-			}
-		}
-	},
-	options: {
-		cssLayer: {
-			name: 'primevue',
-			order: 'tailwind-base, primevue, tailwind-utilities'
-		},
-		options: {
-			darkModeSelector: '.app-dark'
-		}
-	}
-})
+// const CustomAuraPreset = definePreset(CustomAura, {
+// 	semantic: {
+// 		primary: {
+// 			50: '{indigo.50}',
+// 			100: '{indigo.100}',
+// 			200: '{indigo.200}',
+// 			300: '{indigo.300}',
+// 			400: '{indigo.400}',
+// 			500: '{indigo.500}',
+// 			600: '{indigo.600}',
+// 			700: '{indigo.700}',
+// 			800: '{indigo.800}',
+// 			900: '{indigo.900}',
+// 			950: '{indigo.950}'
+// 		},
+// 		colorScheme: {
+// 			light: {
+// 				formField: {
+// 					background: '{white}'
+// 				},
+// 				dialog: {
+// 					background: '{white}'
+// 				}
+// 			},
+// 			dark: {
+// 				formField: {
+// 					background: '{slate.900}'
+// 				},
+// 				dialog: {
+// 					background: '{slate.800}'
+// 				}
+// 			}
+// 		}
+// 	},
+// 	options: {
+// 		cssLayer: {
+// 			name: 'primevue',
+// 			order: 'tailwind-base, primevue, tailwind-utilities'
+// 		},
+// 		options: {
+// 			darkModeSelector: '.app-dark'
+// 		}
+// 	}
+// })
 
 /**
  * Initialize PrimeVue component
@@ -66,9 +66,8 @@ export const plugin = {
 				overlay: 1000,
 				tooltip: 1100
 			},
-			theme: {
-				preset: CustomAuraPreset
-			}
+			unstyled: true,
+			pt: CustomAura
 		})
 
 		Vue.use(ConfirmationService)

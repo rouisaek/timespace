@@ -5,7 +5,7 @@ import TimespaceLogoIcon from './TimespaceLogoIcon.vue';
 <template>
 	<div class="flex flex-row place-items-center gap-2">
 		<TimespaceLogoIcon class="h-12 w-12" />
-		<span class="text-2xl font-bold ">Timespace</span>
+		<span class="text-2xl font-bold text-slate-950 dark:text-white">Timespace</span>
 	</div>
 </template>
 

@@ -17,7 +17,7 @@ public static class StartupExtensions
 		_ = services.AddBehaviors();
 	}
 
-	public static void AddIdentity(this IServiceCollection services)
+	public static void AddIdentity(this IServiceCollection services, string cookieDomain)
 	{
 		_ = services.AddIdentityCore<ApplicationUser>(config =>
 			{
@@ -48,6 +48,7 @@ public static class StartupExtensions
 		{
 			o.Cookie.Name = "timespace";
 			o.Cookie.HttpOnly = true;
+			// o.Cookie.Domain = cookieDomain;
 			o.ExpireTimeSpan = TimeSpan.FromDays(7);
 			o.Events.OnRedirectToLogin = _ => throw new UnauthorizedException();
 			o.Events.OnRedirectToAccessDenied = _ => throw new ForbiddenException();

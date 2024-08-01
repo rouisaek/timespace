@@ -28,7 +28,7 @@ function submit() {
 
 	apiClient.post("/accounts/password-reset/request", state).then(() => {
 		loading.value = false;
-		toast.add({ severity: "success", summary: t('success'), detail: t('forgotPasswordModal.emailSent'), life: 5000 });
+		toast.add({ severity: "success", summary: t('success'), detail: t('forgotPasswordModal.emailSent'), life: 50000 });
 		dialogRef?.value.close();
 	}).catch(() => {
 		loading.value = false;

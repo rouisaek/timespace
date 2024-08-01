@@ -2,20 +2,22 @@
 	<!-- Begin form field -->
 	<div class="field w-full mt-6">
 		<FloatLabel>
-			<InputText :id="id" v-bind="componentAttributes" v-model="v$.modelValue.$model" :class="componentClasses">
+			<InputText :id="id" v-bind="componentAttributes" v-model="v$.modelValue.$model" :class="componentClasses"
+				:invalid="v$.modelValue.$invalid && props.showError">
 				<template v-for="(_, slot) of $slots" v-slot:[slot]="scope">
 					<slot :name="slot" v-bind="scope" />
 				</template>
 			</InputText>
-			<label :for="id" :class="{ 'p-error': v$.modelValue.$invalid && showError }">{{ props.label }}{{
-				required ?
-					'*'
-					: '' }}</label>
+			<label :for="id" :class="{ 'dark:text-red-300 text-red-700': v$.modelValue.$invalid && showError }">{{
+				props.label }}{{
+					required ?
+						'*'
+						: '' }}</label>
 		</FloatLabel>
-		<small :id="id + '-help'" v-if="helpText">{{ helpText }}<br></small>
+		<small :id="id + '-help'" v-if="helpText" class="text-tsecondary">{{ helpText }}<br></small>
 		<span v-if="v$.modelValue.$invalid && showTextErrors">
 			<span :id="id + '-error'" v-for="(error, index) of v$.modelValue.$errors" :key="index">
-				<small class="p-error">{{ error.$message }}</small>
+				<small class="dark:text-red-300 text-red-700">{{ error.$message }}</small>
 			</span>
 		</span>
 	</div>
@@ -47,7 +49,7 @@ const v$ = useVuelidate({ modelValue: rules }, reactive({ modelValue }));
 // eslint-disable-next-line vue/no-setup-props-destructure
 
 const componentClasses = reactive<any>({
-	"p-invalid": computed(() => v$.value.modelValue.$invalid && props.showError),
+	// "border-red-700 dark:border-red-300": computed(() => v$.value.modelValue.$invalid && props.showError),
 	"w-full": true,
 });
 

@@ -25,11 +25,11 @@ const items = ref<MenuItem[]>([
 		items: [
 			{
 				label: t('userAccountMenu.settingsTitle'),
-				icon: 'pi pi-cog'
+				icon: 'heroicons:cog-6-tooth'
 			},
 			{
 				label: t('userAccountMenu.logoutTitle'),
-				icon: 'pi pi-sign-out',
+				icon: 'heroicons:arrow-right-end-on-rectangle',
 				command: () => {
 					apiClient.post('/accounts/logout')
 						.then(async () => {
@@ -63,9 +63,10 @@ const items = ref<MenuItem[]>([
 				}}</span>
 		</div>
 		<div class="flex-col items-start hidden lg:flex">
-			<span class="font-bold">{{ join([userInfo?.firstName, userInfo?.middleName, userInfo?.lastName], " ")
+			<span class="font-bold text-tprimary">{{ join([userInfo?.firstName, userInfo?.middleName,
+			userInfo?.lastName], " ")
 				}}</span>
-			<span class="text-slate-600 dark:text-slate-400">{{ userInfo?.email }}</span>
+			<span class="text-tsecondary">{{ userInfo?.email }}</span>
 		</div>
 		<i class="pi pi-chevron-down hidden lg:block"></i>
 	</div>
@@ -74,8 +75,8 @@ const items = ref<MenuItem[]>([
 			<span class="font-bold">{{ item.label }}</span>
 		</template>
 		<template #item="{ item, props }">
-			<a class="flex items-center" v-bind="props.action">
-				<iconify-icon :icon="item.icon" />
+			<a class="flex items-center gap-1" v-bind="props.action">
+				<iconify-icon :icon="item.icon" height="none" class="h-6 w-6" />
 				<span>{{ item.label }}</span>
 			</a>
 		</template>

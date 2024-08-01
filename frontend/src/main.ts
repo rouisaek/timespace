@@ -2,7 +2,7 @@ import './assets/main.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import { plugin as primeVue } from '@/infrastructure/plugins/primevue'
+import { plugin as primeVue } from '@/infrastructure/plugins/primevue/primevue'
 import { VueQueryPlugin } from '@tanstack/vue-query'
 import 'iconify-icon'
 

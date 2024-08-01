@@ -45,7 +45,7 @@ try
 
 	builder.Services.AddDatabase(builder.Configuration["DbContextOptions:ConnectionString"] ?? throw new ArgumentException("Cannot find connection string"));
 	builder.Services.ConfigureImmediatePlatform();
-	builder.Services.AddIdentity();
+	builder.Services.AddIdentity(builder.Configuration["SiteSettings:FrontendSiteUrl"] ?? throw new ArgumentException("Cannot find frontend url"));
 	_ = builder.Services.AddPermissionPolicies();
 
 	_ = builder.Services.AddDistributedMemoryCache();

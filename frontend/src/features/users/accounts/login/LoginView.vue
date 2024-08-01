@@ -12,7 +12,6 @@ import { apiClient } from "@/infrastructure/api";
 import Message from "primevue/message";
 import request from "axios";
 import { useToast } from "primevue/usetoast";
-import Divider from "primevue/divider";
 
 const dialog = useDialog();
 const toast = useToast();
@@ -92,7 +91,7 @@ function resendConfirmationEmail() {
 <template>
 	<div class="flex w-full h-full place-items-center justify-center gradient-bg">
 		<div
-			class="p-12 flex flex-col shadow-2xl border-gray-200 dark:border-gray-900 border rounded bg-white dark:bg-slate-800 min-w-[50%] md:min-w-[30%]">
+			class="p-12 flex flex-col shadow-2xl border-surface-200 dark:border-surface-900 border rounded bg-white dark:bg-surface-900 min-w-[50%] md:min-w-[30%]">
 			<div class="flex justify-center mb-6">
 				<TimespaceLogoWithWordmark />
 			</div>
@@ -112,20 +111,20 @@ function resendConfirmationEmail() {
 					</Button>
 				</div>
 			</Message>
-			<h1 class="font-bold text-3xl mb-4">{{ $t('loginPage.title') }}</h1>
+			<h1 class="font-bold text-3xl mb-4 text-tprimary">{{ $t('loginPage.title') }}</h1>
 			<Form.Text id="email" :label="$t('commonFieldLabels.email')" v-model="state.email" email size="large"
 				:show-text-errors="submitted" :show-error="submitted" required />
-			<Form.Password id="password" :label="$t('loginPage.passwordFieldLabel')" v-model="state.password"
-				:toggleMask="true" size="large" :show-text-errors="submitted" :show-error="submitted" required />
-			<span role="button" @click="openResetPasswordModal"
-				class="text-slate-700 dark:text-slate-300 cursor-pointer">{{
-					$t('loginPage.forgotPasswordText')
-				}}</span>
+			<Form.Text id="password" type="password" :label="$t('loginPage.passwordFieldLabel')"
+				v-model="state.password" :toggleMask="true" size="large" :show-text-errors="submitted"
+				:show-error="submitted" required />
+			<span role="button" @click="openResetPasswordModal" class="text-tsecondary cursor-pointer">{{
+				$t('loginPage.forgotPasswordText')
+			}}</span>
 			<div class="flex flex-col gap-4 items-center">
 				<Button :label="$t('loginPage.loginButtonText')" class="mt-6 w-full" size="large" @click="submit"
 					:loading="loading" />
 				<div class="flex flex-row gap-1">
-					<span class="text-slate-700 dark:text-slate-300">{{ $t('loginPage.signUpText1') }}</span>
+					<span class="text-tsecondary">{{ $t('loginPage.signUpText1') }}</span>
 					<RouterLink class="text-indigo-700 dark:text-indigo-300 font-semibold" :to="{ name: 'sign-up' }">{{
 						$t('loginPage.signUpText2') }}</RouterLink>
 				</div>

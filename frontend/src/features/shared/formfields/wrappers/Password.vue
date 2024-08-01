@@ -2,14 +2,7 @@
 	<!-- Begin form field -->
 	<div class="field w-full mt-6">
 		<FloatLabel>
-			<Password :id="id" v-bind="componentAttributes" v-model="v$.modelValue.$model" :pt="{
-				pcInput: {
-					root: {
-						class: componentClasses,
-					}
-				},
-				root: 'w-full'
-			}">
+			<Password :id="id" v-bind="componentAttributes" v-model="v$.modelValue.$model">
 				<template v-for="(_, slot) of $slots" v-slot:[slot]="scope">
 					<slot :name="slot" v-bind="scope" />
 				</template>
