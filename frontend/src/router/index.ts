@@ -1,8 +1,13 @@
 import { userInfoFetcher } from '@/features/users/accounts/queries/meQuery'
+import { usePermissionStore } from '@/infrastructure/authorization/permissionStore'
+import { permissions } from '@/infrastructure/authorization/permissions'
+import i18n from '@/infrastructure/i18n/i18n'
 import queryClient from '@/infrastructure/query-client'
+import { toastStore } from '@/infrastructure/stores/toastStore'
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 
 const routes: Array<RouteRecordRaw> = [
+	// Accounts
 	{
 		path: '/accounts',
 		name: 'accounts',
@@ -26,6 +31,7 @@ const routes: Array<RouteRecordRaw> = [
 			}
 		]
 	},
+	// App
 	{
 		path: '/app',
 		component: () => import('@/infrastructure/layouts/AppLayout/AppLayout.vue'),
@@ -37,6 +43,36 @@ const routes: Array<RouteRecordRaw> = [
 				path: 'dashboard',
 				name: 'dashboard',
 				component: () => import('@/features/dashboard/DashboardView.vue')
+			},
+			// Employees
+			{
+				path: 'employees',
+				name: 'employees',
+				children: [
+					{
+						path: 'time',
+						name: 'employees-time',
+						component: () => import('@/features/employees/time/TimeView.vue'),
+						meta: {
+							permission: permissions.employee.time.view
+						}
+					}
+				]
+			},
+			// Manager
+			{
+				path: 'manager',
+				name: 'manager',
+				children: [
+					{
+						path: 'validate',
+						name: 'manager-validate-hours',
+						component: () => import('@/features/manager/time/validate/ValidateHoursView.vue'),
+						meta: {
+							permission: permissions.manager.time.view
+						}
+					}
+				]
 			}
 		]
 	}
@@ -59,21 +95,25 @@ router.beforeEach(async (to, _, next) => {
 		if (to.matched.some((record) => record.name === 'accounts')) {
 			next({ name: 'dashboard' })
 		} else {
-			// const data = await retrievePortalInfoExtended()
-			// if (to.meta.requireFeatureFlags) {
-			// 	const featureFlags = to.meta.requireFeatureFlags as string[]
-			// 	if (!featureFlags.every((flag) => hasFeatureFlag(flag))) {
-			// 		Swal.fire({
-			// 			title: i18n.global.t('feature_not_available'),
-			// 			text: i18n.global.t('feature_not_available_text'),
-			// 			icon: 'error',
-			// 			confirmButtonText: 'OK'
-			// 		})
+			const { hasPermission } = usePermissionStore()
 
-			// 		next({ name: data?.defaultPageName })
-			// 	}
-			// }
-			next()
+			if (to.meta.permission) {
+				const permissions = to.matched
+					.map((record) => record.meta.permission)
+					.filter((n) => n !== undefined) as string[]
+				if (permissions.every((permission) => hasPermission(permission))) {
+					next()
+				} else {
+					toastStore.toasts.push({
+						severity: 'error',
+						life: 5000,
+						detail: i18n.global.t('errors.unauthorized')
+					})
+					return false
+				}
+			} else {
+				next()
+			}
 		}
 
 		// Scroll page to top on every route change

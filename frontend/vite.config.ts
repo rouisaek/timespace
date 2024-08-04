@@ -6,7 +6,16 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [vue(), vueDevTools()],
+	plugins: [
+		vue({
+			template: {
+				compilerOptions: {
+					isCustomElement: (tag) => ['iconify-icon'].includes(tag)
+				}
+			}
+		}),
+		vueDevTools()
+	],
 	resolve: {
 		alias: {
 			'@': fileURLToPath(new URL('./src', import.meta.url))

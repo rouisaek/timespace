@@ -68,7 +68,6 @@ const items = ref<MenuItem[]>([
 				}}</span>
 			<span class="text-tsecondary">{{ userInfo?.email }}</span>
 		</div>
-		<i class="pi pi-chevron-down hidden lg:block"></i>
 	</div>
 	<Menu :model="items" class="w-full md:w-60" ref="menu" popup>
 		<template #submenulabel="{ item }">

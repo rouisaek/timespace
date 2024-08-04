@@ -78,7 +78,7 @@ export interface DatePickerProps
 	extends BaseInputProps,
 		/* @vue-ignore */ Omit<
 			PDatePickerProps,
-			'disabled' | 'readonly' | 'required' | 'maxDate' | 'minDate'
+			'disabled' | 'readonly' | 'required' | 'maxDate' | 'minDate' | 'modelValue'
 		> {}
 
 export interface DropdownProps
@@ -135,6 +135,7 @@ export function getRules(
 	label: string = 'Value'
 ): any {
 	const rules: any = {}
+
 	const withI18nMessage = createI18nMessage({ t: i18n.global.t.bind(i18n) })
 
 	if (props.alpha)

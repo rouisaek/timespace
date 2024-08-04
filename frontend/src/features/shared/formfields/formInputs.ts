@@ -11,6 +11,7 @@ import RadioGroup from './wrappers/RadioGroup.vue'
 import PhoneNumber from './wrappers/InputPhoneNumber.vue'
 import Autocomplete from './wrappers/InputAutocomplete.vue'
 import File from './wrappers/FileInput.vue'
+import Time from './wrappers/TimeInput.vue'
 
 export {
 	Text,
@@ -25,5 +26,6 @@ export {
 	RadioGroup,
 	PhoneNumber,
 	Autocomplete,
-	File
+	File,
+	Time
 }

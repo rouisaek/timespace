@@ -47,7 +47,8 @@ export default {
 			// Colors
 			'text-tprimary',
 			'border border-b-0',
-			'border-surface-200 dark:border-surface-700'
+			'border-surface-200 dark:border-surface-700',
+			'bg-transparent'
 		]
 	},
 	title: {

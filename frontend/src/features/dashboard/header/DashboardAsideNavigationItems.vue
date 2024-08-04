@@ -1,16 +1,62 @@
 <script setup lang="ts">
-import DashboardAsideNavigationItem from './DashboardAsideNavigationItem.vue';
+import { ref } from 'vue'
+import DashboardAsideNavigationItem from './DashboardAsideNavigationItem.vue'
+import type { MenuItem } from './types'
+import { useI18n } from 'vue-i18n'
+import { permissions } from '@/infrastructure/authorization/permissions';
 
+const { t } = useI18n()
 
+const menuItems = ref<MenuItem[]>([
+	{
+		label: '',
+		items: [
+			{
+				label: t('sidebarNavigation.dashboard'),
+				to: 'dashboard',
+				icon: 'heroicons:circle-stack',
+			}
+		]
+	},
+	{
+		label: t('sidebarNavigation.employees'),
+		items: [
+			{
+				label: t('sidebarNavigation.employees.clockHours'),
+				to: 'employees-time',
+				icon: 'heroicons:clock',
+				permission: permissions.employee.time.view
+			}
+		]
+	},
+	{
+		label: t('sidebarNavigation.manager'),
+		items: [
+			{
+				label: t('sidebarNavigation.manager.time'),
+				icon: 'heroicons:clock',
+				permission: permissions.manager.time.view,
+				items: [
+					{
+						label: t('sidebarNavigation.manager.validateHours'),
+						to: 'manager-validate-hours',
+						icon: 'heroicons:check-circle',
+						permission: permissions.manager.time.approve
+					}
+				]
+			}
+		]
+	}
+])
 </script>
 
 <template>
-	<div>
-		<span class="font-semibold text-sm text-slate-700 dark:text-slate-300">{{
-			$t('dashboardAsideNavigation.employeesTitle').toUpperCase() }}</span>
-		<DashboardAsideNavigationItem :title="$t('employeesNavigationItem.hours')" icon="heroicons:clock"
-			to="dashboard" />
-	</div>
+	<ul>
+		<template v-for="(item, i) in menuItems" :key="item">
+			<DashboardAsideNavigationItem v-if="!item.seperator" :item="item" :index="i" />
+			<li v-if="item.seperator" class="menu-separator"></li>
+		</template>
+	</ul>
 </template>
 
 <style scoped></style>

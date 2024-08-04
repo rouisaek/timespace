@@ -13,6 +13,7 @@
 		"format": "prettier --write src/"
 	},
 	"dependencies": {
+		"@formkit/auto-animate": "^0.8.2",
 		"@primevue/themes": "^4.0.0",
 		"@tanstack/vue-query": "^5.51.1",
 		"@vuelidate/core": "^2.0.3",
@@ -26,6 +27,7 @@
 		"pretty-bytes": "^6.1.1",
 		"primevue": "^4.0.2",
 		"tailwindcss-primeui": "^0.3.4",
+		"temporal-polyfill": "^0.2.5",
 		"vue": "^3.4.29",
 		"vue-i18n": "^9.13.1",
 		"vue-router": "^4.3.3"
