@@ -18,6 +18,7 @@ public static class LoggingStartupExtensions
 			.ConfigureForNodaTime(DateTimeZoneProviders.Tzdb)
 			.MinimumLevel.Information()
 			.MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+			.MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Verbose)
 			.MinimumLevel.Override("Microsoft.Hosting.Lifetime", LogEventLevel.Information)
 			.MinimumLevel.Override("Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware", LogEventLevel.Fatal)
 			.Enrich.FromLogContext()

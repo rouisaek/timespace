@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using NodaTime;
 using NodaTime.Serialization.SystemTextJson;
@@ -38,7 +37,7 @@ try
 	_ = builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(
 		o =>
 		{
-			o.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
+			// o.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
 			_ = o.SerializerOptions.ConfigureForNodaTime(DateTimeZoneProviders.Tzdb);
 		}
 	);
@@ -46,6 +45,7 @@ try
 	builder.Services.AddDatabase(builder.Configuration["DbContextOptions:ConnectionString"] ?? throw new ArgumentException("Cannot find connection string"));
 	builder.Services.ConfigureImmediatePlatform();
 	builder.Services.AddIdentity(builder.Configuration["SiteSettings:FrontendSiteUrl"] ?? throw new ArgumentException("Cannot find frontend url"));
+	_ = builder.Services.AddSingleton<IClock>(SystemClock.Instance);
 	_ = builder.Services.AddPermissionPolicies();
 
 	_ = builder.Services.AddDistributedMemoryCache();

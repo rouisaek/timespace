@@ -1,9 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
 using Destructurama.Attributed;
 using Immediate.Apis.Shared;
 using Immediate.Handlers.Shared;
 using Immediate.Validations.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Timespace.Api.Features.Shared.Exceptions;
 using Timespace.Api.Features.Shared.Validations;
 using Timespace.Api.Features.Users.Exceptions;
@@ -32,9 +34,12 @@ public static partial class LoginEndpoint
 		public bool Success { get; set; }
 	}
 
-	private static async ValueTask<Response> HandleAsync(Command command, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, CancellationToken _)
+	[SuppressMessage("Globalization", "CA1309:Use ordinal string comparison", Justification = "Equals method cannot be translated when passing a stringcomparison")]
+	private static async ValueTask<Response> HandleAsync(Command command, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, CancellationToken token)
 	{
-		var user = await userManager.FindByEmailAsync(command.Email);
+		var user = await userManager.Users
+			.IgnoreQueryFilters()
+			.FirstOrDefaultAsync(x => x.NormalizedEmail!.Equals(userManager.NormalizeEmail(command.Email)), token);
 
 		if (user == null)
 			throw new LoginFailedException();

@@ -8,8 +8,20 @@ import * as nlLocale from '@/infrastructure/i18n/locales/primevue/en.json';
 import DynamicDialog from 'primevue/dynamicdialog';
 import Toast from 'primevue/toast';
 import { useToastStore } from './infrastructure/stores/toastStore';
+import { useToast } from 'primevue/usetoast';
 
-useToastStore();
+const toastStore = useToastStore();
+const toast = useToast();
+
+toastStore.$onAction(({
+	name,
+	store,
+	args,
+}) => {
+	if (name === 'add') {
+		toast.add(args[0]);
+	}
+})
 
 const primeVue = usePrimeVue();
 const i18n = useI18n();

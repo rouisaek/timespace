@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using NodaTime;
 using Npgsql;
+using Timespace.Api.Database.Interceptors;
+using Timespace.Api.Infrastructure.UsageContext;
 
 namespace Timespace.Api.Database;
 
@@ -23,6 +26,6 @@ public class DesignTimeDbContext : IDesignTimeDbContextFactory<AppDbContext>
 			_ = opt.UseNodaTime();
 		});
 
-		return new AppDbContext(optionsBuilder.Options);
+		return new AppDbContext(optionsBuilder.Options, new SaveChangesInterceptor(SystemClock.Instance, new UsageContext()), new UsageContext());
 	}
 }

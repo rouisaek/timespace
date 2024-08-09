@@ -71,5 +71,18 @@
   "watchOut": "Watch out!",
   "clockHoursModal.afterMidnightWarning": "It is currently after midnight, the start date of your shift could differ from the current date.",
   "clockHoursModal.startedBeforeMidnight": "I started before midnight",
-  "clockHoursModal.title": "Clock hours"
+  "clockHoursModal.title": "Clock hours",
+  "clockHoursModal.saved": "Your shift has been saved and will be approved by a manager",
+  "clockHoursModal.errorSaving": "There was an error while saving your shift, please try again later or contact our support team.",
+  "periodSelector.from": "From date",
+  "periodSelector.to": "To date",
+  "timesheetEntryDetailCard.approved": "Approved",
+  "timesheetEntryDetailCard.awaitingApproval": "Pending",
+  "timesheetEntryDetailCard.denied": "Denied",
+  "periodSelector.thisMonth": "This month",
+  "periodSelector.lastMonth": "Previous month",
+  "periodSelector.custom": "Custom",
+  "dashboard.clockHoursButton": "Clock hours",
+  "approvableTimesheetEntryCard.none": "No",
+  "approvableTimesheetEntryCard.break": "break"
 }

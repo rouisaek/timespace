@@ -106,6 +106,60 @@ namespace Timespace.Api.Migrations
                     b.ToTable("Tenants");
                 });
 
+            modelBuilder.Entity("Timespace.Api.Features.Time.Models.TimesheetEntry", b =>
+                {
+                    b.Property<int>("TimesheetEntryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TimesheetEntryId"));
+
+                    b.Property<Period>("BreakTime")
+                        .IsRequired()
+                        .HasColumnType("interval");
+
+                    b.Property<Instant>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Instant?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("DenialReason")
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
+
+                    b.Property<Instant>("ShiftEnd")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Instant>("ShiftStart")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("TenantId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("TimeZoneId")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
+
+                    b.Property<Instant>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("TimesheetEntryId");
+
+                    b.HasIndex("TenantId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("TimesheetEntries");
+                });
+
             modelBuilder.Entity("Timespace.Api.Features.Users.Models.ApplicationUser", b =>
                 {
                     b.Property<int>("Id")
@@ -122,6 +176,7 @@ namespace Timespace.Api.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
 
@@ -223,6 +278,25 @@ namespace Timespace.Api.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Timespace.Api.Features.Time.Models.TimesheetEntry", b =>
+                {
+                    b.HasOne("Timespace.Api.Features.Tenants.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Timespace.Api.Features.Users.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Tenant");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Timespace.Api.Features.Users.Models.ApplicationUser", b =>

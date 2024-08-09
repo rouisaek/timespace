@@ -18,6 +18,7 @@ export default {
 			// Transitions
 			'transform',
 			'scale-100',
+			'w-[90vw] md:w-[55vw] lg:w-[45vw] xl:w-[35vw] 2xl:w-[25vw]',
 
 			// Maximized State
 			{

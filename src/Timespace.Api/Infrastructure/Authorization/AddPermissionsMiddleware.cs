@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Timespace.Api.Database;
 using Timespace.Api.Features.Shared.Exceptions;
 using Timespace.Api.Features.Users.Models;
@@ -19,11 +20,15 @@ public class AddPermissionsMiddleware : IMiddleware
 		if (context.User is { Identity.IsAuthenticated: true } claimsPrincipal)
 		{
 			var userId = userManager.GetUserId(claimsPrincipal) ?? throw new UnauthorizedException();
-			var user = await userManager.FindByIdAsync(userId) ?? throw new UnauthorizedException();
 
-			usageContext.User = user;
+			if (int.TryParse(userId, out var userIntId))
+			{
+				var user = await db.Users.IgnoreQueryFilters().FirstAsync(x => x.Id == userIntId) ?? throw new UnauthorizedException();
 
-			claimsPrincipal.AddIdentity(new ClaimsIdentity(user.Permissions.Select(x => new Claim(Claims.Permission, x))));
+				usageContext.User = user;
+
+				claimsPrincipal.AddIdentity(new ClaimsIdentity(user.Permissions.Select(x => new Claim(Claims.Permission, x))));
+			}
 		}
 
 		await next(context);

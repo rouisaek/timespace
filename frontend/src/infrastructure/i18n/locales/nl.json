@@ -67,5 +67,22 @@
   "clockHoursModal.afterMidnightWarning": "Het is momenteel na middernacht, de startdatum van jouw dienst kan afwijken van de huidige datum.",
   "watchOut": "Let op!",
   "clockHoursModal.startedBeforeMidnight": "Ik begon vóór middernacht",
-  "clockHoursModal.title": "Uren klokken"
+  "clockHoursModal.title": "Uren klokken",
+  "clockHoursModal.saved": "Je dienst is opgeslagen en wordt goedgekeurd door een manager",
+  "clockHoursModal.errorSaving": "Er is een fout opgetreden bij het opslaan van uw dienst. Probeer het later opnieuw of neem contact op met ons ondersteuningsteam.",
+  "periodSelector.from": "Van datum",
+  "periodSelector.to": "Daten",
+  "timesheetEntryDetailCard.approved": "Goedgekeurd",
+  "timesheetEntryDetailCard.awaitingApproval": "In afwachting",
+  "timesheetEntryDetailCard.denied": "Afgekeurd",
+  "periodSelector.thisMonth": "Deze maand",
+  "periodSelector.lastMonth": "Vorige maand",
+  "periodSelector.custom": "Aangepast",
+  "dashboard.clockHoursButton": "Uren klokken",
+  "approvableTimesheetEntryCard.none": "Geen",
+  "approvableTimesheetEntryCard.break": "pauze",
+  "dashboardHeader.search": "Zoeken...",
+  "errors.email-not-confirmed.resend-email": "Bevestigingsmail opnieuw verzenden",
+  "userAccountMenu.logoutErrorMessage": "Er is iets misgegaan bij het uitloggen. \nProbeer het later opnieuw of neem contact op met ons ondersteuningsteam.",
+  "userAccountMenu.logoutSuccessMessage": "Uitloggen succesvol, u wordt doorgestuurd naar de inlogpagina."
 }

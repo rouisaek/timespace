@@ -14,6 +14,7 @@ public static class DatabaseStartupExtensions
 		_ = services.AddDbContext<AppDbContext>(c =>
 		{
 			_ = c.UseNpgsql(dataSource, o => o.UseNodaTime());
+			_ = c.EnableSensitiveDataLogging();
 		});
 	}
 

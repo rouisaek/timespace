@@ -1,18 +1,17 @@
 <script setup lang="ts">
 import useVuelidate from '@vuelidate/core';
-import { useAttrs, reactive, computed, ref } from 'vue';
+import { useAttrs, reactive, computed, ref, nextTick } from 'vue';
 import { getRules, type BaseInputProps } from '../FormInputTypes';
 import InputText from 'primevue/inputtext';
 import FloatLabel from 'primevue/floatlabel';
-import dayjs, { Dayjs } from 'dayjs';
 import { uniqueId } from 'lodash-es';
 import i18n from '@/infrastructure/i18n/i18n';
 import { createI18nMessage, helpers } from '@vuelidate/validators';
 
 const props = defineProps<BaseInputProps>();
 
-const modelValue = defineModel<Dayjs | null>();
-const internalValue = ref<string | null>(modelValue.value?.format('HH:mm') ?? null);
+const modelValue = defineModel<Temporal.PlainTime | null>();
+const internalValue = ref<string | null>(modelValue.value?.toString({ smallestUnit: 'minute' }) ?? null);
 const attrs = useAttrs();
 const id = attrs["id"] as string ?? uniqueId("input");
 
@@ -44,89 +43,72 @@ function onlyAllowed(str: string) {
 	return /^[0-9:]*$/.test(str);
 }
 
-const inputChange = () => {
-	if (internalValue.value === '' || internalValue.value === null) {
+const inputChange = async (event: Event) => {
+	const target = event.target as HTMLInputElement;
+	console.log('inputChange', target.value);
+
+	if (target.value === '' || target.value === null) {
 		modelValue.value = null;
 		return;
 	}
 
-	let hours: any = 0;
-	let minutes: any = 0;
-
-	// Check if input contains illegal characters
-	if (onlyAllowed(internalValue.value)) {
-		if (!internalValue.value.includes('-')) {
-			// Check if input has hours + minutes
-			if (internalValue.value.includes(':')) {
-				hours = internalValue.value.split(':')[0];
-				minutes = internalValue.value.split(':')[1];
-
-				let hoursNumber = Number.parseInt(hours);
-				if (isNaN(hoursNumber))
-					hours = '0';
-
-				if (hours > 23)
-					hours = 23;
-
-				let minutesNumber = Number.parseInt(minutes);
-				if (isNaN(minutesNumber))
-					minutes = '0';
-
-				if (minutes > 59)
-					minutes = 59;
-
-				// hours = roundHours(minutes, hours, userInfo.value?.roundHoursTo);
-				// minutes = roundMinutes(minutes, userInfo.value?.roundHoursTo);
-
-			} else {
-				if (internalValue.value.length === 1 || internalValue.value.length === 2) {
-					hours = internalValue.value;
-					let hoursNumber = Number.parseInt(hours);
-					if (isNaN(hoursNumber)) {
-						hours = '0';
-					}
-
-					if (hours > 24)
-						hours = 24;
-
-					minutes = 0;
-				} else if (internalValue.value.length === 3 || internalValue.value.length === 4) {
-					hours = internalValue.value.substring(0, 2);
-					minutes = internalValue.value.substring(2, 4);
-
-					let hoursNumber = Number.parseInt(hours);
-					if (isNaN(hoursNumber)) {
-						hours = '0';
-					}
-
-					if (hours > 24)
-						hours = 24;
-
-					let minutesNumber = Number.parseInt(minutes);
-					if (isNaN(minutesNumber)) {
-						minutes = '0';
-					}
-
-					if (minutes > 59)
-						minutes = 59;
-
-					// hours = roundHours(minutes, hours, userInfo.value?.roundHoursTo);
-					// minutes = roundMinutes(minutes, userInfo.value?.roundHoursTo);
-
-				} else {
-					hours = '0';
-					minutes = '0';
-				}
-			}
-		}
-	} else {
+	if (!onlyAllowed(target.value)) {
 		internalValue.value = null;
 		modelValue.value = null;
 		return;
 	}
 
-	modelValue.value = dayjs().hour(hours).minute(minutes).second(0).millisecond(0);
-	internalValue.value = dayjs().hour(hours).minute(minutes).second(0).millisecond(0).format('HH:mm');
+	let result = parseTimeString(target.value);
+
+	console.log(result)
+
+	if (result === null) {
+		internalValue.value = null;
+		modelValue.value = null;
+		return;
+	}
+
+	let { hours, minutes } = result;
+	const plainTime = Temporal.PlainTime.from({ hour: hours, minute: minutes });
+	modelValue.value = plainTime;
+	console.log(plainTime, plainTime.toString({ smallestUnit: 'minute' }));
+	internalValue.value = plainTime.toString({ smallestUnit: 'minute' });
+}
+
+function parseTimeString(timeString: string): { hours: number; minutes: number } | null {
+	// Remove any colon (:) from the string for uniformity
+	timeString = timeString.replace(":", "");
+
+	let hours, minutes;
+
+	// Depending on the length of the timeString, parse it accordingly
+	switch (timeString.length) {
+		case 1:
+			hours = parseInt(timeString, 10);
+			minutes = 0;
+			break;
+		case 2:
+			hours = parseInt(timeString, 10);
+			minutes = 0;
+			break;
+		case 3:
+			hours = parseInt(timeString.slice(0, 1), 10);
+			minutes = parseInt(timeString.slice(1), 10);
+			break;
+		case 4:
+			hours = parseInt(timeString.slice(0, 2), 10);
+			minutes = parseInt(timeString.slice(2), 10);
+			break;
+		default:
+			return null;
+	}
+
+	// Ensure that hours and minutes are valid numbers
+	if (isNaN(hours) || isNaN(minutes)) {
+		throw new Error("Invalid time components");
+	}
+
+	return { hours, minutes };
 }
 
 v$.value.$touch();
@@ -137,7 +119,7 @@ v$.value.$touch();
 	<div class="field w-full mt-6">
 		<FloatLabel>
 			<InputText :id="id" v-model="v$.modelValue.$model" :class="componentClasses"
-				:invalid="v$.modelValue.$invalid && props.showError" @change="inputChange()"
+				:invalid="v$.modelValue.$invalid && props.showError" @change="(inputChange($event))" v-bind="attrs"
 				@focus="(!props.readonly ? ($event.target as HTMLInputElement).select() : '')">
 				<template v-for="(_, slot) of $slots" v-slot:[slot]="scope">
 					<slot :name="slot" v-bind="scope" />

@@ -3,7 +3,7 @@ import { usePermissionStore } from '@/infrastructure/authorization/permissionSto
 import { permissions } from '@/infrastructure/authorization/permissions'
 import i18n from '@/infrastructure/i18n/i18n'
 import queryClient from '@/infrastructure/query-client'
-import { toastStore } from '@/infrastructure/stores/toastStore'
+import { useToastStore } from '@/infrastructure/stores/toastStore'
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 
 const routes: Array<RouteRecordRaw> = [
@@ -104,7 +104,8 @@ router.beforeEach(async (to, _, next) => {
 				if (permissions.every((permission) => hasPermission(permission))) {
 					next()
 				} else {
-					toastStore.toasts.push({
+					const toast = useToastStore()
+					toast.add({
 						severity: 'error',
 						life: 5000,
 						detail: i18n.global.t('errors.unauthorized')

@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import ApprovableTimesheetEntryCard from './ApprovableTimesheetEntryCard.vue'
+import { useGetApprovableTimesheetEntriesQuery } from './queries/useGetApprovableTimesheetEntriesQuery'
 
+const { data, isSuccess } = useGetApprovableTimesheetEntriesQuery()
 </script>
 
 <template>
-	<div>
-		<h1>Validate Hours</h1>
-		<p>Validate hours here</p>
+	<div v-if="isSuccess">
+		<ApprovableTimesheetEntryCard v-for="entry in data" :key="entry.id" :entry="entry" />
 	</div>
 </template>
 

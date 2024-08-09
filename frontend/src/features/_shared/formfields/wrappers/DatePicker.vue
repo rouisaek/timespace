@@ -34,7 +34,7 @@ import FloatLabel from "primevue/floatlabel";
 const props = defineProps<DatePickerProps>();
 
 const modelValue = defineModel<Temporal.PlainDate | null>();
-const internalValue = ref<Date | null>(new Date(modelValue.value?.toString()!) ?? null);
+const internalValue = ref<Date | null>(modelValue.value ? new Date(modelValue.value.toString()) : null);
 const attrs = useAttrs();
 const id = attrs["id"] as string ?? uniqueId("input");
 
@@ -52,11 +52,6 @@ const recursing = ref(false);
 watch(
 	() => internalValue.value,
 	(newVal) => {
-		console.log('internalValue changed', newVal);
-		console.log('internalvalue as plainDate', newVal?.toTemporalInstant()
-			.toZonedDateTimeISO(Temporal.Now.timeZoneId())
-			.toPlainDate());
-
 		if (newVal === null) {
 			modelValue.value = null;
 			return;

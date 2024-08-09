@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TimespaceLogoIcon from '@/features/shared/logos/TimespaceLogoIcon.vue';
+import TimespaceLogoIcon from '@/features/_shared/components/logos/TimespaceLogoIcon.vue';
 import InputText from 'primevue/inputtext';
 import IconField from 'primevue/iconfield';
 import InputIcon from 'primevue/inputicon';

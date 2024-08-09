@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import * as Form from "@/features/shared/formfields/formInputs";
+import * as Form from "@/features/_shared/formfields/formInputs";
 import { apiClient } from "@/infrastructure/api";
 import useVuelidate from "@vuelidate/core";
 import Button from "primevue/button";

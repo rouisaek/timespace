@@ -7,6 +7,7 @@ import { VueQueryPlugin } from '@tanstack/vue-query'
 import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
 import 'iconify-icon'
 import 'temporal-polyfill/global'
+import '@formatjs/intl-durationformat/polyfill'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat' // ES 2015
 
@@ -15,13 +16,17 @@ dayjs.extend(customParseFormat)
 import App from './App.vue'
 import router from './router'
 import i18n from './infrastructure/i18n/i18n'
+import queryClient from './infrastructure/query-client'
 
 const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
 app.use(primeVue)
-app.use(VueQueryPlugin)
+app.use(VueQueryPlugin, {
+	queryClient: queryClient,
+	enableDevtoolsV6Plugin: true
+})
 app.use(i18n)
 app.use(autoAnimatePlugin)
 
