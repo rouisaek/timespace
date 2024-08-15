@@ -22,6 +22,7 @@ apiClient.interceptors.response.use(
 			if (window.location.pathname.includes('accounts/login')) return Promise.reject(error)
 			if (window.location.pathname.includes('accounts/email-confirmation'))
 				return Promise.reject(error)
+			if (window.location.pathname.includes('accounts/invite')) return Promise.reject(error)
 			router.push({ name: 'login' })
 		}
 

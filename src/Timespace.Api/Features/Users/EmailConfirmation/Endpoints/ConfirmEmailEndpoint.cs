@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using Immediate.Apis.Shared;
 using Immediate.Handlers.Shared;
 using Immediate.Validations.Shared;
@@ -27,6 +28,7 @@ public static partial class ConfirmEmailEndpoint
 		public bool Success { get; set; }
 	}
 
+	[SuppressMessage("Globalization", "CA1309:Use ordinal string comparison", Justification = "Not translatable by EfCore")]
 	private static async ValueTask<Response> HandleAsync(Command command, UserManager<ApplicationUser> userManager, CancellationToken token)
 	{
 		var user = await userManager.FindByEmailAsync(command.Email);

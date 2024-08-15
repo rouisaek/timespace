@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import * as Form from '@/features/_shared/formfields/formInputs'
+import * as Form from '@/features/_shared/formfields'
 import { reactive, ref } from 'vue'
 import Button from 'primevue/button'
 import TimespaceLogoWithWordmark from '@/features/_shared/components/logos/TimespaceLogoWithWordmark.vue'
@@ -23,7 +23,7 @@ function submit() {
 <template>
 	<div class="flex w-full h-full place-items-center justify-center gradient-bg">
 		<div
-			class="p-6 md:p-12 m-6 md:m-12 shadow-2xl border-gray-200 dark:border-gray-900 border rounded bg-white dark:bg-surface-9 00 min-w-[50%] lg:min-w-[30%]"
+			class="p-8 md:p-12 flex flex-col shadow-2xl border-surface-200 dark:border-surface-900 border rounded bg-white dark:bg-surface-900 w-[95vw] md:w-[60vw] lg:w-[50vw] xl:w-[40vw]"
 		>
 			<div class="flex justify-center mb-6">
 				<TimespaceLogoWithWordmark />
@@ -51,7 +51,7 @@ function submit() {
 						></iconify-icon>
 					</template>
 				</Button>
-				<div class="flex flex-row gap-1">
+				<div class="flex flex-col xl:flex-row items-center gap-1">
 					<span class="text-tsecondary">{{ $t('signUpPage.loginText') }}</span>
 					<RouterLink
 						class="text-indigo-700 dark:text-indigo-300 font-semibold"

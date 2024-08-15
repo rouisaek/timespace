@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, reactive, ref, watchEffect, inject, type Ref } from 'vue'
-import * as Form from '@/features/_shared/formfields/formInputs'
+import * as Form from '@/features/_shared/formfields'
 import useVuelidate from '@vuelidate/core'
 import Button from 'primevue/button'
 import { useToastStore } from '@/infrastructure/stores/toastStore'
@@ -10,11 +10,12 @@ import ScaleInTransition from '@/features/_shared/components/transitions/ScaleIn
 import type { DynamicDialogInstance } from 'primevue/dynamicdialogoptions'
 import { apiClient } from '@/infrastructure/api'
 import { msToTime } from '@/features/_shared/timeDisplayHelpers'
-import queryClient from '@/infrastructure/query-client'
+import { useQueryClient } from '@tanstack/vue-query'
 
 const { t } = useI18n()
 const toast = useToastStore()
 const dialogRef = inject<Ref<DynamicDialogInstance> | null>('dialogRef', null)
+const queryClient = useQueryClient()
 
 const state = reactive<{
 	date: Temporal.PlainDate

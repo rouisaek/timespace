@@ -47,20 +47,13 @@ watch(
 )
 
 const itemClick = (event: any, item: MenuItem) => {
-	// if (item.disabled) {
-	// 	event.preventDefault();
-	// 	return;
-	// }
+	const foundItemKey = item.items
+		? isActiveMenu.value
+			? props.parentItemKey
+			: itemKey
+		: itemKey.value
 
-	if (!item.to) {
-		const foundItemKey = item.items
-			? isActiveMenu.value
-				? props.parentItemKey
-				: itemKey
-			: itemKey.value
-
-		setActiveMenuItem(unref(foundItemKey) ?? '')
-	}
+	setActiveMenuItem(unref(foundItemKey) ?? '')
 }
 
 const checkActiveRoute = (item: MenuItem) => {
@@ -107,7 +100,10 @@ const allowedMenuItem = computed(() => {
 
 <template>
 	<li
-		:class="{ 'layout-root-menuitem': root, 'active-menuitem': isActiveMenu }"
+		:class="{
+			'border-l-2 border-gray-300': !root && (itemKey?.split('-').length ?? 1) - 1 > 1,
+			'active-menuitem': isActiveMenu
+		}"
 		v-if="item && allowedMenuItem"
 	>
 		<div
@@ -144,7 +140,7 @@ const allowedMenuItem = computed(() => {
 			<iconify-icon icon="heroicons:chevron-down" v-if="item.items && isActiveMenu" />
 		</router-link>
 		<Transition v-if="item.items && item.visible !== false" name="layout-submenu">
-			<ul v-show="root ? true : isActiveMenu" :class="{ 'ml-2': item.label.length > 0 }">
+			<ul v-show="root ? true : isActiveMenu" :class="{ 'ml-[1.125rem]': root === false }">
 				<DashboardAsideNavigationItem
 					v-for="(child, i) in item.items"
 					:key="child.label"

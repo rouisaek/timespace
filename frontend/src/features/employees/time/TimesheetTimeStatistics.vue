@@ -54,9 +54,9 @@ const totalRejectedMs = computed(() => {
 			<iconify-icon
 				icon="heroicons:clock"
 				height="none"
-				class="w-6 h-6 text-amber-900 dark:text-amber-100"
+				class="w-4 h-4 lg:w-6 lg:h-6 text-amber-900 dark:text-amber-100"
 			/>
-			<span class="font-mono text-xl text-center text-amber-900 dark:text-amber-100">{{
+			<span class="font-mono lg:text-xl text-center text-amber-900 dark:text-amber-100">{{
 				msToTime(totalPendingMs)
 			}}</span>
 		</div>
@@ -66,9 +66,9 @@ const totalRejectedMs = computed(() => {
 			<iconify-icon
 				icon="heroicons:check"
 				height="none"
-				class="w-6 h-6 text-green-900 dark:text-green-100"
+				class="w-4 h-4 lg:w-6 lg:h-6 text-green-900 dark:text-green-100"
 			/>
-			<span class="font-mono text-xl text-center text-green-900 dark:text-green-100">{{
+			<span class="font-mono lg:text-xl text-center text-green-900 dark:text-green-100">{{
 				msToTime(totalApprovedMs)
 			}}</span>
 		</div>
@@ -79,9 +79,9 @@ const totalRejectedMs = computed(() => {
 			<iconify-icon
 				icon="heroicons:x-mark"
 				height="none"
-				class="w-6 h-6 text-red-900 dark:text-red-100"
+				class="w-4 h-4 lg:w-6 lg:h-6 text-red-900 dark:text-red-100"
 			/>
-			<span class="font-mono text-xl text-center text-red-900 dark:text-red-100">{{
+			<span class="font-mono lg:text-xl text-center text-red-900 dark:text-red-100">{{
 				msToTime(totalRejectedMs)
 			}}</span>
 		</div>

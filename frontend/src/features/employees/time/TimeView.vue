@@ -29,7 +29,7 @@ const { data: timesheetEntries } = useEmployeeTimesheetQuery(timePeriod)
 			<TimesheetTimeStatistics :timesheetEntries="timesheetEntries" />
 		</ContainerCard>
 		<div class="flex flex-col gap-4">
-			<TimesheetEntryDetailCard v-for="shift in timesheetEntries" :key="shift.id" :shift="shift" />
+			<TimesheetEntryDetailCard v-for="shift in timesheetEntries" :key="shift.id" :entry="shift" />
 		</div>
 	</div>
 </template>

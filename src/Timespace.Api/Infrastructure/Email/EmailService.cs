@@ -2,7 +2,7 @@ using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
 using MimeKit;
 
-namespace Timespace.Api.Infrastructure;
+namespace Timespace.Api.Infrastructure.Email;
 
 [ConfigureOptions]
 public sealed class EmailServiceOptions

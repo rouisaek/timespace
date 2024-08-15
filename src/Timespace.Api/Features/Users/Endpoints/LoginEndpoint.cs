@@ -6,6 +6,8 @@ using Immediate.Validations.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using NodaTime;
+using Timespace.Api.Database;
 using Timespace.Api.Features.Shared.Exceptions;
 using Timespace.Api.Features.Shared.Validations;
 using Timespace.Api.Features.Users.Exceptions;
@@ -35,7 +37,7 @@ public static partial class LoginEndpoint
 	}
 
 	[SuppressMessage("Globalization", "CA1309:Use ordinal string comparison", Justification = "Equals method cannot be translated when passing a stringcomparison")]
-	private static async ValueTask<Response> HandleAsync(Command command, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, CancellationToken token)
+	private static async ValueTask<Response> HandleAsync(Command command, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IClock clock, AppDbContext db, CancellationToken token)
 	{
 		var user = await userManager.Users
 			.IgnoreQueryFilters()
@@ -56,6 +58,12 @@ public static partial class LoginEndpoint
 
 			throw new LoginFailedException();
 		}
+
+		_ = await db.TenantUsers
+			.Where(x => x.UserId == user.Id)
+			.ExecuteUpdateAsync(setters =>
+				setters.SetProperty(x => x.LastLogin, clock.GetCurrentInstant()),
+				token);
 
 		return new()
 		{

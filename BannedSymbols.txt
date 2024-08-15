@@ -6,6 +6,8 @@ T:System.DateTimeOffset
 T:System.DateOnly
 T:System.TimeOnly
 
+T:Timespace.Api.Infrastructure.UsageContext.UsageContext;Use the abstraction
+
 M:Microsoft.EntityFrameworkCore.DbContext.FindAsync``1(System.Object[],System.Threading.CancellationToken)
 M:Microsoft.EntityFrameworkCore.DbContext.Set``1
 M:Microsoft.EntityFrameworkCore.DbContext.Set``1(System.String)

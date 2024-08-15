@@ -11,27 +11,33 @@ export enum TimesheetEntryStatus {
 
 export interface TimesheetEntry {
 	id: number
-	shiftStart: Temporal.Instant
-	shiftEnd: Temporal.Instant
+	shiftStart: Temporal.ZonedDateTime
+	shiftEnd: Temporal.ZonedDateTime
 	breakTime: Temporal.Duration
-	timeZoneId: Temporal.TimeZone | Temporal.TimeZoneProtocol
 	status: TimesheetEntryStatus
 	denialReason?: any
-	createdAt: Temporal.Instant
-	updatedAt: Temporal.Instant
+	createdAt: Temporal.ZonedDateTime
+	updatedAt: Temporal.ZonedDateTime
 }
 
 function mapToTimesheetEntry(data: any): TimesheetEntry {
 	return {
 		id: data.id,
-		shiftStart: Temporal.Instant.from(data.shiftStart),
-		shiftEnd: Temporal.Instant.from(data.shiftEnd),
+		shiftStart: Temporal.Instant.from(data.shiftStart).toZonedDateTimeISO(
+			Temporal.TimeZone.from(data.timeZoneId)
+		),
+		shiftEnd: Temporal.Instant.from(data.shiftEnd).toZonedDateTimeISO(
+			Temporal.TimeZone.from(data.timeZoneId)
+		),
 		breakTime: Temporal.Duration.from(data.breakTime),
-		timeZoneId: Temporal.TimeZone.from(data.timeZoneId),
 		status: data.status,
 		denialReason: data.denialReason,
-		createdAt: Temporal.Instant.from(data.createdAt),
-		updatedAt: Temporal.Instant.from(data.updatedAt)
+		createdAt: Temporal.Instant.from(data.createdAt).toZonedDateTimeISO(
+			Temporal.TimeZone.from(data.timeZoneId)
+		),
+		updatedAt: Temporal.Instant.from(data.updatedAt).toZonedDateTimeISO(
+			Temporal.TimeZone.from(data.timeZoneId)
+		)
 	}
 }
 

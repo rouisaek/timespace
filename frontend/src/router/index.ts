@@ -1,6 +1,6 @@
-import { userInfoFetcher } from '@/features/users/accounts/queries/meQuery'
+import { userInfoFetcher } from '@/features/users/accounts/queries/useUserInfoQuery'
 import { usePermissionStore } from '@/infrastructure/authorization/permissionStore'
-import { permissions } from '@/infrastructure/authorization/permissions'
+import { policies } from '@/infrastructure/authorization/permissions'
 import i18n from '@/infrastructure/i18n/i18n'
 import queryClient from '@/infrastructure/query-client'
 import { useToastStore } from '@/infrastructure/stores/toastStore'
@@ -28,6 +28,11 @@ const routes: Array<RouteRecordRaw> = [
 				name: 'email-confirmation',
 				component: () =>
 					import('@/features/users/accounts/email-confirmation/EmailConfirmationView.vue')
+			},
+			{
+				path: 'invite/:inviteToken',
+				name: 'accounts-invite',
+				component: () => import('@/features/users/accounts/invites/AcceptInviteView.vue')
 			}
 		]
 	},
@@ -54,7 +59,7 @@ const routes: Array<RouteRecordRaw> = [
 						name: 'employees-time',
 						component: () => import('@/features/employees/time/TimeView.vue'),
 						meta: {
-							permission: permissions.employee.time.view
+							permission: policies.getTimesheetEntriesEndpointPolicy
 						}
 					}
 				]
@@ -65,12 +70,32 @@ const routes: Array<RouteRecordRaw> = [
 				name: 'manager',
 				children: [
 					{
-						path: 'validate',
-						name: 'manager-validate-hours',
-						component: () => import('@/features/manager/time/validate/ValidateHoursView.vue'),
-						meta: {
-							permission: permissions.manager.time.view
-						}
+						path: 'time',
+						children: [
+							{
+								path: 'validate',
+								name: 'manager-validate-hours',
+								component: () => import('@/features/manager/time/validate/ValidateHoursView.vue'),
+								meta: {
+									permission: policies.getApprovableTimesheetEntriesEndpointPolicy
+								}
+							}
+						]
+					},
+					{
+						path: 'employees',
+						children: [
+							{
+								path: '',
+								name: 'manager-employees-list',
+								component: () => import('@/features/manager/employees/EmployeesListView.vue')
+							},
+							{
+								path: 'invites',
+								name: 'manager-employees-invites',
+								component: () => import('@/features/manager/employees/invites/InvitesView.vue')
+							}
+						]
 					}
 				]
 			}

@@ -67,7 +67,11 @@ export const plugin = {
 				tooltip: 1100
 			},
 			unstyled: true,
-			pt: CustomAura
+			pt: CustomAura,
+			ptOptions: {
+				mergeSections: true,
+				mergeProps: true
+			}
 		})
 
 		Vue.use(ConfirmationService)

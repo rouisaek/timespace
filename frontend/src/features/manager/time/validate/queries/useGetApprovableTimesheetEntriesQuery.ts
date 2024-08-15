@@ -33,14 +33,14 @@ function mapToTimesheetEntry(data: any): ApprovableTimesheetEntry {
 
 function managerApprovableEntriesFetcher(): Promise<ApprovableTimesheetEntry[]> {
 	return apiClient
-		.get('manager/timesheet/approvable-entries')
+		.get<ApprovableTimesheetEntry[]>('/timesheet/approvable-entries')
 		.then((response) => response.data.map(mapToTimesheetEntry))
 		.catch(() => [])
 }
 
 export function useGetApprovableTimesheetEntriesQuery() {
 	return useQuery({
-		queryKey: ['manager/approvable-entries'],
+		queryKey: ['approvable-entries'],
 		queryFn: () => managerApprovableEntriesFetcher(),
 		staleTime: 1000 * 60 * 5,
 		retry: true

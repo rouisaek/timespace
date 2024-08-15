@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import DashboardAsideNavigationItem from './DashboardAsideNavigationItem.vue'
 import type { MenuItem } from './types'
 import { useI18n } from 'vue-i18n'
-import { permissions } from '@/infrastructure/authorization/permissions';
+import { policies } from '@/infrastructure/authorization/permissions'
 
 const { t } = useI18n()
 
@@ -14,7 +14,7 @@ const menuItems = ref<MenuItem[]>([
 			{
 				label: t('sidebarNavigation.dashboard'),
 				to: 'dashboard',
-				icon: 'heroicons:circle-stack',
+				icon: 'heroicons:circle-stack'
 			}
 		]
 	},
@@ -25,7 +25,7 @@ const menuItems = ref<MenuItem[]>([
 				label: t('sidebarNavigation.employees.clockHours'),
 				to: 'employees-time',
 				icon: 'heroicons:clock',
-				permission: permissions.employee.time.view
+				permission: policies.getTimesheetEntriesEndpointPolicy
 			}
 		]
 	},
@@ -35,13 +35,30 @@ const menuItems = ref<MenuItem[]>([
 			{
 				label: t('sidebarNavigation.manager.time'),
 				icon: 'heroicons:clock',
-				permission: permissions.manager.time.view,
 				items: [
 					{
 						label: t('sidebarNavigation.manager.validateHours'),
 						to: 'manager-validate-hours',
 						icon: 'heroicons:check-circle',
-						permission: permissions.manager.time.approve
+						permission: policies.getApprovableTimesheetEntriesEndpointPolicy
+					}
+				]
+			},
+			{
+				label: t('sidebarNavigation.manager.employees'),
+				icon: 'heroicons:user-group',
+				items: [
+					{
+						label: t('sidebarNavigation.manager.employees.list'),
+						to: 'manager-employees-list',
+						icon: 'heroicons:user-group',
+						permission: policies.getMembersEndpointPolicy
+					},
+					{
+						label: t('sidebarNavigation.manager.employees.invites'),
+						to: 'manager-employees-invites',
+						icon: 'heroicons:paper-airplane',
+						permission: policies.getInvitesEndpointPolicy
 					}
 				]
 			}

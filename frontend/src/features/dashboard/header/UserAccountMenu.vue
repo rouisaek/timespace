@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useUserinfoQuery } from '@/features/users/accounts/queries/meQuery'
+import { useUserinfoQuery } from '@/features/users/accounts/queries/useUserInfoQuery'
 import { join } from 'lodash-es'
 import { ref } from 'vue'
 import Menu from 'primevue/menu'
@@ -8,13 +8,14 @@ import type { MenuItem } from 'primevue/menuitem'
 import { apiClient } from '@/infrastructure/api'
 import { useToastStore } from '@/infrastructure/stores/toastStore'
 import { useRouter } from 'vue-router'
-import queryClient from '@/infrastructure/query-client'
+import { useQueryClient } from '@tanstack/vue-query'
 
 const { data: userInfo } = useUserinfoQuery()
 const { t } = useI18n()
 const router = useRouter()
 const menu = ref()
 const toast = useToastStore()
+const queryClient = useQueryClient()
 
 const toggle = (event: any) => {
 	menu.value.toggle(event)
@@ -35,14 +36,13 @@ const items = ref<MenuItem[]>([
 					apiClient
 						.post('/accounts/logout')
 						.then(async () => {
+							queryClient.invalidateQueries({ queryKey: ['/accounts/me'] })
+							await router.push({ name: 'login' })
 							toast.add({
 								severity: 'success',
 								summary: t('success'),
 								detail: t('userAccountMenu.logoutSuccessMessage')
 							})
-
-							await queryClient.invalidateQueries({ queryKey: ['/accounts/me'] })
-							router.push({ name: 'login' })
 						})
 						.catch(() => {
 							toast.add({
@@ -77,7 +77,7 @@ const items = ref<MenuItem[]>([
 			<span class="text-tsecondary">{{ userInfo?.email }}</span>
 		</div>
 	</div>
-	<Menu :model="items" class="w-full md:w-60" ref="popOver" popup>
+	<Menu :model="items" class="w-full md:w-60" ref="menu" popup>
 		<template #submenulabel="{ item }">
 			<span class="font-bold">{{ item.label }}</span>
 		</template>

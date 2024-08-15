@@ -21,11 +21,12 @@ public class SaveChangesInterceptor(IClock clock, IUsageContext usageContext) : 
 
 		foreach (var entityEntry in timestampedEntries)
 		{
-			((ITimestamped)entityEntry.Entity).UpdatedAt = clock.GetCurrentInstant();
+			var currentInstant = clock.GetCurrentInstant();
+			((ITimestamped)entityEntry.Entity).UpdatedAt = currentInstant;
 
 			if (entityEntry.State == EntityState.Added)
 			{
-				((ITimestamped)entityEntry.Entity).CreatedAt = clock.GetCurrentInstant();
+				((ITimestamped)entityEntry.Entity).CreatedAt = currentInstant;
 			}
 		}
 
@@ -44,7 +45,8 @@ public class SaveChangesInterceptor(IClock clock, IUsageContext usageContext) : 
 
 		foreach (var entityEntry in tenantedEntries)
 		{
-			((ITenanted)entityEntry.Entity).TenantId = usageContext.User.TenantId;
+			if (usageContext.TenantId != null)
+				((ITenanted)entityEntry.Entity).TenantId = usageContext.TenantId.Value;
 		}
 
 		return new ValueTask<InterceptionResult<int>>(result);

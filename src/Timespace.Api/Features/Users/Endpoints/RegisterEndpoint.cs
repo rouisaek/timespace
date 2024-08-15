@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Timespace.Api.Database;
 using Timespace.Api.Features.Shared.Validations;
+using Timespace.Api.Features.Tenants.Models;
 using Timespace.Api.Features.Users.EmailConfirmation.Handlers;
 using Timespace.Api.Features.Users.Models;
 using Timespace.Api.Infrastructure.Authorization;
@@ -36,7 +37,7 @@ public static partial class RegisterEndpoint
 	private static async ValueTask<Response> HandleAsync(Command command,
 		UserManager<ApplicationUser> userManager,
 		AppDbContext dbContext,
-		SendConfirmationEmailCommand.Handler sendConfirmationEmailCommand,
+		SendConfirmationEmail.Handler sendConfirmationEmailCommand,
 		CancellationToken token)
 	{
 		var transaction = await dbContext.Database.BeginTransactionAsync(token);
@@ -47,9 +48,14 @@ public static partial class RegisterEndpoint
 		{
 			Email = command.Email,
 			UserName = command.Email,
-			TenantId = tenant.Entity.Id,
 			FirstName = command.FirstName,
-			Permissions = [AdminPolicy.PolicyName]
+			Memberships = [
+				new TenantUser
+				{
+					TenantId = tenant.Entity.Id,
+					Permissions = [AdminPolicy.PolicyName]
+				}
+			]
 		};
 
 		var result = await userManager.CreateAsync(user, command.Password);
@@ -58,9 +64,12 @@ public static partial class RegisterEndpoint
 		{
 			await transaction.CommitAsync(token);
 
+			var confirmationToken = await userManager.GenerateEmailConfirmationTokenAsync(user);
+
 			_ = await sendConfirmationEmailCommand.HandleAsync(new()
 			{
 				Email = command.Email,
+				EmailVerificationToken = confirmationToken,
 				FirstName = command.FirstName,
 				User = user
 			}, token);

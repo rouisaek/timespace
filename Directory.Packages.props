@@ -23,6 +23,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>
+    <PackageVersion Include="Microsoft.Extensions.Identity.Core" Version="8.0.7" />
     <PackageVersion Include="NodaTime" Version="3.1.11" />
     <PackageVersion Include="NodaTime.Serialization.SystemTextJson" Version="1.2.0" />
     <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />

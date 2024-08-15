@@ -39,7 +39,7 @@ export default {
 			'shrink-0',
 
 			// Spacing
-			'p-6',
+			'px-6 pt-6 pb-2',
 
 			// Shape
 			'rounded-tl-lg',
@@ -73,7 +73,7 @@ export default {
 			},
 
 			// Colors
-			'text-surface-700 dark:text-surface-0/80',
+			'text-tsecondary',
 			'border border-t-0 border-b-0',
 			'border-surface-200 dark:border-surface-700',
 

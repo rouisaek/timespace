@@ -23,11 +23,18 @@ public class AddPermissionsMiddleware : IMiddleware
 
 			if (int.TryParse(userId, out var userIntId))
 			{
-				var user = await db.Users.IgnoreQueryFilters().FirstAsync(x => x.Id == userIntId) ?? throw new UnauthorizedException();
+				var user = await db.Users.IgnoreQueryFilters().Include(x => x.Memberships).FirstOrDefaultAsync(x => x.Id == userIntId);
+
+				if (user is null)
+					throw new UnauthorizedException();
 
 				usageContext.User = user;
 
-				claimsPrincipal.AddIdentity(new ClaimsIdentity(user.Permissions.Select(x => new Claim(Claims.Permission, x))));
+				var firstMembership = user.Memberships.FirstOrDefault();
+
+				usageContext.TenantId = firstMembership?.TenantId ?? throw new UnauthorizedException();
+
+				claimsPrincipal.AddIdentity(new ClaimsIdentity(firstMembership.Permissions.Select(x => new Claim(Claims.Permission, x))));
 			}
 		}
 

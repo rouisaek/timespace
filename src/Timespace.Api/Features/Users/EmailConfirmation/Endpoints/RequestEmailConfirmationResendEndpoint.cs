@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using Immediate.Apis.Shared;
 using Immediate.Handlers.Shared;
 using Immediate.Validations.Shared;
@@ -25,9 +26,10 @@ public static partial class RequestEmailConfirmationResendEndpoint
 		public bool Success { get; set; }
 	}
 
+	[SuppressMessage("Globalization", "CA1309:Use ordinal string comparison", Justification = "Not translatable by EfCore")]
 	private static async ValueTask<Response> HandleAsync(Command command,
 		UserManager<ApplicationUser> userManager,
-		SendConfirmationEmailCommand.Handler sendConfirmationEmailCommand,
+		SendConfirmationEmail.Handler sendConfirmationEmailCommand,
 		CancellationToken token)
 	{
 		var user = await userManager.FindByEmailAsync(command.Email);
@@ -37,14 +39,17 @@ public static partial class RequestEmailConfirmationResendEndpoint
 			return new Response { Success = true };
 		}
 
+		var confirmationToken = await userManager.GenerateEmailConfirmationTokenAsync(user);
+
 		_ = await sendConfirmationEmailCommand.HandleAsync(new()
 		{
-			Email = user.Email!,
+			Email = user.Email,
+			EmailVerificationToken = confirmationToken,
 			FirstName = user.FirstName,
 			User = user
 		}, token);
 
-		return new Response { Success = true }; ;
+		return new Response { Success = true };
 	}
 }
 

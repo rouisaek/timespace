@@ -7,6 +7,8 @@ export const useToastStore = defineStore('toast', () => {
 	const toasts = ref<ToastMessageOptions[]>([])
 
 	const add = (toast: ToastMessageOptions) => {
+		if (!toast.life) toast.life = 5000
+
 		toasts.value.push(toast)
 	}
 

@@ -7,4 +7,6 @@ public static class EmailTemplates
 {
 	public static Template ConfirmEmailTemplate => ScribanTemplateUtility.GetScribanTemplate("ConfirmEmail");
 	public static Template ConfirmEmailTemplatePlain => ScribanTemplateUtility.GetScribanTemplate("ConfirmEmailPlain");
+	public static Template InviteReceivedTemplate => ScribanTemplateUtility.GetScribanTemplate("InviteReceived");
+	public static Template InviteReceivedTemplatePlain => ScribanTemplateUtility.GetScribanTemplate("InviteReceivedPlain");
 }

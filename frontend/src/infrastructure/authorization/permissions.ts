@@ -1,20 +1,12 @@
-export const permissions = {
-	user: {
-		time: {
-			view: 'timespace:time:view',
-			add: 'timespace:time:add'
-		}
-	},
-	employee: {
-		time: {
-			view: 'timespace:employee:time:view',
-			clockHours: 'timespace:employee:time:clock-hours'
-		}
-	},
-	manager: {
-		time: {
-			view: 'timespace:manager:time:view',
-			approve: 'timespace:manager:time:approve'
-		}
-	}
+export const policies = {
+	getTimesheetEntriesEndpointPolicy: 'timespace:timesheet:view',
+	addTimesheetEntryEndpointPolicy: 'timespace:timesheet:add',
+	approveAllTimesheetEntriesEndpointPolicy: 'timespace:timesheet:approval:approve-all',
+	approveTimesheetEntryEndpointPolicy: 'timespace:timesheet:approval:approve',
+	denyTimesheetEntryEndpointPolicy: 'timespace:timesheet:approval:deny',
+	getApprovableTimesheetEntriesEndpointPolicy: 'timespace:timesheet:approval:view',
+	getMembersEndpointPolicy: 'timespace:tenant:members:view',
+	getInvitesEndpointPolicy: 'timespace:tenant:invites:view',
+	updateMemberEndpointPolicy: 'timespace:tenant:members:update',
+	disableMemberEndpointPolicy: 'timespace:tenant:members:disable'
 }

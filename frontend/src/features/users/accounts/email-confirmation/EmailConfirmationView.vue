@@ -40,13 +40,13 @@ onMounted(() => {
 <template>
 	<div class="flex w-full h-full place-items-center justify-center gradient-bg">
 		<div
-			class="p-12 shadow-2xl border-gray-200 dark:border-gray-900 border rounded bg-white dark:bg-slate-800 min-w-[50%] md:min-w-[30%]"
+			class="p-8 md:p-12 shadow-2xl border-gray-200 dark:border-gray-900 border rounded bg-white dark:bg-slate-900 w-[95vw] md:w-[60vw] lg:w-[50vw] xl:w-[40vw]"
 		>
 			<div class="flex justify-center mb-6">
 				<TimespaceLogoWithWordmark />
 			</div>
-			<h1 class="font-bold text-3xl mb-6">{{ $t('confirmEmailPage.title') }}</h1>
-			<ProgressSpinner v-if="loading" class="h-20 w-20" />
+			<h1 class="font-bold text-3xl mb-6 text-tprimary">{{ $t('confirmEmailPage.title') }}</h1>
+			<ProgressSpinner v-if="loading" class="h-15 w-15" />
 			<template v-if="success">
 				<Message severity="success" class="mb-4"
 					>{{ $t('confirmEmailPage.successMessage') }}

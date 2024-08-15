@@ -34,7 +34,7 @@ public static partial class UserinfoEndpoint
 				MiddleName = x.MiddleName,
 				LastName = x.LastName,
 				Email = x.Email,
-				Permissions = x.Permissions
+				Permissions = x.Memberships.First().Permissions
 			})
 			.FirstOrDefaultAsync(token);
 
