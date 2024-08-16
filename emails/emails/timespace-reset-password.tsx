@@ -17,19 +17,19 @@ import { colors } from "./colors";
 	return (
 	  <Html>
 		<Head />
-		<Preview>Uitnodiging voor Timespace van {`{{ tenant_name }}`}</Preview>
+		<Preview>Stel je Timespace wachtwoord opnieuw in</Preview>
 		<Body style={main}>
 		  <Container style={container}>
 			<Section>
 			  <Text style={text}>Hallo {`{{ user_name }}`},</Text>
 			  <Text style={text}>
-				Je bent uitgenodigd om deel te nemen aan de Timespace van {`{{ tenant_name }}`}, klik hieronder om je account aan te maken:
+				Iemand heeft onlangs een wachtwoord reset aangevraagd voor je Timespace-account. Als jij dat was, kun je je wachtwoord opnieuw instellen door hier op de knop te klikken:
 			  </Text>
-			  <Button style={button} href="{{ invite_link }}">
-				Uitnodiging accepteren
+			  <Button style={button} href="{{ reset_password_link }}">
+				Wachtwoord opnieuw instellen
 			  </Button>
 			  <Text style={text}>
-				Als je niet deel wil nemen aan deze Timespace, kun je deze e-mail gewoon negeren en verwijderen.
+				Als je dit niet hebt aangevraagd, kun je deze e-mail gewoon negeren en verwijderen.
 			  </Text>
 			  <Text style={text}>
 				Om je account veilig te houden, stuur deze e-mail alsjeblieft niet door naar iemand anders.
@@ -61,10 +61,6 @@ import { colors } from "./colors";
 	color: "#404040",
 	lineHeight: "26px",
   };
-
-  const boldText = {
-	fontWeight: "bold"
-  }
   
   const button = {
 	backgroundColor: colors.buttonPrimary,

@@ -143,5 +143,10 @@
   "editMemberModal.memberUpdated": "Werknemer is successvol geüpdatet",
   "editMemberModal.inviteNotSentError": "Er is iets misgegaan bij het opslaan van de werknemer, probeer het later opnieuw of neem contact op met ons supportteam",
   "employeesListView.editModalTitle": "Medewerker bewerken",
-  "commonFieldLabels.employeeEmail": "Werknemer email"
+  "commonFieldLabels.employeeEmail": "Werknemer email",
+  "passwordResetView.confirmPasswordLabel": "Bevestig wachtwoord",
+  "passwordResetView.invalidTokenError": "Wachtwoord reset token kon niet geverifieerd worden. Probeer het later opnieuw of neem contact op met ons supportteam",
+  "passwordResetView.passwordResetSuccess": "Wachtwoord opnieuw instellen gelukt, je kunt nu inloggen",
+  "passwordResetView.passwordsDoNotMatchError": "Wachtwoorden komen niet overeen",
+  "passwordResetView.continueButtonText": "Wachtwoord opnieuw instellen"
 }

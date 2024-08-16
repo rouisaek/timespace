@@ -33,6 +33,11 @@ const routes: Array<RouteRecordRaw> = [
 				path: 'invite/:inviteToken',
 				name: 'accounts-invite',
 				component: () => import('@/features/users/accounts/invites/AcceptInviteView.vue')
+			},
+			{
+				path: 'password-reset',
+				name: 'password-reset',
+				component: () => import('@/features/users/accounts/password-reset/PasswordResetView.vue')
 			}
 		]
 	},

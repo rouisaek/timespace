@@ -148,5 +148,13 @@
   "editMemberModal.memberUpdated": "Member has been updated successfully",
   "editMemberModal.inviteNotSentError": "Something went wrong while saving the employee, please try again later or contact our support team",
   "employeesListView.editModalTitle": "Edit employee",
-  "commonFieldLabels.employeeEmail": "Employee email"
+  "commonFieldLabels.employeeEmail": "Employee email",
+  "passwordResetView.title": "Password reset",
+  "passwordResetView.subtitle": "Enter a new password to continue",
+  "passwordResetView.confirmPasswordLabel": "Confirm password",
+  "passwordResetView.invalidTokenError": "Password reset token could not be verified. Please try again later or contact our support team",
+  "passwordResetView.passwordResetSuccess": "Password reset successfully, you can now log in",
+  "passwordResetView.passwordResetError": "Something went wrong while resetting your password, please try again later or contact our support team",
+  "passwordResetView.passwordsDoNotMatchError": "Passwords do not match",
+  "passwordResetView.continueButtonText": "Reset password"
 }

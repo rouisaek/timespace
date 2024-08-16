@@ -76,6 +76,7 @@ const items = ref<MenuItem[]>([
 			}}</span>
 			<span class="text-tsecondary">{{ userInfo?.email }}</span>
 		</div>
+		<iconify-icon icon="heroicons:chevron-down" height="none" class="h-6 w-6 text-tprimary" />
 	</div>
 	<Menu :model="items" class="w-full md:w-60" ref="menu" popup>
 		<template #submenulabel="{ item }">

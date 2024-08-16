@@ -18,11 +18,7 @@ apiClient.interceptors.response.use(
 	},
 	(error) => {
 		if (error.response.status === 401) {
-			if (window.location.pathname.includes('accounts/sign-up')) return Promise.reject(error)
-			if (window.location.pathname.includes('accounts/login')) return Promise.reject(error)
-			if (window.location.pathname.includes('accounts/email-confirmation'))
-				return Promise.reject(error)
-			if (window.location.pathname.includes('accounts/invite')) return Promise.reject(error)
+			if (window.location.pathname.includes('accounts/')) return Promise.reject(error)
 			router.push({ name: 'login' })
 		}
 
