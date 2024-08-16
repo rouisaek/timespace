@@ -6,8 +6,8 @@ import { plugin as primeVue } from '@/infrastructure/plugins/primevue/primevue'
 import { VueQueryPlugin } from '@tanstack/vue-query'
 import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
 import 'iconify-icon'
-import 'temporal-polyfill/global'
 import '@formatjs/intl-durationformat/polyfill'
+import 'temporal-polyfill/global'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat' // ES 2015
 

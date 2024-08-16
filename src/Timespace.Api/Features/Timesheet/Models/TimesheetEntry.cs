@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using NodaTime;
 using Timespace.Api.Database.Common;
 using Timespace.Api.Features.Tenants.Models;
-using Timespace.Api.Features.Users.Models;
 
 namespace Timespace.Api.Features.Timesheet.Models;
 
@@ -14,14 +13,14 @@ public enum TimesheetEntryStatus
 	Approved = 2
 }
 
-public class TimesheetEntry : ISoftDeletable, ITimestamped, IUsered, ITenanted
+public class TimesheetEntry : ISoftDeletable, ITimestamped, ITenanted
 {
 	public int TimesheetEntryId { get; set; }
 	public Instant? DeletedAt { get; set; }
 	public Instant CreatedAt { get; set; }
 	public Instant? UpdatedAt { get; set; }
-	public required int UserId { get; set; }
-	public ApplicationUser User { get; set; } = null!;
+	public required int TenantUserId { get; set; }
+	public TenantUser TenantUser { get; set; } = null!;
 	public Tenant Tenant { get; set; } = null!;
 	public int TenantId { get; set; }
 
@@ -40,5 +39,4 @@ public class TimesheetEntry : ISoftDeletable, ITimestamped, IUsered, ITenanted
 			_ = builder.Property(e => e.DenialReason).HasMaxLength(2000);
 		}
 	}
-
 }

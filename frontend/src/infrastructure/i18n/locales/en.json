@@ -156,5 +156,15 @@
   "passwordResetView.passwordResetSuccess": "Password reset successfully, you can now log in",
   "passwordResetView.passwordResetError": "Something went wrong while resetting your password, please try again later or contact our support team",
   "passwordResetView.passwordsDoNotMatchError": "Passwords do not match",
-  "passwordResetView.continueButtonText": "Reset password"
+  "passwordResetView.continueButtonText": "Reset password",
+  "clockHoursModal.startTimeAndEndTimeEqual": "Start time and end time cannot be equal",
+  "clockHoursModal.cannotWorkNegativeTime": "You cannot work less than 0 hours",
+  "aggregatedTimeView.title": "Hours overview",
+  "sidebarNavigation.manager.aggregatedTime": "Hours overview",
+  "aggregatedTimeView.table.fullNameHeader": "Full name",
+  "aggregatedTimeView.table.salaryDays": "Salary days",
+  "aggregatedTimeView.table.salaryHours": "Salary hours",
+  "aggregatedTimeView.noEntries": "There are no timesheet entries for the selected time period",
+  "aggregatedTimeView.entriesPendingApprovalWarning": "There are still entries that need to be approved for the selected period",
+  "aggregatedTimeView.entriesPendingApprovalWarningLinkText": "Go to approval page"
 }

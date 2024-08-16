@@ -91,11 +91,11 @@ export default {
 
 			// Success Button
 			{
-				'text-white dark:text-green-200':
+				'text-white dark:text-surface-900':
 					props.severity === 'success' && !props.text && !props.outlined && !props.plain,
-				'bg-green-500 dark:bg-green-800/40':
+				'bg-green-500 dark:bg-green-400':
 					props.severity === 'success' && !props.text && !props.outlined && !props.plain,
-				'border border-green-500 dark:border-green-800/60':
+				'border border-green-500 dark:border-green-400':
 					props.severity === 'success' && !props.text && !props.outlined && !props.plain
 			},
 			// Success Text Button

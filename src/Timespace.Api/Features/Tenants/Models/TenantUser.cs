@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using NodaTime;
 using Timespace.Api.Database.Common;
+using Timespace.Api.Features.Timesheet.Models;
 using Timespace.Api.Features.Users.Models;
 
 namespace Timespace.Api.Features.Tenants.Models;
@@ -17,6 +18,8 @@ public class TenantUser : ITenanted, IUsered, ITimestamped
 	public List<string> Permissions { get; init; } = null!;
 	public Instant? LastLogin { get; set; }
 	public string? EmployeeCode { get; set; }
+
+	public ICollection<TimesheetEntry> TimesheetEntries { get; init; } = null!;
 
 	public Instant CreatedAt { get; set; }
 	public Instant? UpdatedAt { get; set; }

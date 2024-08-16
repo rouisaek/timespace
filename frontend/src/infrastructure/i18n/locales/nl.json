@@ -148,5 +148,15 @@
   "passwordResetView.invalidTokenError": "Wachtwoord reset token kon niet geverifieerd worden. Probeer het later opnieuw of neem contact op met ons supportteam",
   "passwordResetView.passwordResetSuccess": "Wachtwoord opnieuw instellen gelukt, je kunt nu inloggen",
   "passwordResetView.passwordsDoNotMatchError": "Wachtwoorden komen niet overeen",
-  "passwordResetView.continueButtonText": "Wachtwoord opnieuw instellen"
+  "passwordResetView.continueButtonText": "Wachtwoord opnieuw instellen",
+  "clockHoursModal.startTimeAndEndTimeEqual": "Begintijd en eindtijd kunnen niet gelijk zijn",
+  "clockHoursModal.cannotWorkNegativeTime": "Je kan niet (minder dan) 0 uur werken",
+  "aggregatedTimeView.title": "Uren overzicht",
+  "sidebarNavigation.manager.aggregatedTime": "Urenoverzicht",
+  "aggregatedTimeView.table.fullNameHeader": "Naam",
+  "aggregatedTimeView.table.salaryDays": "Loondagen",
+  "aggregatedTimeView.table.salaryHours": "Loonuren",
+  "aggregatedTimeView.noEntries": "Er zijn geen uren voor de geselecteerde tijdsperiode",
+  "aggregatedTimeView.entriesPendingApprovalWarning": "Er zijn nog uren die goedgekeurd moeten worden voor de geselecteerde periode.\\",
+  "aggregatedTimeView.entriesPendingApprovalWarningLinkText": "Ga naar uren goedkeuren pagina"
 }

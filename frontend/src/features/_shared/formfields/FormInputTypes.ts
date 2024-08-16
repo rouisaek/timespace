@@ -4,13 +4,13 @@ import type { DatePickerProps as PDatePickerProps } from 'primevue/datepicker'
 import type { DropdownProps as PDropdownProps } from 'primevue/dropdown'
 import type { InputNumberProps as PInputNumberProps } from 'primevue/inputnumber'
 import type { MultiSelectProps as PMultiSelectProps } from 'primevue/multiselect'
-import type { InputSwitchProps as PInputSwitchProps } from 'primevue/inputswitch'
+import type { ToggleSwitchProps as PToggleSwitchProps } from 'primevue/toggleswitch'
 import type { PasswordProps as PPasswordProps } from 'primevue/password'
 import type { InputMaskProps as PInputMaskProps } from 'primevue/inputmask'
 import type { RadioButtonProps as PRadioButtonProps } from 'primevue/radiobutton'
 import type { FileUploadProps as PFileUploadProps } from 'primevue/fileupload'
 import type { AutoCompleteProps as PAutocompleteProps } from 'primevue/autocomplete'
-import type { Dayjs } from 'dayjs'
+// import type { Dayjs } from 'dayjs'
 import {
 	alpha as alphaRule,
 	between as betweenRule,
@@ -76,10 +76,7 @@ export interface TextareaProps
 
 export interface DatePickerProps
 	extends BaseInputProps,
-		/* @vue-ignore */ Omit<
-			PDatePickerProps,
-			'disabled' | 'readonly' | 'required' | 'maxDate' | 'minDate' | 'modelValue'
-		> {}
+		/* @vue-ignore */ Omit<PDatePickerProps, 'disabled' | 'readonly' | 'required' | 'modelValue'> {}
 
 export interface DropdownProps
 	extends BaseInputProps,
@@ -90,9 +87,10 @@ export interface MultiSelectProps
 		/* @vue-ignore */ Omit<PMultiSelectProps, 'disabled' | 'readonly' | 'required'> {}
 
 export type InputSwitchProps = BaseInputProps &
-	/* @vue-ignore */ Omit<PInputSwitchProps, 'disabled' | 'readonly' | 'required'> & {
+	/* @vue-ignore */ Omit<PToggleSwitchProps, 'disabled' | 'readonly' | 'required'> & {
 		topLabel?: boolean
 		rightLabel?: boolean
+		leftLabel?: boolean
 	}
 
 export interface RadioButtonProps
@@ -118,10 +116,8 @@ export interface ValidationProps {
 	between?: { min: number; max: number }
 	decimal?: boolean
 	email?: boolean
-	maxDate?: Dayjs
 	maxLength?: number
 	maxValue?: number
-	minDate?: Dayjs
 	minLength?: number
 	minValue?: number
 	numeric?: boolean
@@ -159,11 +155,11 @@ export function getRules(
 			withArguments: true
 		})
 
-	if (props.maxDate !== undefined)
-		rules.maxDate = withI18nMessage(
-			helpers.withParams({ label }, (value: Dayjs) => value.toDate() <= props.maxDate!.toDate()),
-			{ withArguments: true }
-		)
+	// if (props.maxDate !== undefined)
+	// 	rules.maxDate = withI18nMessage(
+	// 		helpers.withParams({ label }, (value: Dayjs) => value.toDate() <= props.maxDate!.toDate()),
+	// 		{ withArguments: true }
+	// 	)
 
 	if (props.maxLength !== undefined)
 		rules.maxLength = withI18nMessage(
@@ -176,11 +172,11 @@ export function getRules(
 			withArguments: true
 		})
 
-	if (props.minDate !== undefined)
-		rules.maxDate = withI18nMessage(
-			helpers.withParams({ label }, (value: Dayjs) => value.toDate() >= props.minDate!.toDate()),
-			{ withArguments: true }
-		)
+	// if (props.minDate !== undefined)
+	// 	rules.maxDate = withI18nMessage(
+	// 		helpers.withParams({ label }, (value: Dayjs) => value.toDate() >= props.minDate!.toDate()),
+	// 		{ withArguments: true }
+	// 	)
 
 	if (props.minLength !== undefined)
 		rules.minLength = withI18nMessage(

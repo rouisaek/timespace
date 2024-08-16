@@ -84,6 +84,14 @@ const routes: Array<RouteRecordRaw> = [
 								meta: {
 									permission: policies.getApprovableTimesheetEntriesEndpointPolicy
 								}
+							},
+							{
+								path: 'overview',
+								name: 'manager-aggregated-time',
+								component: () => import('@/features/manager/time/overview/AggregatedTimeView.vue'),
+								meta: {
+									permission: policies.getAggregatedTimesheetEntriesEndpointPolicy
+								}
 							}
 						]
 					},
@@ -93,7 +101,8 @@ const routes: Array<RouteRecordRaw> = [
 							{
 								path: '',
 								name: 'manager-employees-list',
-								component: () => import('@/features/manager/employees/EmployeesListView.vue')
+								component: () =>
+									import('@/features/manager/employees/overview/EmployeesListView.vue')
 							},
 							{
 								path: 'invites',

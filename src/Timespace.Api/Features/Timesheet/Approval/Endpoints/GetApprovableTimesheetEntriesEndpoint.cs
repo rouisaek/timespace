@@ -24,7 +24,6 @@ public static partial class GetApprovableTimesheetEntriesEndpoint
 	[Validate]
 	public partial record Query : IValidationTarget<Query>
 	{
-
 	}
 
 	public record Response
@@ -39,7 +38,11 @@ public static partial class GetApprovableTimesheetEntriesEndpoint
 		public required Instant? UpdatedAt { get; set; }
 	}
 
-	private static async ValueTask<IReadOnlyList<Response>> HandleAsync(Query command, AppDbContext db, IUsageContext usageContext, CancellationToken token)
+	private static async ValueTask<IReadOnlyList<Response>> HandleAsync(
+		Query command,
+		AppDbContext db,
+		IUsageContext usageContext,
+		CancellationToken token)
 	{
 		var entries = await db.TimesheetEntries
 			.Where(x => x.Status == TimesheetEntryStatus.AwaitingApproval)
@@ -52,13 +55,12 @@ public static partial class GetApprovableTimesheetEntriesEndpoint
 					ShiftEnd = x.ShiftEnd,
 					BreakTime = x.BreakTime,
 					TimeZoneId = x.TimeZoneId,
-					UserName = x.User.FirstName,
+					UserName = x.TenantUser.User.FirstName,
 					CreatedAt = x.CreatedAt,
-					UpdatedAt = x.UpdatedAt,
+					UpdatedAt = x.UpdatedAt
 				})
 			.ToListAsync(token);
 
 		return entries;
 	}
 }
-

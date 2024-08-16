@@ -8,5 +8,6 @@ export const policies = {
 	getMembersEndpointPolicy: 'timespace:tenant:members:view',
 	getInvitesEndpointPolicy: 'timespace:tenant:invites:view',
 	updateMemberEndpointPolicy: 'timespace:tenant:members:update',
-	disableMemberEndpointPolicy: 'timespace:tenant:members:disable'
+	disableMemberEndpointPolicy: 'timespace:tenant:members:disable',
+	getAggregatedTimesheetEntriesEndpointPolicy: 'timespace:timesheet:aggregated:view'
 }

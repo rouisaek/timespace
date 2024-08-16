@@ -41,6 +41,12 @@ const menuItems = ref<MenuItem[]>([
 						to: 'manager-validate-hours',
 						icon: 'heroicons:check-circle',
 						permission: policies.getApprovableTimesheetEntriesEndpointPolicy
+					},
+					{
+						label: t('sidebarNavigation.manager.aggregatedTime'),
+						to: 'manager-aggregated-time',
+						icon: 'heroicons:chart-pie',
+						permission: policies.getAggregatedTimesheetEntriesEndpointPolicy
 					}
 				]
 			},

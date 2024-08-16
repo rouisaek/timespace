@@ -32,14 +32,18 @@ public static partial class AddTimesheetEntryEndpoint
 
 	public record Response
 	{
-
 	}
 
-	private static async ValueTask<Response> HandleAsync(Command command, AppDbContext db, IUsageContext usageContext, CancellationToken token)
+	private static async ValueTask<Response> HandleAsync(
+		Command command,
+		AppDbContext db,
+		IUsageContext usageContext,
+		CancellationToken token)
 	{
 		if (command.ShiftStart > command.ShiftEnd)
 		{
-			throw new BadRequestException("Shift start must be before shift end", "shift-start-must-be-before-shift-end");
+			throw new BadRequestException("Shift start must be before shift end",
+				"shift-start-must-be-before-shift-end");
 		}
 
 		if (command.ShiftEnd.Minus(command.ShiftStart).Minus(command.BreakTime.ToDuration()) < Duration.Zero)
@@ -53,7 +57,7 @@ public static partial class AddTimesheetEntryEndpoint
 			ShiftEnd = command.ShiftEnd,
 			BreakTime = command.BreakTime,
 			TimeZoneId = command.TimeZoneId,
-			UserId = usageContext.User.Id,
+			TenantUserId = usageContext.User.Id
 		};
 
 		_ = db.TimesheetEntries.Add(entry);
@@ -63,4 +67,3 @@ public static partial class AddTimesheetEntryEndpoint
 		return new Response();
 	}
 }
-

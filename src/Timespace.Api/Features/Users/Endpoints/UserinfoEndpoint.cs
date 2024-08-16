@@ -22,26 +22,25 @@ public static partial class UserinfoEndpoint
 		public required List<string> Permissions { get; init; }
 	}
 
-	private static async ValueTask<Response> HandleAsync(object _, IUsageContext usageContext, AppDbContext db, CancellationToken token)
+	private static async ValueTask<Response> HandleAsync(
+		object _,
+		IUsageContext usageContext,
+		AppDbContext db,
+		CancellationToken token)
 	{
-		var contexUser = usageContext.User;
-
-		var response = await db.Users
-			.Where(x => x.Id == contexUser.Id)
-			.Select(x => new Response
-			{
-				FirstName = x.FirstName,
-				MiddleName = x.MiddleName,
-				LastName = x.LastName,
-				Email = x.Email,
-				Permissions = x.Memberships.First().Permissions
-			})
-			.FirstOrDefaultAsync(token);
-
-		if (response is null)
-			throw new BadRequestException("Something went wrong with projecting into userinfo object");
-
+		var response = await db.TenantUsers
+						   .Where(x => x.Id == usageContext.User.Id)
+						   .Select(x => new Response
+						   {
+							   FirstName = x.User.FirstName,
+							   MiddleName = x.User.MiddleName,
+							   LastName = x.User.LastName,
+							   Email = x.User.Email,
+							   Permissions = x.Permissions
+						   })
+						   .FirstOrDefaultAsync(token) ??
+					   throw new BadRequestException("Something went wrong with projecting into userinfo object");
 		return response;
+
 	}
 }
-

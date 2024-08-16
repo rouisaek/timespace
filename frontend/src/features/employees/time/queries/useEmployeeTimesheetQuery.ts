@@ -20,7 +20,7 @@ export interface TimesheetEntry {
 	updatedAt: Temporal.ZonedDateTime
 }
 
-function mapToTimesheetEntry(data: any): TimesheetEntry {
+export function mapToTimesheetEntry(data: any): TimesheetEntry {
 	return {
 		id: data.id,
 		shiftStart: Temporal.Instant.from(data.shiftStart).toZonedDateTimeISO(

@@ -106,6 +106,21 @@ const submit = () => {
 		return
 	}
 
+	if (
+		endDt.value
+			.since(startDt.value)
+			.subtract(Temporal.Duration.from({ milliseconds: state.breakMs }))
+			.total({ unit: 'milliseconds' }) <= 0
+	) {
+		toast.add({
+			severity: 'error',
+			summary: t('error'),
+			detail: t('clockHoursModal.cannotWorkNegativeTime'),
+			life: 3000
+		})
+		return
+	}
+
 	loading.value = true
 	apiClient
 		.post('/timesheet', {
@@ -183,6 +198,7 @@ const warningDismissed = ref(false)
 				selectOtherMonths
 				:showError="submitted"
 				:showTextErrors="submitted"
+				:max-date="new Date()"
 			/>
 			<div class="flex flex-row gap-3">
 				<Form.Time

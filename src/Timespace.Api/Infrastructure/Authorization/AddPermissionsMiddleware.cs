@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Timespace.Api.Database;
 using Timespace.Api.Features.Shared.Exceptions;
 using Timespace.Api.Features.Users.Models;
+using Timespace.Api.Infrastructure.Exceptions;
 using Timespace.Api.Infrastructure.UsageContext;
 
 namespace Timespace.Api.Infrastructure.Authorization;
@@ -23,18 +24,22 @@ public class AddPermissionsMiddleware : IMiddleware
 
 			if (int.TryParse(userId, out var userIntId))
 			{
-				var user = await db.Users.IgnoreQueryFilters().Include(x => x.Memberships).FirstOrDefaultAsync(x => x.Id == userIntId);
+				var user = await db.Users.IgnoreQueryFilters().Include(x => x.Memberships)
+					.FirstOrDefaultAsync(x => x.Id == userIntId);
 
 				if (user is null)
 					throw new UnauthorizedException();
 
-				usageContext.User = user;
 
 				var firstMembership = user.Memberships.FirstOrDefault();
+				usageContext.User = firstMembership ??
+				                    throw new TimespaceException(500, "User has no memberships",
+					                    "user-has-no-memberships");
 
-				usageContext.TenantId = firstMembership?.TenantId ?? throw new UnauthorizedException();
+				usageContext.TenantId = firstMembership.TenantId;
 
-				claimsPrincipal.AddIdentity(new ClaimsIdentity(firstMembership.Permissions.Select(x => new Claim(Claims.Permission, x))));
+				claimsPrincipal.AddIdentity(
+					new ClaimsIdentity(firstMembership.Permissions.Select(x => new Claim(Claims.Permission, x))));
 			}
 		}
 
