@@ -9,6 +9,7 @@ import { unref, type MaybeRef } from 'vue'
 
 export interface AggregatedTimesheetEntryResponse {
 	tenantUserId: number
+	employeeCode?: string
 	firstName: string
 	middleName?: string
 	lastName?: string
@@ -18,6 +19,7 @@ export interface AggregatedTimesheetEntryResponse {
 function mapToAggregatedTimesheetEntry(data: any): AggregatedTimesheetEntryResponse {
 	return {
 		tenantUserId: data.tenantUserId,
+		employeeCode: data.employeeCode,
 		firstName: data.firstName,
 		middleName: data.middleName,
 		lastName: data.lastName,

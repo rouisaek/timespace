@@ -166,5 +166,15 @@
   "aggregatedTimeView.table.salaryHours": "Salary hours",
   "aggregatedTimeView.noEntries": "There are no timesheet entries for the selected time period",
   "aggregatedTimeView.entriesPendingApprovalWarning": "There are still entries that need to be approved for the selected period",
-  "aggregatedTimeView.entriesPendingApprovalWarningLinkText": "Go to approval page"
+  "aggregatedTimeView.entriesPendingApprovalWarningLinkText": "Go to approval page",
+  "aggregatedTimeView.table.employeeCodeHeader": "Employee code",
+  "aggregatedTimeView.table.exportCSV": "Export to CSV",
+  "aggregatedTimeView.table.actionsHeader": "Actions",
+  "aggregatedTimeView.table.viewDetails": "More info",
+  "aggregatedTimeView.exportFilePrefix": "aggregated_timesheet",
+  "aggregatedTimeView.table.date": "Date",
+  "aggregatedTimeView.table.shiftStart": "Start",
+  "aggregatedTimeView.table.shiftEnd": "End",
+  "aggregatedTimeView.table.breakTime": "Break",
+  "aggregatedTimeView.table.workedHours": "Worked hours"
 }

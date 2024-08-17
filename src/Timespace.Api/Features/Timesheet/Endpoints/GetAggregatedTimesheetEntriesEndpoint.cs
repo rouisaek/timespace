@@ -29,6 +29,7 @@ public static partial class GetAggregatedTimesheetEntriesEndpoint
 	public record Response
 	{
 		public required int TenantUserId { get; init; }
+		public string? EmployeeCode { get; init; }
 		public required string FirstName { get; init; }
 		public string? MiddleName { get; init; }
 		public string? LastName { get; init; }
@@ -48,6 +49,7 @@ public static partial class GetAggregatedTimesheetEntriesEndpoint
 				x => new Response
 				{
 					TenantUserId = x.Id,
+					EmployeeCode = x.EmployeeCode,
 					FirstName = x.User.FirstName,
 					MiddleName = x.User.MiddleName,
 					LastName = x.User.LastName,

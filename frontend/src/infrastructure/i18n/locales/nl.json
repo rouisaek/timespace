@@ -158,5 +158,13 @@
   "aggregatedTimeView.table.salaryHours": "Loonuren",
   "aggregatedTimeView.noEntries": "Er zijn geen uren voor de geselecteerde tijdsperiode",
   "aggregatedTimeView.entriesPendingApprovalWarning": "Er zijn nog uren die goedgekeurd moeten worden voor de geselecteerde periode.\\",
-  "aggregatedTimeView.entriesPendingApprovalWarningLinkText": "Ga naar uren goedkeuren pagina"
+  "aggregatedTimeView.entriesPendingApprovalWarningLinkText": "Ga naar uren goedkeuren pagina",
+  "aggregatedTimeView.table.employeeCodeHeader": "Werknemersnr.",
+  "aggregatedTimeView.table.exportCSV": "Exporteer naar CSV",
+  "aggregatedTimeView.exportFilePrefix": "geaggregeerde_urenstaat",
+  "aggregatedTimeView.table.shiftStart": "Starttijd",
+  "aggregatedTimeView.table.shiftEnd": "Eindtijd",
+  "aggregatedTimeView.table.breakTime": "Pauze",
+  "aggregatedTimeView.table.workedHours": "Gewerkte uren",
+  "aggregatedTimeView.table.date": "Datum"
 }

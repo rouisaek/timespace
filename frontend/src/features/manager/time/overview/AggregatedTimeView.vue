@@ -3,7 +3,10 @@ import { computed, ref } from 'vue'
 import { useGetAggregatedTimesheetEntriesQuery } from './useGetAggregatedTimesheetEntriesQuery'
 import type { PeriodSelection } from '@/features/_shared/components/PeriodSelector'
 import PeriodSelector from '@/features/_shared/components/PeriodSelector.vue'
-import { TimesheetEntryStatus } from '@/features/employees/time/queries/useEmployeeTimesheetQuery'
+import {
+	TimesheetEntryStatus,
+	type TimesheetEntry
+} from '@/features/employees/time/queries/useEmployeeTimesheetQuery'
 import ContainerCard from '@/features/_shared/components/ContainerCard.vue'
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
@@ -13,14 +16,17 @@ import Message from 'primevue/message'
 import Button from 'primevue/button'
 import { useRouter } from 'vue-router'
 import ScaleInTransition from '@/features/_shared/components/transitions/ScaleInTransition.vue'
+import { msToTime } from '@/features/_shared/timeDisplayHelpers'
 
 const period = ref<PeriodSelection>({
 	start: null,
 	end: null
 })
 const { data, isLoading } = useGetAggregatedTimesheetEntriesQuery(period)
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const router = useRouter()
+const dataTable = ref()
+const expandedRows = ref({})
 
 const formattedData = computed(() => {
 	if (!data.value) return []
@@ -44,9 +50,12 @@ const formattedData = computed(() => {
 			}, 0)
 
 		return {
+			tenantUserId: entry.tenantUserId,
+			employeeCode: entry.employeeCode,
 			fullName: [entry.firstName, entry.middleName, entry.lastName].filter(Boolean).join(' '),
 			salaryDays: uniqueDates.size,
-			workedHours: Temporal.Duration.from({ milliseconds: workedMs }).total('hours')
+			workedHours: Temporal.Duration.from({ milliseconds: workedMs }).total('hours'),
+			entries: entry.entries
 		}
 	})
 })
@@ -57,6 +66,14 @@ const hasEntriesPendingApproval = computed(() => {
 	return data.value.some((entry) =>
 		entry.entries.some((x) => x.status === TimesheetEntryStatus.AwaitingApproval)
 	)
+})
+
+const exportCSV = (event: any) => {
+	dataTable.value.exportCSV()
+}
+
+const exportFileName = computed(() => {
+	return `${t('aggregatedTimeView.exportFilePrefix')}_${period.value.start?.toString()}_${period.value.end?.toString()}`
 })
 </script>
 
@@ -97,10 +114,121 @@ const hasEntriesPendingApproval = computed(() => {
 					</div>
 				</Message>
 			</ScaleInTransition>
-			<DataTable :value="formattedData" scrollable scroll-height="flex">
-				<Column field="fullName" :header="$t('aggregatedTimeView.table.fullNameHeader')"></Column>
-				<Column field="salaryDays" :header="$t('aggregatedTimeView.table.salaryDays')"> </Column>
-				<Column field="workedHours" :header="$t('aggregatedTimeView.table.salaryHours')"> </Column>
+			<DataTable
+				:value="formattedData"
+				scrollable
+				scroll-height="flex"
+				ref="dataTable"
+				:export-filename="exportFileName"
+				:expanded-rows="expandedRows"
+				dataKey="tenantUserId"
+			>
+				<template #header>
+					<Button @click="exportCSV($event)" class="w-full" outlined>
+						<span>
+							{{ $t('aggregatedTimeView.table.exportCSV') }}
+						</span>
+						<iconify-icon
+							icon="heroicons:arrow-top-right-on-square"
+							height="none"
+							class="w-5 h-5 ml-2"
+						/>
+					</Button>
+				</template>
+				<Column expander style="width: 3em"></Column>
+				<Column
+					field="employeeCode"
+					:header="$t('aggregatedTimeView.table.employeeCodeHeader')"
+					v-if="data?.some((x) => x.employeeCode !== null)"
+				></Column>
+				<Column
+					field="fullName"
+					:header="$t('aggregatedTimeView.table.fullNameHeader')"
+					exportHeader="full_name"
+				></Column>
+				<Column
+					field="salaryDays"
+					:header="$t('aggregatedTimeView.table.salaryDays')"
+					exportHeader="salary_days"
+				>
+				</Column>
+				<Column
+					field="workedHours"
+					:header="$t('aggregatedTimeView.table.salaryHours')"
+					exportHeader="salary_hours"
+				>
+				</Column>
+				<template #expansion="{ data }">
+					<DataTable
+						:value="data.entries"
+						scrollable
+						scroll-height="flex"
+						dataKey="id"
+						:expanded-rows="expandedRows"
+					>
+						<Column
+							:header="$t('aggregatedTimeView.table.date')"
+							:field="(x: TimesheetEntry) => x.shiftStart"
+						>
+							<template #body="{ data }">
+								<span>
+									{{
+										data.shiftStart.toPlainDate().toLocaleString(locale, {
+											weekday: 'long',
+											year: 'numeric',
+											month: 'long',
+											day: 'numeric'
+										})
+									}}
+								</span>
+							</template>
+						</Column>
+						<Column
+							:header="$t('aggregatedTimeView.table.shiftStart')"
+							:field="(x: TimesheetEntry) => x.shiftStart"
+						>
+							<template #body="{ data }">
+								<span>
+									{{ data.shiftStart.toPlainTime().toString({ smallestUnit: 'minutes' }) }}
+								</span>
+							</template>
+						</Column>
+						<Column
+							:header="$t('aggregatedTimeView.table.shiftEnd')"
+							:field="(x: TimesheetEntry) => x.shiftEnd"
+						>
+							<template #body="{ data }">
+								<span>
+									{{ data.shiftEnd.toPlainTime().toString({ smallestUnit: 'minutes' }) }}
+								</span>
+							</template>
+						</Column>
+						<Column
+							:header="$t('aggregatedTimeView.table.breakTime')"
+							:field="(x: TimesheetEntry) => x.breakTime"
+						>
+							<template #body="{ data }">
+								<span>
+									{{ msToTime(data.breakTime.total('milliseconds')) }}
+								</span>
+							</template>
+						</Column>
+						<Column :header="$t('aggregatedTimeView.table.workedHours')">
+							<template #body="{ data }">
+								<span>
+									{{
+										msToTime(
+											data.shiftEnd
+												.since(data.shiftStart)
+												.subtract(data.breakTime)
+												.total({ unit: 'milliseconds' })
+										)
+									}}
+								</span>
+							</template>
+						</Column>
+					</DataTable></template
+				>
 			</DataTable>
 		</ContainerCard>
 	</div>
