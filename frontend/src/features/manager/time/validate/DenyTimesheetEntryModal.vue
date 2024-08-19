@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type DynamicDialogInstance } from 'primevue/dynamicdialogoptions'
+import type { DynamicDialogInstance } from 'primevue/dynamicdialogoptions'
 import { inject, reactive, ref, type Ref } from 'vue'
 import * as Form from '@/features/_shared/formfields'
 import { apiClient } from '@/infrastructure/api'

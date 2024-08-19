@@ -81,6 +81,7 @@ try
 		endpoints =>
 		{
 			_ = endpoints.MapTimespaceApiEndpoints();
+			_ = endpoints.MapFallbackToFile("index.html").AllowAnonymous();
 		}
 	);
 

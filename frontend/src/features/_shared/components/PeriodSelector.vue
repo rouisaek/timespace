@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import { type PeriodSelection } from './PeriodSelector'
-import { computed, onMounted, ref, watchEffect } from 'vue'
+import type { PeriodSelection } from './PeriodSelector'
+import { onMounted, ref, watchEffect } from 'vue'
 import SelectButton from 'primevue/selectbutton'
 import DatePicker from '../formfields/wrappers/DatePicker.vue'
 import { useI18n } from 'vue-i18n'
-import Button from 'primevue/button'
-import Menu from 'primevue/menu'
 import Popover from 'primevue/popover'
 
 const { t, locale } = useI18n()
