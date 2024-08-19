@@ -3,8 +3,13 @@
 	<PropertyGroup>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-	</PropertyGroup>
 
+		<SpaRoot>../../frontend</SpaRoot>
+		<SpaProxyServerUrl>http://localhost:5173</SpaProxyServerUrl>
+		<SpaProxyLaunchCommand Condition="$([MSBuild]::IsOsPlatform('Windows'))">pnpm.exe run dev</SpaProxyLaunchCommand>
+		<SpaProxyLaunchCommand Condition="$([MSBuild]::IsOSUnixLike())">pnpm run dev</SpaProxyLaunchCommand>
+	</PropertyGroup>
+	
 	<ItemGroup>
 		<PackageReference Include="AutoRegisterInject" />
 		<PackageReference Include="Destructurama.Attributed" />
@@ -13,6 +18,7 @@
 		<PackageReference Include="Immediate.Validations" />
 		<PackageReference Include="MailKit" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
+		<PackageReference Include="Microsoft.AspNetCore.SpaProxy" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design">
 		  <PrivateAssets>all</PrivateAssets>
@@ -59,5 +65,7 @@
 		<None Remove=".\Infrastructure\Email\Templates\*.sbntxt" />
 		<EmbeddedResource Include=".\Infrastructure\Email\Templates\*.sbntxt" Kind="Text" />
 	</ItemGroup>
+
+	
 	
 </Project>

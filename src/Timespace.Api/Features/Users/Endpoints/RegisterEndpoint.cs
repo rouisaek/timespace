@@ -10,6 +10,7 @@ using Timespace.Api.Features.Tenants.Models;
 using Timespace.Api.Features.Users.EmailConfirmation.Handlers;
 using Timespace.Api.Features.Users.Models;
 using Timespace.Api.Infrastructure.Authorization;
+using Timespace.Api.Infrastructure.UsageContext;
 
 namespace Timespace.Api.Features.Users.Endpoints;
 
@@ -23,6 +24,8 @@ public static partial class RegisterEndpoint
 	{
 		public required string TenantName { get; init; }
 		public required string FirstName { get; init; } = null!;
+		public string? MiddleName { get; init; } = null!;
+		public string? LastName { get; init; } = null!;
 		[EmailAddress]
 		public required string Email { get; init; }
 		[LogMasked]
@@ -38,17 +41,22 @@ public static partial class RegisterEndpoint
 		UserManager<ApplicationUser> userManager,
 		AppDbContext dbContext,
 		SendConfirmationEmail.Handler sendConfirmationEmailCommand,
+		IUsageContext usageContext,
 		CancellationToken token)
 	{
 		var transaction = await dbContext.Database.BeginTransactionAsync(token);
 		var tenant = dbContext.Tenants.Add(new() { DisplayName = command.TenantName, });
 		_ = await dbContext.SaveChangesAsync(token);
 
+		usageContext.TenantId = tenant.Entity.Id;
+
 		var user = new ApplicationUser()
 		{
 			Email = command.Email,
 			UserName = command.Email,
 			FirstName = command.FirstName,
+			MiddleName = command.MiddleName,
+			LastName = command.LastName,
 			Memberships = [
 				new TenantUser
 				{

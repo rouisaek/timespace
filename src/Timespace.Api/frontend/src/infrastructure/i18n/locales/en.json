@@ -39,7 +39,7 @@
   "signUpPage.emailFieldLabel": "Email",
   "signUpPage.loginText": "Already a customer?",
   "signUpPage.loginText2": "Click here to sign in.",
-  "signUpPage.stepOneSubtitle": "Enter your email address to continue",
+  "signUpPage.stepOneSubtitle": "Enter your personal details to continue",
   "signUpPage.title": "Sign up",
   "success": "Success",
   "userAccountMenu.logoutErrorMessage": "Something went wrong while trying to log you out. Please try again later or contact our support team.",
@@ -176,5 +176,8 @@
   "aggregatedTimeView.table.shiftStart": "Start",
   "aggregatedTimeView.table.shiftEnd": "End",
   "aggregatedTimeView.table.breakTime": "Break",
-  "aggregatedTimeView.table.workedHours": "Worked hours"
+  "aggregatedTimeView.table.workedHours": "Worked hours",
+  "commonFieldLabels.tenantName": "Tenant name",
+  "signUpPage.successMessage": "Sign up successful, please check your inbox to confirm your email",
+  "signUpPage.error": "Something went wrong while creating your account, please try again later or contact our support team"
 }

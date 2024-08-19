@@ -37,7 +37,7 @@
   "signUpPage.emailFieldLabel": "E-mailadres",
   "signUpPage.loginText": "Reeds klant?",
   "signUpPage.loginText2": "Klik hier om in te loggen.",
-  "signUpPage.stepOneSubtitle": "Voer uw e-mailadres in om door te gaan",
+  "signUpPage.stepOneSubtitle": "Voer je persoonlijke gegevens in om je account te maken",
   "signUpPage.title": "Registreren",
   "success": "Succes",
   "userAccountMenu.logoutTitle": "Uitloggen",
@@ -166,5 +166,7 @@
   "aggregatedTimeView.table.shiftEnd": "Eindtijd",
   "aggregatedTimeView.table.breakTime": "Pauze",
   "aggregatedTimeView.table.workedHours": "Gewerkte uren",
-  "aggregatedTimeView.table.date": "Datum"
+  "aggregatedTimeView.table.date": "Datum",
+  "commonFieldLabels.tenantName": "Bedrijfsnaam",
+  "signUpPage.successMessage": "Account is successvol aangemaakt, bekijk je mailbox om je email te bevestigen"
 }

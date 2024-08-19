@@ -70,6 +70,7 @@ try
 	_ = app.UseMiddleware<AddPermissionsMiddleware>();
 	_ = app.UseMiddleware<AddRequestIdHeaderMiddleware>();
 	_ = app.UseHttpsRedirection();
+	_ = app.UseStaticFiles();
 	_ = app.UseSwagger();
 	_ = app.UseSwaggerUI();
 	_ = app.UseRouting();
