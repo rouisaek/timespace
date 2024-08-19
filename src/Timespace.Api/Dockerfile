@@ -26,7 +26,7 @@ WORKDIR /source
 ENV NPM_CONFIG_UPDATE_NOTIFIER=false
 RUN npm i -g --no-audit --no-fund pnpm
 
-COPY ../../frontend src/Web
+COPY ./frontend src/Web
 #COPY ../../frontend/.npmrc .
 #COPY ../../frontend/pnpm* .
 #COPY ../../frontend/package.json .
