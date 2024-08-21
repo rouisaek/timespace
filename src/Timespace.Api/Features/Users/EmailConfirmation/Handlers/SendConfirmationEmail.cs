@@ -2,13 +2,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Web;
 using Immediate.Handlers.Shared;
 using Immediate.Validations.Shared;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using NodaTime;
 using Timespace.Api.Database;
-using Timespace.Api.Features.Users.Models;
 using Timespace.Api.Infrastructure.Email;
 using Timespace.Api.Infrastructure.Startup;
 using Timespace.Api.Infrastructure.UsageContext;
@@ -25,10 +23,10 @@ public static partial class SendConfirmationEmail
 		public required string Email { get; set; } = null!;
 		public required string FirstName { get; set; } = null!;
 		public required string EmailVerificationToken { get; set; } = null!;
-		public required ApplicationUser User { get; set; } = null!;
+		public required int UserId { get; set; }
 	}
 
-	private static async ValueTask HandleAsync(Command command, EmailService emailService, UserManager<ApplicationUser> userManager, AppDbContext db, IClock clock, IUsageContext usageContext, IOptionsSnapshot<SiteSettings> siteSettings, CancellationToken token)
+	private static async ValueTask HandleAsync(Command command, EmailService emailService, AppDbContext db, IClock clock, IUsageContext usageContext, IOptionsSnapshot<SiteSettings> siteSettings, CancellationToken token)
 	{
 		var emailTemplateProps = new
 		{
@@ -52,13 +50,14 @@ public static partial class SendConfirmationEmail
 			TextBody = renderedTextBody
 		};
 		mimeMessage.Body = builder.ToMessageBody();
+		mimeMessage.Subject = "Verifieer je e-mailadres voor Timespace";
 		mimeMessage.To.Add(new MailboxAddress(command.FirstName, command.Email));
 
 		await emailService.SendEmail(mimeMessage, token);
 
 		var currentInstant = clock.GetCurrentInstant();
 		_ = await db.Users
-			.Where(x => x.Id == command.User.Id)
+			.Where(x => x.Id == command.UserId)
 			.ExecuteUpdateAsync(setters =>
 				setters.SetProperty(x => x.LastEmailConfirmationSent, currentInstant), token);
 	}

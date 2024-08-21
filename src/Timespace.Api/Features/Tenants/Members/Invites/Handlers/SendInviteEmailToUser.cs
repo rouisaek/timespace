@@ -47,6 +47,7 @@ public static partial class SendInviteEmailToUser
 			TextBody = renderedTextBody
 		};
 		mimeMessage.Body = builder.ToMessageBody();
+		mimeMessage.Subject = "Uitnodiging voor Timespace van " + command.TenantName;
 		mimeMessage.To.Add(new MailboxAddress(command.FirstName, command.Email));
 
 		await emailService.SendEmail(mimeMessage, token);

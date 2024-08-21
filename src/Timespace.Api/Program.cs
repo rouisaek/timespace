@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NodaTime;
 using NodaTime.Serialization.SystemTextJson;
 using Serilog;
@@ -20,6 +21,7 @@ try
 	_ = builder.Configuration.AddJsonFile("secrets.json", optional: true);
 	_ = builder.Configuration.AddJsonFile("appsettings.json", optional: true);
 	_ = builder.Configuration.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true);
+	_ = builder.Configuration.AddEnvironmentVariables();
 	_ = builder.Services.ConfigureAllOptions();
 
 	// Add services to the container.
@@ -64,6 +66,12 @@ try
 	);
 
 	var app = builder.Build();
+
+	using (var scope = app.Services.CreateScope())
+	{
+		var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+		await db.Database.MigrateAsync();
+	}
 
 	_ = app.UseLogging();
 	_ = app.UseExceptionHandler();

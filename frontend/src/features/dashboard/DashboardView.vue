@@ -32,8 +32,8 @@ const openClockHoursModal = () => {
 </script>
 
 <template>
-	<div class="flex flex-col gap-4">
-		<ContainerCard class="h-full">
+	<div class="flex flex-col gap-4 h-full">
+		<ContainerCard>
 			<PeriodSelector v-model="timePeriod" />
 			<TimesheetTimeStatistics :timesheetEntries="timesheetEntries" />
 			<Button @click="openClockHoursModal" class="w-full">
@@ -47,7 +47,7 @@ const openClockHoursModal = () => {
 				</template>
 			</Button>
 		</ContainerCard>
-		<div class="flex flex-col gap-4">
+		<div class="flex flex-col gap-4 overflow-y-auto">
 			<TimesheetEntryDetailCard v-for="shift in timesheetEntries" :key="shift.id" :entry="shift" />
 		</div>
 	</div>

@@ -79,7 +79,7 @@ public static partial class RegisterEndpoint
 				Email = command.Email,
 				EmailVerificationToken = confirmationToken,
 				FirstName = command.FirstName,
-				User = user
+				UserId = user.Id
 			}, token);
 
 			return new()

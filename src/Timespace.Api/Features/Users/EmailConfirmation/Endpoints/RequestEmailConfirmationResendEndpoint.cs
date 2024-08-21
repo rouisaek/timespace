@@ -46,7 +46,7 @@ public static partial class RequestEmailConfirmationResendEndpoint
 			Email = user.Email,
 			EmailVerificationToken = confirmationToken,
 			FirstName = user.FirstName,
-			User = user
+			UserId = user.Id
 		}, token);
 
 		return new Response { Success = true };

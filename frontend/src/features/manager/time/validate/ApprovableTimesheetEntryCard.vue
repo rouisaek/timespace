@@ -100,7 +100,13 @@ const deny = (id: number) => {
 		</div>
 		<div class="flex-grow"></div>
 		<div class="flex flex-row space-x-2">
-			<Button severity="danger" class="w-1/3" outlined @click="deny(entry.id)" :disabled="loading">
+			<Button
+				severity="danger"
+				class="min-w-32 w-1/3"
+				outlined
+				@click="deny(entry.id)"
+				:disabled="loading"
+			>
 				<iconify-icon icon="heroicons:x-mark" height="none" class="w-4 h-4 mt-0.5 mr-1" />
 				<span>{{ t('approvableTimesheetEntryCard.deny') }}</span>
 			</Button>

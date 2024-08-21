@@ -114,7 +114,8 @@ const routes: Array<RouteRecordRaw> = [
 				]
 			}
 		]
-	}
+	},
+	{ path: '/:pathMatch(.*)*', redirect: '/accounts/login' }
 ]
 
 const router = createRouter({

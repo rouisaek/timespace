@@ -4,11 +4,11 @@ import DashboardHeader from '@/features/dashboard/header/DashboardHeader.vue'
 </script>
 
 <template>
-	<div class="h-dvh w-dvw flex flex-col">
+	<div class="h-dvh w-dvw flex flex-col overflow-x-hidden">
 		<DashboardHeader />
-		<div class="flex flex-row h-full">
+		<div class="flex flex-row min-h-full">
 			<DashboardAsideNavigation />
-			<div class="flex-grow bg-surface-50 dark:bg-surface-950 p-4 lg:p-8 max-w-full">
+			<div class="flex-grow bg-surface-50 dark:bg-surface-950 p-4 lg:p-8 h-full">
 				<RouterView />
 			</div>
 		</div>

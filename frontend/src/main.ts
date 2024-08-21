@@ -31,11 +31,3 @@ app.use(i18n)
 app.use(autoAnimatePlugin)
 
 app.mount('#app')
-
-const IconifyIcon: any = window.customElements.get('iconify-icon')
-
-IconifyIcon?.loadIcons('heroicons')
-	.then(() => {
-		console.log('Loaded data for', name)
-	})
-	.catch(console.error)

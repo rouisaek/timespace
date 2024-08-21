@@ -47,16 +47,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Include="..\..\.dockerignore">
-		  <Link>.dockerignore</Link>
-		</Content>
-		<Content Include="..\.dockerignore">
-			<Link>.dockerignore</Link>
-		</Content>
-		<Content Remove="frontend\**" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<AdditionalFiles Include="../../BannedSymbols.txt" />
 	</ItemGroup>
 
@@ -68,24 +58,6 @@
 	<ItemGroup>
 		<None Remove=".\Infrastructure\Email\Templates\*.sbntxt" />
 		<EmbeddedResource Include=".\Infrastructure\Email\Templates\*.sbntxt" Kind="Text" />
-		<EmbeddedResource Remove="frontend\**" />
-		<None Remove="frontend\**" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Remove="frontend\**" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <_ContentIncludedByDefault Remove="frontend\.prettierrc.json" />
-	  <_ContentIncludedByDefault Remove="frontend\package.json" />
-	  <_ContentIncludedByDefault Remove="frontend\src\infrastructure\i18n\locales\en.json" />
-	  <_ContentIncludedByDefault Remove="frontend\src\infrastructure\i18n\locales\nl.json" />
-	  <_ContentIncludedByDefault Remove="frontend\src\infrastructure\i18n\locales\primevue\en.json" />
-	  <_ContentIncludedByDefault Remove="frontend\src\infrastructure\i18n\locales\primevue\nl.json" />
-	  <_ContentIncludedByDefault Remove="frontend\tsconfig.app.json" />
-	  <_ContentIncludedByDefault Remove="frontend\tsconfig.json" />
-	  <_ContentIncludedByDefault Remove="frontend\tsconfig.node.json" />
 	</ItemGroup>
 
 	

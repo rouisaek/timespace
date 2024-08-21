@@ -16,6 +16,28 @@ services:
     networks:
       - timespace
     restart: unless-stopped
+  seq:
+    container_name: timespace-seq
+    image: datalust/seq:latest
+    ports:
+      - "5341:5341"
+    networks:
+      - timespace
+    restart: unless-stopped
+  app:
+    container_name: timespace-app
+    image: dukedev/timespace:latest
+    environment:
+      DbContextOptions__ConnectionString: User ID=${POSTGRES_USER:-postgres};Password=${POSTGRES_PASSWORD:-root};Host=postgres;Port=5432;Database=timespace;Pooling=true;Connection Lifetime=0;
+      SeqUrl: http://seq:5341
+    ports:
+      - "8080:8080"
+    networks:
+      - timespace
+    depends_on:
+      - postgres
+      - seq
+    restart: unless-stopped
 
 networks:
   timespace:
