@@ -44,7 +44,7 @@ try
 		}
 	);
 
-	builder.Services.AddDatabase(builder.Configuration["DbContextOptions:ConnectionString"] ?? throw new ArgumentException("Cannot find connection string"));
+	builder.Services.AddDatabase(builder.Configuration["DbContextOptions:ConnectionString"] ?? throw new ArgumentException("Cannot find connection string"), builder.Environment.EnvironmentName == "DEV");
 	builder.Services.ConfigureImmediatePlatform();
 	builder.Services.AddIdentity(builder.Configuration["SiteSettings:FrontendSiteUrl"] ?? throw new ArgumentException("Cannot find frontend url"));
 	_ = builder.Services.AddSingleton<IClock>(SystemClock.Instance);

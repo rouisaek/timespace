@@ -5,7 +5,7 @@ namespace Timespace.Api.Database;
 
 public static class DatabaseStartupExtensions
 {
-	public static void AddDatabase(this IServiceCollection services, string connectionString)
+	public static void AddDatabase(this IServiceCollection services, string connectionString, bool isDev = false)
 	{
 		var dataSourceBuilder = new NpgsqlDataSourceBuilder(connectionString);
 		_ = dataSourceBuilder.UseNodaTime();
@@ -14,7 +14,8 @@ public static class DatabaseStartupExtensions
 		_ = services.AddDbContext<AppDbContext>(c =>
 		{
 			_ = c.UseNpgsql(dataSource, o => o.UseNodaTime());
-			_ = c.EnableSensitiveDataLogging();
+			if (isDev)
+				_ = c.EnableSensitiveDataLogging();
 		});
 	}
 
